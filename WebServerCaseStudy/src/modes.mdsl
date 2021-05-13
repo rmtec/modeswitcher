@@ -1,0 +1,116 @@
+System Webserver has following modes 
+	Apache,ApacheWithPhp,Nginx,NginxWithPhp
+	distribution "buster"
+	releaseDate "2019-07-06"
+
+Software apache_2_4_38 identified by cpe:/:apache:http_server:"2.4.38" package "apache2"
+Software nginx_1_14_2 identified by cpe:/:nginx:nginx:"1.14.2" package "nginx"
+Software php_7_3_5 identified by cpe:/:php:php:"7.3.5" package "php7.3"
+
+Mode Apache
+description "Only static HTML pages"
+priority 3
+startServices apache2Service
+stopServices apache2Service
+//usesSoftware apache_2_4_38
+
+Mode ApacheWithPhp extends Apache
+description "Static HTML and dynamic PHP pages"
+priority 1
+startServices apacheModProxyFcgiService,apacheModSetenvifService,phpFpmService
+stopServices phpFpmService,apacheModSetenvifService,apacheModProxyFcgiService
+//usesSoftware php_7_3_5
+
+Mode Nginx
+description "Only static HTML pages"
+priority 4
+startServices nginxService
+stopServices nginxService
+//usesSoftware nginx_1_14_2
+
+Mode NginxWithPhp extends Nginx
+description "Static HTML and dynamic PHP pages"
+priority 2
+startServices apacheConfPhpFpmService
+stopServices apacheConfPhpFpmService
+//usesSoftware php_7_3_5
+
+Service apache2Service usesSoftware apache_2_4_38
+startActions startLinuxService("apache2")
+stopActions stopLinuxService("apache2")
+Service apacheModProxyFcgiService
+startActions enableApacheMod("proxy_fcgi")
+stopActions enableApacheMod("proxy_fcgi")
+Service apacheModSetenvifService
+startActions enableApacheMod("setenvif")
+stopActions disableApacheMod("setenvif")
+Service apacheConfPhpFpmService
+startActions enableApacheConf("php7.3-fpm")
+stopActions disableApacheConf("php7.3-fpm")
+Service nginxService usesSoftware nginx_1_14_2
+startActions startLinuxService("nginx")
+stopActions stopLinuxService("nginx")
+Service phpFpmService usesSoftware php_7_3_5
+startActions startLinuxService("php7.3-fpm")
+stopActions stopLinuxService("php7.3-fpm")
+
+Action startLinuxService shellCmd "servicectl start" //param(s) were added after shellCmd
+Action stopLinuxService shellCmd "servicectl stop"
+Action enableApacheMod shellCmd "/sbin/a2enmod --quiet"
+Action disableApacheMod shellCmd "/sbin/a2dismod -f --quiet"
+Action enableApacheConf shellCmd "/sbin/a2enconf --quiet"
+Action disableApacheConf shellCmd "/sbin/a2disconf --quiet"
+
+Rule "Switch to NginxWithPHPfpm after ApacheVulnerability
+ and current mode is Apache2withPHP or Apache2withPHPfpm"
+if ApacheVulnerability and current mode in (ApacheWithPhp)
+then NginxWithPhp
+
+Rule "Switch to Nginx after ApacheVulnerability
+ and current mode is Apache2"
+if ApacheVulnerability and current mode in (Apache)
+then Nginx
+
+Rule "Switch to Apache2withPHPfpm after NginxVulnerability
+ and current mode is NginxWithPHPfpm"
+if NginxVulnerability and current mode in (NginxWithPhp)
+then ApacheWithPhp
+
+Rule "Switch to Apache2 after NginxVulnerability
+ and current mode is Nginx"
+if NginxVulnerability and current mode in (Nginx)
+then Apache
+
+Rule "Switch to static pages after PHP vulnerability"
+if PHPVulnerability and current mode in (ApacheWithPhp)
+then Apache
+else Nginx
+
+Event ApacheVulnerability
+description "Vulnerability at Apache webserver version detected"
+
+Event NginxVulnerability
+description "Vulnerability at Nginx webserver version detected"
+
+Event PHPVulnerability
+description "Vulnerability at PHP version detected"
+
+Event PHPFPMVulnerability
+description "Vulnerability at PHP fpm version detected"
+
+/*
+ 	Rules and possible modes
+ 	
+	R=rule, A=Apache, AP=ApacheWithPHP, APF=ApacheWithPHPfpm, N=Nginx, NPF=NginxWithPHPfpm
+	3 services, 2 states (vulnerable, or not) => 2^3 states => 8 states
+	
+	R|A|N|P|Possible Modes
+	1|0|0|0|A,AP,APF,N,NPF => priority? AP,APF,NPF
+	2|0|0|1|A,N => priority?
+	3|0|1|0|A,AP,APF => priority? AP, APF
+	4|0|1|1|A
+	5|1|0|0|N,NPF => NPF
+	6|1|0|1|N
+	7|1|1|0|- => emergency mode?
+	8|1|1|1|- => emergency mode?
+ */
