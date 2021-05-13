@@ -1,0 +1,73 @@
+grammar org.xtext.mdsl.Mdsl with org.eclipse.xtext.common.Terminals
+
+generate mdsl "http://www.xtext.org/mdsl/Mdsl"
+
+Model: (declarations+=Declaration)*;
+Declaration : System | Software | Mode | Service | Action | Rule | Event;
+
+System :
+	'System' name=ID 'has' 'following' 'modes'
+		(modes+=[Mode] (',' modes+=[Mode])*)?
+	'distribution' distribution=STRING
+	'releaseDate' releaseDate=STRING
+;
+
+terminal DATE : ('2000'..'2999')'-'('01'..'12')'-'('01'..'31');
+
+Software : 
+	'Software' name=ID 'identified' 'by' 'cpe:/:'vendor=ID':'product=ID':'version=STRING
+	'package' package=STRING;
+	//Software apache identified by cpe:/:apache:http_server:2.4.38
+	//package apache2
+
+Mode :
+	'Mode' name=ID ('extends' superType=[Mode])?
+	'description' description=STRING
+	'priority' priority=INT
+	'startServices' (startServices+=[Service] 
+		(',' startServices+=[Service])*
+	)?
+	'stopServices' (stopServices+=[Service] 
+		(',' stopServices+=[Service])*
+	)?
+	//'usesSoftware' usesSoftware+=[Software] (',' usesSoftware+=[Software])*
+	(enabled=Enabled)?
+;
+
+enum Enabled:
+	true | false //default: true. disabled for e.g. maintenance mode
+;
+
+Service :
+	'Service' name=ID
+	('usesSoftware' usesSoftware+=[Software] (',' usesSoftware+=[Software])*)?
+	'startActions' startActions+=ActionWithParams 
+		(',' startActions+=ActionWithParams)*
+	'stopActions' stopActions+=ActionWithParams
+		(',' stopActions+=ActionWithParams)*
+;
+
+ActionWithParams : 
+	action=[Action]'('(params+=STRING (',' params+=STRING)*)?')'
+;
+
+Action :
+	'Action' name=ID ('extends' superAction=[Action])?
+	('description' description=STRING)?
+	'shellCmd' shellCmd=STRING
+;
+
+Rule :
+	'Rule' description=STRING
+		'if' if+=[Event] 
+		('and' 'current' 'mode' 'in' '('currentMode+=[Mode] 
+			(',' modes+=[Mode])*')'
+		)?
+		'then' then=[Mode]
+		('else' else=[Mode])?
+;
+		
+Event : 
+	'Event' name=ID
+	'description' description=STRING
+;

@@ -1,0 +1,29 @@
+Manifest-Version: 1.0
+Automatic-Module-Name: org.xtext.mdsl
+Bundle-ManifestVersion: 2
+Bundle-Name: org.xtext.mdsl
+Bundle-Vendor: My Company
+Bundle-Version: 1.0.0.qualifier
+Bundle-SymbolicName: org.xtext.mdsl; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.eclipse.xtext,
+ org.eclipse.xtext.xbase,
+ org.eclipse.equinox.common;bundle-version="3.5.0",
+ org.eclipse.emf.ecore,
+ org.eclipse.xtext.xbase.lib;bundle-version="2.14.0",
+ org.eclipse.xtext.util,
+ org.eclipse.emf.common,
+ org.antlr.runtime;bundle-version="[3.2.0,3.2.1)"
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Export-Package: org.xtext.mdsl.services,
+ org.xtext.mdsl,
+ org.xtext.mdsl.mdsl.impl,
+ org.xtext.mdsl.validation,
+ org.xtext.mdsl.parser.antlr,
+ org.xtext.mdsl.parser.antlr.internal,
+ org.xtext.mdsl.serializer,
+ org.xtext.mdsl.generator,
+ org.xtext.mdsl.scoping,
+ org.xtext.mdsl.mdsl,
+ org.xtext.mdsl.mdsl.util
+Import-Package: org.apache.log4j
