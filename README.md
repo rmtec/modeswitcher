@@ -43,6 +43,46 @@ The operating system (OS) will be automatically detected. If the OS is supported
 ```############################################################################
 Welcome to the Mode Switching System!
 ############################################################################
+Your operating system is linux
+Distribution Debian detected
+Regenerate system configuration from MDSL-Defintion not neccessary
+Possible modes:[[apache, apacheWithPhp, nginxOnly, nginxWithPhp]]
+############################################################################
+What do you want to do? Choose an option:
+----------------------------------------------------------------------------
+[i]    Initialize
+[m]    Show modes
+[u]    Update CVEs, Patches and switch mode
+[uv]   Update CVEs
+[up]   Update Patches
+[ams]  Automatic mode switch
+[mms]  Manual mode switch
+[s]    Show used software
+[v]    Show all vulnerabilities
+[vo]   Show open vulnerabilities
+[vps]  Show vulnerabilities per software
+[vs]   Show vulnerabilities statistics
+[vsps] Show vulnerabilities statistics per software
+[h]    Show mode history
+[e]    Toggle mode (enabled/disabled)
+[si]   Toggle simulation (on/off)
+[ex]   Toggle execution (on/off)
+[d]    Toggle debugging (on/off)
+
+Start scenario:
+[s1]   Start scenario vulnerability time series
+[s2]   Start scenario all modes are disabled
+[s3]   Start scenario all software is disabled
+[s4]   Start scenario random mode order
+[s5]   Start scenario mode switch duration
+
+[q]    Quit
+############################################################################
+[? for menu]>```
+
+```############################################################################
+Welcome to the Mode Switching System!
+############################################################################
 Your operating system is windows 10
 Your operating system is currently not supported!!
 You can only simulate the mode switching
