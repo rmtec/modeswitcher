@@ -5,21 +5,31 @@ In order to detect relevant security vulnerabilities, and in turn, to react to r
 For demonstrating the feasibility and potential benefits of our approach described in Paper XXX, we performed a case study for web server security and analyzed the time span of two years, from Feb. 2019 to Feb. 2021. We created a system configuration with commonly used components: Linux distribution Debian 10 (Buster) and two different implementations of popular web servers in its most recent version: Apache2 (v2.4.38) and nginx (v1.14.2). Additionally running on the web server, PHP (version 7.3) and FastCGI Process Manager are used to serve dynamic web content. Both web servers were selected because they provide similar functionality and work together with PHP. The web content was saved to the common /var/www directory, such that both web servers have access to it. The combination of a web server and a PHP interpreter is used by many common content management systems (CMSs) such as [WordPress](https://wordpress.org/download/), [Joomla](https://downloads.joomla.org/technical-requirements) or [Typo 3](https://get.typo3.org/). Typically, an instance of a CMS uses only a single (type of) web server. We investigate how mode switching can improve security and protect the system from reported vulnerabilities by applying our Mode DSL and the accompanying mode switching framework.
 
 # Table of Contents
-1. [Re-run the Web Server Case Study](#rerun)
-2. [Data Sources](#datasources)
+1. [Mode Domain Specific Language (MDSL)](#mdsl)
+2. [Re-run the Web Server Case Study](#rerun)
+3. [Data Sources](#datasources)
     1. [Vulnerabilities](#vulnerabilities)
     2. [Patches](#patches)
+
+# Mode Domain Specific Language (MDSL) <a name="mdsl"></a>
+We defined our MDSL with [XText](https://www.eclipse.org/Xtext/) in the project [org.xtext.mdsl](https://github.com/rmtec/modeswitcher/tree/main/org.xtext.mdsl) and the grammar in the file [org.xtext.mdsl/src/org/xtext/mdsl/Mdsl.xtext](https://github.com/rmtec/modeswitcher/blob/main/org.xtext.mdsl/src/org/xtext/mdsl/Mdsl.xtext).
+
+Using the MDSL within the Eclipse Editor, files with the extension .MDSL will support syntax highlighting, code-completion and validation.
+The validation is defined in [org.xtext.mdsl/src/org/xtext/mdsl/validation/MdslValidator.java](https://github.com/rmtec/modeswitcher/blob/main/org.xtext.mdsl/src/org/xtext/mdsl/validation/MdslValidator.java).
+The Xtext parser automatically validates if the syntax conforms to the defined MDSL. For example, only defined modes are allowed in a system. In addition, we statically analyze the system description and show error messages if there are duplicates of mode names, priorities, or action names. If the Debian OS and the distribution are specified, we check if the software and the packages are within the official package list. If not, we display a warning. If there are no errors the [XTend](https://www.eclipse.org/xtend/) code generator [org.xtext.mdsl/src/org/xtext/mdsl/generator/MdslGenerator.xtend](https://github.com/rmtec/modeswitcher/blob/main/org.xtext.mdsl/src/org/xtext/mdsl/generator/MdslGenerator.xtend) is executed and creates the system configuration as Java Code from the .MDSL-File.
+
+When executing the framework on the command line, as shown in [Re-run the Web Server Case Study](#rerun), the file mode.mdsl in the same folder is validated and used to generate the system configuration, see [WebServerCaseStudy/src/ModeSwitcher.java](https://github.com/rmtec/modeswitcher/blob/main/WebServerCaseStudy/src/ModeSwitcher.java) function generateSystemConfigurationCreatorFileFromMdsl.
 
 # Re-run the Web Server Case Study <a name="rerun"></a>
 
 ## Requirements for Simulating Mode Switching
-* **Installed Windows or Linux:** e.g, Windows 10 or [Debian Buster](https://www.debian.org/releases/buster/debian-installer)
-* **Installed Java, to run the Framework:** `sudo apt install default-jdk`
+* Installed Windows or Linux: e.g, Windows 10 or [Debian Buster](https://www.debian.org/releases/buster/debian-installer)
+* Installed Java, to run the Framework: `sudo apt install default-jdk`
 
 ## Extended Requirements for Executing Mode Switching
-* **Installed and configured Apache2:** `sudo apt install apache2`
-* **Installed and configured nginx:** `sudo apt install nginx`
-* **Installed and configured PHP with FastCGI:** `sudo apt install php-fpm`
+* Installed and configured Apache2: `sudo apt install apache2`
+* Installed and configured nginx: `sudo apt install nginx`
+* Installed and configured PHP with FastCGI: `sudo apt install php-fpm`
 
 ## Execute the Framework
 To start the Mode Switching Framework please execute the following command:
@@ -152,6 +162,9 @@ Data serialized and saved to disk
 ```
 
 # Data Sources <a name="datasources"></a>
+The following links provide access to the vulnerabilities and patches of the used software packages Apache2, Nginx, and PHP.
+In addition, we uploaded the JSON data in the folder reproduction package in case the links are not working anymore.
+
 ## Vulnerabilities <a name="vulnerabilities"></a>
 * **Apache2 2.4.38 (17 Jan 2019)** `cpe:2.3:a:apache:http_server:2.4.38` [HTML](https://nvd.nist.gov/vuln/search/results?adv_search=true&query=cpe:2.3:a:apache:http_server:2.4.38), [JSON](https://services.nvd.nist.gov/rest/json/cpes/1.0?cpeMatchString=cpe:2.3:a:apache:http_server:2.4.38:*:*:*:*:*:*:*&addOns=cves), [HTML Vendor](https://httpd.apache.org/security/vulnerabilities_24.html)
 
