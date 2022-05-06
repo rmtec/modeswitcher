@@ -15,12 +15,13 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  * <ul>
  *   <li>{@link org.xtext.mdsl.mdsl.Mode#getName <em>Name</em>}</li>
- *   <li>{@link org.xtext.mdsl.mdsl.Mode#getSuperType <em>Super Type</em>}</li>
+ *   <li>{@link org.xtext.mdsl.mdsl.Mode#getSuperMode <em>Super Mode</em>}</li>
  *   <li>{@link org.xtext.mdsl.mdsl.Mode#getDescription <em>Description</em>}</li>
  *   <li>{@link org.xtext.mdsl.mdsl.Mode#getPriority <em>Priority</em>}</li>
  *   <li>{@link org.xtext.mdsl.mdsl.Mode#getStartServices <em>Start Services</em>}</li>
  *   <li>{@link org.xtext.mdsl.mdsl.Mode#getStopServices <em>Stop Services</em>}</li>
  *   <li>{@link org.xtext.mdsl.mdsl.Mode#getEnabled <em>Enabled</em>}</li>
+ *   <li>{@link org.xtext.mdsl.mdsl.Mode#getAlternativeMode <em>Alternative Mode</em>}</li>
  * </ul>
  *
  * @see org.xtext.mdsl.mdsl.MdslPackage#getMode()
@@ -52,26 +53,26 @@ public interface Mode extends Declaration
   void setName(String value);
 
   /**
-   * Returns the value of the '<em><b>Super Type</b></em>' reference.
+   * Returns the value of the '<em><b>Super Mode</b></em>' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Super Type</em>' reference.
-   * @see #setSuperType(Mode)
-   * @see org.xtext.mdsl.mdsl.MdslPackage#getMode_SuperType()
+   * @return the value of the '<em>Super Mode</em>' reference.
+   * @see #setSuperMode(Mode)
+   * @see org.xtext.mdsl.mdsl.MdslPackage#getMode_SuperMode()
    * @model
    * @generated
    */
-  Mode getSuperType();
+  Mode getSuperMode();
 
   /**
-   * Sets the value of the '{@link org.xtext.mdsl.mdsl.Mode#getSuperType <em>Super Type</em>}' reference.
+   * Sets the value of the '{@link org.xtext.mdsl.mdsl.Mode#getSuperMode <em>Super Mode</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Super Type</em>' reference.
-   * @see #getSuperType()
+   * @param value the new value of the '<em>Super Mode</em>' reference.
+   * @see #getSuperMode()
    * @generated
    */
-  void setSuperType(Mode value);
+  void setSuperMode(Mode value);
 
   /**
    * Returns the value of the '<em><b>Description</b></em>' attribute.
@@ -165,5 +166,27 @@ public interface Mode extends Declaration
    * @generated
    */
   void setEnabled(Enabled value);
+
+  /**
+   * Returns the value of the '<em><b>Alternative Mode</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Alternative Mode</em>' reference.
+   * @see #setAlternativeMode(Mode)
+   * @see org.xtext.mdsl.mdsl.MdslPackage#getMode_AlternativeMode()
+   * @model
+   * @generated
+   */
+  Mode getAlternativeMode();
+
+  /**
+   * Sets the value of the '{@link org.xtext.mdsl.mdsl.Mode#getAlternativeMode <em>Alternative Mode</em>}' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Alternative Mode</em>' reference.
+   * @see #getAlternativeMode()
+   * @generated
+   */
+  void setAlternativeMode(Mode value);
 
 } // Mode

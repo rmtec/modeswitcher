@@ -95,25 +95,33 @@ public class MdslGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		private final Assignment cModesAssignment_5_1_1 = (Assignment)cGroup_5_1.eContents().get(1);
 		private final CrossReference cModesModeCrossReference_5_1_1_0 = (CrossReference)cModesAssignment_5_1_1.eContents().get(0);
 		private final RuleCall cModesModeIDTerminalRuleCall_5_1_1_0_1 = (RuleCall)cModesModeCrossReference_5_1_1_0.eContents().get(1);
-		private final Keyword cDistributionKeyword_6 = (Keyword)cGroup.eContents().get(6);
-		private final Assignment cDistributionAssignment_7 = (Assignment)cGroup.eContents().get(7);
-		private final RuleCall cDistributionSTRINGTerminalRuleCall_7_0 = (RuleCall)cDistributionAssignment_7.eContents().get(0);
-		private final Keyword cReleaseDateKeyword_8 = (Keyword)cGroup.eContents().get(8);
-		private final Assignment cReleaseDateAssignment_9 = (Assignment)cGroup.eContents().get(9);
-		private final RuleCall cReleaseDateSTRINGTerminalRuleCall_9_0 = (RuleCall)cReleaseDateAssignment_9.eContents().get(0);
+		private final Group cGroup_6 = (Group)cGroup.eContents().get(6);
+		private final Keyword cOperatingSystemKeyword_6_0 = (Keyword)cGroup_6.eContents().get(0);
+		private final Assignment cOperatingSystemAssignment_6_1 = (Assignment)cGroup_6.eContents().get(1);
+		private final RuleCall cOperatingSystemSUPPORTED_OPERATING_SYSTEMSEnumRuleCall_6_1_0 = (RuleCall)cOperatingSystemAssignment_6_1.eContents().get(0);
+		private final Group cGroup_7 = (Group)cGroup.eContents().get(7);
+		private final Keyword cDistributionKeyword_7_0 = (Keyword)cGroup_7.eContents().get(0);
+		private final Assignment cDistributionAssignment_7_1 = (Assignment)cGroup_7.eContents().get(1);
+		private final RuleCall cDistributionSUPPORTED_DISTRIBUTIONSEnumRuleCall_7_1_0 = (RuleCall)cDistributionAssignment_7_1.eContents().get(0);
+		private final Group cGroup_8 = (Group)cGroup.eContents().get(8);
+		private final Keyword cReleaseKeyword_8_0 = (Keyword)cGroup_8.eContents().get(0);
+		private final Assignment cReleaseAssignment_8_1 = (Assignment)cGroup_8.eContents().get(1);
+		private final RuleCall cReleaseSUPPORTED_RELEASESEnumRuleCall_8_1_0 = (RuleCall)cReleaseAssignment_8_1.eContents().get(0);
 		
 		//System :
 		//    'System' name=ID 'has' 'following' 'modes'
 		//        (modes+=[Mode] (',' modes+=[Mode])*)?
-		//    'distribution' distribution=STRING
-		//    'releaseDate' releaseDate=STRING
+		//    ('operatingSystem' operatingSystem=SUPPORTED_OPERATING_SYSTEMS)?
+		//    ('distribution' distribution=SUPPORTED_DISTRIBUTIONS)?
+		//    ('release' release=SUPPORTED_RELEASES)?
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'System' name=ID 'has' 'following' 'modes'
 		//    (modes+=[Mode] (',' modes+=[Mode])*)?
-		//'distribution' distribution=STRING
-		//'releaseDate' releaseDate=STRING
+		//('operatingSystem' operatingSystem=SUPPORTED_OPERATING_SYSTEMS)?
+		//('distribution' distribution=SUPPORTED_DISTRIBUTIONS)?
+		//('release' release=SUPPORTED_RELEASES)?
 		public Group getGroup() { return cGroup; }
 		
 		//'System'
@@ -161,23 +169,41 @@ public class MdslGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		//ID
 		public RuleCall getModesModeIDTerminalRuleCall_5_1_1_0_1() { return cModesModeIDTerminalRuleCall_5_1_1_0_1; }
 		
+		//('operatingSystem' operatingSystem=SUPPORTED_OPERATING_SYSTEMS)?
+		public Group getGroup_6() { return cGroup_6; }
+		
+		//'operatingSystem'
+		public Keyword getOperatingSystemKeyword_6_0() { return cOperatingSystemKeyword_6_0; }
+		
+		//operatingSystem=SUPPORTED_OPERATING_SYSTEMS
+		public Assignment getOperatingSystemAssignment_6_1() { return cOperatingSystemAssignment_6_1; }
+		
+		//SUPPORTED_OPERATING_SYSTEMS
+		public RuleCall getOperatingSystemSUPPORTED_OPERATING_SYSTEMSEnumRuleCall_6_1_0() { return cOperatingSystemSUPPORTED_OPERATING_SYSTEMSEnumRuleCall_6_1_0; }
+		
+		//('distribution' distribution=SUPPORTED_DISTRIBUTIONS)?
+		public Group getGroup_7() { return cGroup_7; }
+		
 		//'distribution'
-		public Keyword getDistributionKeyword_6() { return cDistributionKeyword_6; }
+		public Keyword getDistributionKeyword_7_0() { return cDistributionKeyword_7_0; }
 		
-		//distribution=STRING
-		public Assignment getDistributionAssignment_7() { return cDistributionAssignment_7; }
+		//distribution=SUPPORTED_DISTRIBUTIONS
+		public Assignment getDistributionAssignment_7_1() { return cDistributionAssignment_7_1; }
 		
-		//STRING
-		public RuleCall getDistributionSTRINGTerminalRuleCall_7_0() { return cDistributionSTRINGTerminalRuleCall_7_0; }
+		//SUPPORTED_DISTRIBUTIONS
+		public RuleCall getDistributionSUPPORTED_DISTRIBUTIONSEnumRuleCall_7_1_0() { return cDistributionSUPPORTED_DISTRIBUTIONSEnumRuleCall_7_1_0; }
 		
-		//'releaseDate'
-		public Keyword getReleaseDateKeyword_8() { return cReleaseDateKeyword_8; }
+		//('release' release=SUPPORTED_RELEASES)?
+		public Group getGroup_8() { return cGroup_8; }
 		
-		//releaseDate=STRING
-		public Assignment getReleaseDateAssignment_9() { return cReleaseDateAssignment_9; }
+		//'release'
+		public Keyword getReleaseKeyword_8_0() { return cReleaseKeyword_8_0; }
 		
-		//STRING
-		public RuleCall getReleaseDateSTRINGTerminalRuleCall_9_0() { return cReleaseDateSTRINGTerminalRuleCall_9_0; }
+		//release=SUPPORTED_RELEASES
+		public Assignment getReleaseAssignment_8_1() { return cReleaseAssignment_8_1; }
+		
+		//SUPPORTED_RELEASES
+		public RuleCall getReleaseSUPPORTED_RELEASESEnumRuleCall_8_1_0() { return cReleaseSUPPORTED_RELEASESEnumRuleCall_8_1_0; }
 	}
 	public class SoftwareElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.mdsl.Mdsl.Software");
@@ -185,28 +211,37 @@ public class MdslGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		private final Keyword cSoftwareKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
-		private final Keyword cIdentifiedKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Keyword cByKeyword_3 = (Keyword)cGroup.eContents().get(3);
-		private final Keyword cCpeKeyword_4 = (Keyword)cGroup.eContents().get(4);
-		private final Assignment cVendorAssignment_5 = (Assignment)cGroup.eContents().get(5);
-		private final RuleCall cVendorIDTerminalRuleCall_5_0 = (RuleCall)cVendorAssignment_5.eContents().get(0);
-		private final Keyword cColonKeyword_6 = (Keyword)cGroup.eContents().get(6);
-		private final Assignment cProductAssignment_7 = (Assignment)cGroup.eContents().get(7);
-		private final RuleCall cProductIDTerminalRuleCall_7_0 = (RuleCall)cProductAssignment_7.eContents().get(0);
-		private final Keyword cColonKeyword_8 = (Keyword)cGroup.eContents().get(8);
-		private final Assignment cVersionAssignment_9 = (Assignment)cGroup.eContents().get(9);
-		private final RuleCall cVersionSTRINGTerminalRuleCall_9_0 = (RuleCall)cVersionAssignment_9.eContents().get(0);
-		private final Keyword cPackageKeyword_10 = (Keyword)cGroup.eContents().get(10);
-		private final Assignment cPackageAssignment_11 = (Assignment)cGroup.eContents().get(11);
-		private final RuleCall cPackageSTRINGTerminalRuleCall_11_0 = (RuleCall)cPackageAssignment_11.eContents().get(0);
+		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
+		private final Keyword cVendorKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
+		private final Assignment cVendorAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
+		private final RuleCall cVendorSTRINGTerminalRuleCall_2_1_0 = (RuleCall)cVendorAssignment_2_1.eContents().get(0);
+		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
+		private final Keyword cProductKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
+		private final Assignment cProductAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
+		private final RuleCall cProductSTRINGTerminalRuleCall_3_1_0 = (RuleCall)cProductAssignment_3_1.eContents().get(0);
+		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
+		private final Keyword cVersionKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
+		private final Assignment cVersionAssignment_4_1 = (Assignment)cGroup_4.eContents().get(1);
+		private final RuleCall cVersionSTRINGTerminalRuleCall_4_1_0 = (RuleCall)cVersionAssignment_4_1.eContents().get(0);
+		private final Group cGroup_5 = (Group)cGroup.eContents().get(5);
+		private final Keyword cPackageKeyword_5_0 = (Keyword)cGroup_5.eContents().get(0);
+		private final Assignment cPackageAssignment_5_1 = (Assignment)cGroup_5.eContents().get(1);
+		private final RuleCall cPackageSTRINGTerminalRuleCall_5_1_0 = (RuleCall)cPackageAssignment_5_1.eContents().get(0);
 		
 		//Software :
-		//    'Software' name=ID 'identified' 'by' 'cpe:/:'vendor=ID':'product=ID':'version=STRING
-		//    'package' package=STRING;
+		//    'Software' name=ID //software with a dot in the name should be specified in the package e.g. php7 package "php7.3"
+		//    ('vendor' vendor=STRING)?
+		//    ('product' product=STRING)?
+		//    ('version' version=STRING)?
+		//    ('package' package=STRING)?
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'Software' name=ID 'identified' 'by' 'cpe:/:'vendor=ID':'product=ID':'version=STRING
-		//'package' package=STRING
+		//'Software' name=ID //software with a dot in the name should be specified in the package e.g. php7 package "php7.3"
+		//('vendor' vendor=STRING)?
+		//('product' product=STRING)?
+		//('version' version=STRING)?
+		//('package' package=STRING)?
 		public Group getGroup() { return cGroup; }
 		
 		//'Software'
@@ -218,47 +253,54 @@ public class MdslGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 		
-		//'identified'
-		public Keyword getIdentifiedKeyword_2() { return cIdentifiedKeyword_2; }
+		////software with a dot in the name should be specified in the package e.g. php7 package "php7.3"
+		//   ('vendor' vendor=STRING)?
+		public Group getGroup_2() { return cGroup_2; }
 		
-		//'by'
-		public Keyword getByKeyword_3() { return cByKeyword_3; }
+		//'vendor'
+		public Keyword getVendorKeyword_2_0() { return cVendorKeyword_2_0; }
 		
-		//'cpe:/:'
-		public Keyword getCpeKeyword_4() { return cCpeKeyword_4; }
+		//vendor=STRING
+		public Assignment getVendorAssignment_2_1() { return cVendorAssignment_2_1; }
 		
-		//vendor=ID
-		public Assignment getVendorAssignment_5() { return cVendorAssignment_5; }
+		//STRING
+		public RuleCall getVendorSTRINGTerminalRuleCall_2_1_0() { return cVendorSTRINGTerminalRuleCall_2_1_0; }
 		
-		//ID
-		public RuleCall getVendorIDTerminalRuleCall_5_0() { return cVendorIDTerminalRuleCall_5_0; }
+		//('product' product=STRING)?
+		public Group getGroup_3() { return cGroup_3; }
 		
-		//':'
-		public Keyword getColonKeyword_6() { return cColonKeyword_6; }
+		//'product'
+		public Keyword getProductKeyword_3_0() { return cProductKeyword_3_0; }
 		
-		//product=ID
-		public Assignment getProductAssignment_7() { return cProductAssignment_7; }
+		//product=STRING
+		public Assignment getProductAssignment_3_1() { return cProductAssignment_3_1; }
 		
-		//ID
-		public RuleCall getProductIDTerminalRuleCall_7_0() { return cProductIDTerminalRuleCall_7_0; }
+		//STRING
+		public RuleCall getProductSTRINGTerminalRuleCall_3_1_0() { return cProductSTRINGTerminalRuleCall_3_1_0; }
 		
-		//':'
-		public Keyword getColonKeyword_8() { return cColonKeyword_8; }
+		//('version' version=STRING)?
+		public Group getGroup_4() { return cGroup_4; }
+		
+		//'version'
+		public Keyword getVersionKeyword_4_0() { return cVersionKeyword_4_0; }
 		
 		//version=STRING
-		public Assignment getVersionAssignment_9() { return cVersionAssignment_9; }
+		public Assignment getVersionAssignment_4_1() { return cVersionAssignment_4_1; }
 		
 		//STRING
-		public RuleCall getVersionSTRINGTerminalRuleCall_9_0() { return cVersionSTRINGTerminalRuleCall_9_0; }
+		public RuleCall getVersionSTRINGTerminalRuleCall_4_1_0() { return cVersionSTRINGTerminalRuleCall_4_1_0; }
+		
+		//('package' package=STRING)?
+		public Group getGroup_5() { return cGroup_5; }
 		
 		//'package'
-		public Keyword getPackageKeyword_10() { return cPackageKeyword_10; }
+		public Keyword getPackageKeyword_5_0() { return cPackageKeyword_5_0; }
 		
 		//package=STRING
-		public Assignment getPackageAssignment_11() { return cPackageAssignment_11; }
+		public Assignment getPackageAssignment_5_1() { return cPackageAssignment_5_1; }
 		
 		//STRING
-		public RuleCall getPackageSTRINGTerminalRuleCall_11_0() { return cPackageSTRINGTerminalRuleCall_11_0; }
+		public RuleCall getPackageSTRINGTerminalRuleCall_5_1_0() { return cPackageSTRINGTerminalRuleCall_5_1_0; }
 	}
 	public class ModeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.mdsl.Mdsl.Mode");
@@ -268,9 +310,9 @@ public class MdslGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
 		private final Keyword cExtendsKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
-		private final Assignment cSuperTypeAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
-		private final CrossReference cSuperTypeModeCrossReference_2_1_0 = (CrossReference)cSuperTypeAssignment_2_1.eContents().get(0);
-		private final RuleCall cSuperTypeModeIDTerminalRuleCall_2_1_0_1 = (RuleCall)cSuperTypeModeCrossReference_2_1_0.eContents().get(1);
+		private final Assignment cSuperModeAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
+		private final CrossReference cSuperModeModeCrossReference_2_1_0 = (CrossReference)cSuperModeAssignment_2_1.eContents().get(0);
+		private final RuleCall cSuperModeModeIDTerminalRuleCall_2_1_0_1 = (RuleCall)cSuperModeModeCrossReference_2_1_0.eContents().get(1);
 		private final Keyword cDescriptionKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		private final Assignment cDescriptionAssignment_4 = (Assignment)cGroup.eContents().get(4);
 		private final RuleCall cDescriptionSTRINGTerminalRuleCall_4_0 = (RuleCall)cDescriptionAssignment_4.eContents().get(0);
@@ -299,11 +341,15 @@ public class MdslGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		private final RuleCall cStopServicesServiceIDTerminalRuleCall_10_1_1_0_1 = (RuleCall)cStopServicesServiceCrossReference_10_1_1_0.eContents().get(1);
 		private final Assignment cEnabledAssignment_11 = (Assignment)cGroup.eContents().get(11);
 		private final RuleCall cEnabledEnabledEnumRuleCall_11_0 = (RuleCall)cEnabledAssignment_11.eContents().get(0);
+		private final Group cGroup_12 = (Group)cGroup.eContents().get(12);
+		private final Keyword cExchangeableKeyword_12_0 = (Keyword)cGroup_12.eContents().get(0);
+		private final Keyword cWithKeyword_12_1 = (Keyword)cGroup_12.eContents().get(1);
+		private final Assignment cAlternativeModeAssignment_12_2 = (Assignment)cGroup_12.eContents().get(2);
+		private final CrossReference cAlternativeModeModeCrossReference_12_2_0 = (CrossReference)cAlternativeModeAssignment_12_2.eContents().get(0);
+		private final RuleCall cAlternativeModeModeIDTerminalRuleCall_12_2_0_1 = (RuleCall)cAlternativeModeModeCrossReference_12_2_0.eContents().get(1);
 		
-		//    //Software apache identified by cpe:/:apache:http_server:2.4.38
-		//    //package apache2
 		//Mode :
-		//    'Mode' name=ID ('extends' superType=[Mode])?
+		//    'Mode' name=ID ('extends' superMode=[Mode])?
 		//    'description' description=STRING
 		//    'priority' priority=INT
 		//    'startServices' (startServices+=[Service]
@@ -312,12 +358,12 @@ public class MdslGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		//    'stopServices' (stopServices+=[Service]
 		//        (',' stopServices+=[Service])*
 		//    )?
-		//    //'usesSoftware' usesSoftware+=[Software] (',' usesSoftware+=[Software])*
 		//    (enabled=Enabled)?
+		//    ('exchangeable' 'with' alternativeMode=[Mode])?
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'Mode' name=ID ('extends' superType=[Mode])?
+		//'Mode' name=ID ('extends' superMode=[Mode])?
 		//'description' description=STRING
 		//'priority' priority=INT
 		//'startServices' (startServices+=[Service]
@@ -326,8 +372,8 @@ public class MdslGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		//'stopServices' (stopServices+=[Service]
 		//    (',' stopServices+=[Service])*
 		//)?
-		////'usesSoftware' usesSoftware+=[Software] (',' usesSoftware+=[Software])*
 		//(enabled=Enabled)?
+		//('exchangeable' 'with' alternativeMode=[Mode])?
 		public Group getGroup() { return cGroup; }
 		
 		//'Mode'
@@ -339,20 +385,20 @@ public class MdslGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 		
-		//('extends' superType=[Mode])?
+		//('extends' superMode=[Mode])?
 		public Group getGroup_2() { return cGroup_2; }
 		
 		//'extends'
 		public Keyword getExtendsKeyword_2_0() { return cExtendsKeyword_2_0; }
 		
-		//superType=[Mode]
-		public Assignment getSuperTypeAssignment_2_1() { return cSuperTypeAssignment_2_1; }
+		//superMode=[Mode]
+		public Assignment getSuperModeAssignment_2_1() { return cSuperModeAssignment_2_1; }
 		
 		//[Mode]
-		public CrossReference getSuperTypeModeCrossReference_2_1_0() { return cSuperTypeModeCrossReference_2_1_0; }
+		public CrossReference getSuperModeModeCrossReference_2_1_0() { return cSuperModeModeCrossReference_2_1_0; }
 		
 		//ID
-		public RuleCall getSuperTypeModeIDTerminalRuleCall_2_1_0_1() { return cSuperTypeModeIDTerminalRuleCall_2_1_0_1; }
+		public RuleCall getSuperModeModeIDTerminalRuleCall_2_1_0_1() { return cSuperModeModeIDTerminalRuleCall_2_1_0_1; }
 		
 		//'description'
 		public Keyword getDescriptionKeyword_3() { return cDescriptionKeyword_3; }
@@ -436,12 +482,29 @@ public class MdslGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		//ID
 		public RuleCall getStopServicesServiceIDTerminalRuleCall_10_1_1_0_1() { return cStopServicesServiceIDTerminalRuleCall_10_1_1_0_1; }
 		
-		////'usesSoftware' usesSoftware+=[Software] (',' usesSoftware+=[Software])*
 		//(enabled=Enabled)?
 		public Assignment getEnabledAssignment_11() { return cEnabledAssignment_11; }
 		
 		//Enabled
 		public RuleCall getEnabledEnabledEnumRuleCall_11_0() { return cEnabledEnabledEnumRuleCall_11_0; }
+		
+		//('exchangeable' 'with' alternativeMode=[Mode])?
+		public Group getGroup_12() { return cGroup_12; }
+		
+		//'exchangeable'
+		public Keyword getExchangeableKeyword_12_0() { return cExchangeableKeyword_12_0; }
+		
+		//'with'
+		public Keyword getWithKeyword_12_1() { return cWithKeyword_12_1; }
+		
+		//alternativeMode=[Mode]
+		public Assignment getAlternativeModeAssignment_12_2() { return cAlternativeModeAssignment_12_2; }
+		
+		//[Mode]
+		public CrossReference getAlternativeModeModeCrossReference_12_2_0() { return cAlternativeModeModeCrossReference_12_2_0; }
+		
+		//ID
+		public RuleCall getAlternativeModeModeIDTerminalRuleCall_12_2_0_1() { return cAlternativeModeModeIDTerminalRuleCall_12_2_0_1; }
 	}
 	public class ServiceElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.mdsl.Mdsl.Service");
@@ -648,20 +711,30 @@ public class MdslGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		private final Keyword cDescriptionKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
 		private final Assignment cDescriptionAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
 		private final RuleCall cDescriptionSTRINGTerminalRuleCall_3_1_0 = (RuleCall)cDescriptionAssignment_3_1.eContents().get(0);
-		private final Keyword cShellCmdKeyword_4 = (Keyword)cGroup.eContents().get(4);
-		private final Assignment cShellCmdAssignment_5 = (Assignment)cGroup.eContents().get(5);
-		private final RuleCall cShellCmdSTRINGTerminalRuleCall_5_0 = (RuleCall)cShellCmdAssignment_5.eContents().get(0);
+		private final Alternatives cAlternatives_4 = (Alternatives)cGroup.eContents().get(4);
+		private final Group cGroup_4_0 = (Group)cAlternatives_4.eContents().get(0);
+		private final Keyword cShellCmdKeyword_4_0_0 = (Keyword)cGroup_4_0.eContents().get(0);
+		private final Assignment cShellCmdAssignment_4_0_1 = (Assignment)cGroup_4_0.eContents().get(1);
+		private final RuleCall cShellCmdSTRINGTerminalRuleCall_4_0_1_0 = (RuleCall)cShellCmdAssignment_4_0_1.eContents().get(0);
+		private final Group cGroup_4_1 = (Group)cAlternatives_4.eContents().get(1);
+		private final Keyword cParamsKeyword_4_1_0 = (Keyword)cGroup_4_1.eContents().get(0);
+		private final Assignment cParamsAssignment_4_1_1 = (Assignment)cGroup_4_1.eContents().get(1);
+		private final RuleCall cParamsSTRINGTerminalRuleCall_4_1_1_0 = (RuleCall)cParamsAssignment_4_1_1.eContents().get(0);
+		private final Group cGroup_4_1_2 = (Group)cGroup_4_1.eContents().get(2);
+		private final Keyword cCommaKeyword_4_1_2_0 = (Keyword)cGroup_4_1_2.eContents().get(0);
+		private final Assignment cParamsAssignment_4_1_2_1 = (Assignment)cGroup_4_1_2.eContents().get(1);
+		private final RuleCall cParamsSTRINGTerminalRuleCall_4_1_2_1_0 = (RuleCall)cParamsAssignment_4_1_2_1.eContents().get(0);
 		
 		//Action :
 		//    'Action' name=ID ('extends' superAction=[Action])?
 		//    ('description' description=STRING)?
-		//    'shellCmd' shellCmd=STRING
+		//    (('shellCmd' shellCmd=STRING)|('params' params+=STRING (',' params+=STRING)*))
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'Action' name=ID ('extends' superAction=[Action])?
 		//('description' description=STRING)?
-		//'shellCmd' shellCmd=STRING
+		//(('shellCmd' shellCmd=STRING)|('params' params+=STRING (',' params+=STRING)*))
 		public Group getGroup() { return cGroup; }
 		
 		//'Action'
@@ -700,14 +773,44 @@ public class MdslGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		//STRING
 		public RuleCall getDescriptionSTRINGTerminalRuleCall_3_1_0() { return cDescriptionSTRINGTerminalRuleCall_3_1_0; }
 		
+		//(('shellCmd' shellCmd=STRING)|('params' params+=STRING (',' params+=STRING)*))
+		public Alternatives getAlternatives_4() { return cAlternatives_4; }
+		
+		//('shellCmd' shellCmd=STRING)
+		public Group getGroup_4_0() { return cGroup_4_0; }
+		
 		//'shellCmd'
-		public Keyword getShellCmdKeyword_4() { return cShellCmdKeyword_4; }
+		public Keyword getShellCmdKeyword_4_0_0() { return cShellCmdKeyword_4_0_0; }
 		
 		//shellCmd=STRING
-		public Assignment getShellCmdAssignment_5() { return cShellCmdAssignment_5; }
+		public Assignment getShellCmdAssignment_4_0_1() { return cShellCmdAssignment_4_0_1; }
 		
 		//STRING
-		public RuleCall getShellCmdSTRINGTerminalRuleCall_5_0() { return cShellCmdSTRINGTerminalRuleCall_5_0; }
+		public RuleCall getShellCmdSTRINGTerminalRuleCall_4_0_1_0() { return cShellCmdSTRINGTerminalRuleCall_4_0_1_0; }
+		
+		//('params' params+=STRING (',' params+=STRING)*)
+		public Group getGroup_4_1() { return cGroup_4_1; }
+		
+		//'params'
+		public Keyword getParamsKeyword_4_1_0() { return cParamsKeyword_4_1_0; }
+		
+		//params+=STRING
+		public Assignment getParamsAssignment_4_1_1() { return cParamsAssignment_4_1_1; }
+		
+		//STRING
+		public RuleCall getParamsSTRINGTerminalRuleCall_4_1_1_0() { return cParamsSTRINGTerminalRuleCall_4_1_1_0; }
+		
+		//(',' params+=STRING)*
+		public Group getGroup_4_1_2() { return cGroup_4_1_2; }
+		
+		//','
+		public Keyword getCommaKeyword_4_1_2_0() { return cCommaKeyword_4_1_2_0; }
+		
+		//params+=STRING
+		public Assignment getParamsAssignment_4_1_2_1() { return cParamsAssignment_4_1_2_1; }
+		
+		//STRING
+		public RuleCall getParamsSTRINGTerminalRuleCall_4_1_2_1_0() { return cParamsSTRINGTerminalRuleCall_4_1_2_1_0; }
 	}
 	public class RuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.mdsl.Mdsl.Rule");
@@ -898,6 +1001,91 @@ public class MdslGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		public RuleCall getDescriptionSTRINGTerminalRuleCall_3_0() { return cDescriptionSTRINGTerminalRuleCall_3_0; }
 	}
 	
+	public class SUPPORTED_OPERATING_SYSTEMSElements extends AbstractElementFinder.AbstractEnumRuleElementFinder {
+		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.mdsl.Mdsl.SUPPORTED_OPERATING_SYSTEMS");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final EnumLiteralDeclaration cWindowsEnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
+		private final Keyword cWindowsWindowsKeyword_0_0 = (Keyword)cWindowsEnumLiteralDeclaration_0.eContents().get(0);
+		private final EnumLiteralDeclaration cLinuxEnumLiteralDeclaration_1 = (EnumLiteralDeclaration)cAlternatives.eContents().get(1);
+		private final Keyword cLinuxLinuxKeyword_1_0 = (Keyword)cLinuxEnumLiteralDeclaration_1.eContents().get(0);
+		
+		//enum SUPPORTED_OPERATING_SYSTEMS:
+		//    Windows|Linux
+		//;
+		public EnumRule getRule() { return rule; }
+		
+		//Windows|Linux
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//Windows
+		public EnumLiteralDeclaration getWindowsEnumLiteralDeclaration_0() { return cWindowsEnumLiteralDeclaration_0; }
+		
+		public Keyword getWindowsWindowsKeyword_0_0() { return cWindowsWindowsKeyword_0_0; }
+		
+		//Linux
+		public EnumLiteralDeclaration getLinuxEnumLiteralDeclaration_1() { return cLinuxEnumLiteralDeclaration_1; }
+		
+		public Keyword getLinuxLinuxKeyword_1_0() { return cLinuxLinuxKeyword_1_0; }
+	}
+	public class SUPPORTED_DISTRIBUTIONSElements extends AbstractElementFinder.AbstractEnumRuleElementFinder {
+		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.mdsl.Mdsl.SUPPORTED_DISTRIBUTIONS");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final EnumLiteralDeclaration cDebianEnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
+		private final Keyword cDebianDebianKeyword_0_0 = (Keyword)cDebianEnumLiteralDeclaration_0.eContents().get(0);
+		private final EnumLiteralDeclaration cUbuntuEnumLiteralDeclaration_1 = (EnumLiteralDeclaration)cAlternatives.eContents().get(1);
+		private final Keyword cUbuntuUbuntuKeyword_1_0 = (Keyword)cUbuntuEnumLiteralDeclaration_1.eContents().get(0);
+		private final EnumLiteralDeclaration cOtherEnumLiteralDeclaration_2 = (EnumLiteralDeclaration)cAlternatives.eContents().get(2);
+		private final Keyword cOtherOtherKeyword_2_0 = (Keyword)cOtherEnumLiteralDeclaration_2.eContents().get(0);
+		
+		//enum SUPPORTED_DISTRIBUTIONS:
+		//    Debian|Ubuntu|Other
+		//;
+		public EnumRule getRule() { return rule; }
+		
+		//Debian|Ubuntu|Other
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//Debian
+		public EnumLiteralDeclaration getDebianEnumLiteralDeclaration_0() { return cDebianEnumLiteralDeclaration_0; }
+		
+		public Keyword getDebianDebianKeyword_0_0() { return cDebianDebianKeyword_0_0; }
+		
+		//Ubuntu
+		public EnumLiteralDeclaration getUbuntuEnumLiteralDeclaration_1() { return cUbuntuEnumLiteralDeclaration_1; }
+		
+		public Keyword getUbuntuUbuntuKeyword_1_0() { return cUbuntuUbuntuKeyword_1_0; }
+		
+		//Other
+		public EnumLiteralDeclaration getOtherEnumLiteralDeclaration_2() { return cOtherEnumLiteralDeclaration_2; }
+		
+		public Keyword getOtherOtherKeyword_2_0() { return cOtherOtherKeyword_2_0; }
+	}
+	public class SUPPORTED_RELEASESElements extends AbstractElementFinder.AbstractEnumRuleElementFinder {
+		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.mdsl.Mdsl.SUPPORTED_RELEASES");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final EnumLiteralDeclaration cBusterEnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
+		private final Keyword cBusterBusterKeyword_0_0 = (Keyword)cBusterEnumLiteralDeclaration_0.eContents().get(0);
+		private final EnumLiteralDeclaration cOtherEnumLiteralDeclaration_1 = (EnumLiteralDeclaration)cAlternatives.eContents().get(1);
+		private final Keyword cOtherOtherKeyword_1_0 = (Keyword)cOtherEnumLiteralDeclaration_1.eContents().get(0);
+		
+		//enum SUPPORTED_RELEASES:
+		//    Buster|Other
+		//;
+		public EnumRule getRule() { return rule; }
+		
+		//Buster|Other
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//Buster
+		public EnumLiteralDeclaration getBusterEnumLiteralDeclaration_0() { return cBusterEnumLiteralDeclaration_0; }
+		
+		public Keyword getBusterBusterKeyword_0_0() { return cBusterBusterKeyword_0_0; }
+		
+		//Other
+		public EnumLiteralDeclaration getOtherEnumLiteralDeclaration_1() { return cOtherEnumLiteralDeclaration_1; }
+		
+		public Keyword getOtherOtherKeyword_1_0() { return cOtherOtherKeyword_1_0; }
+	}
 	public class EnabledElements extends AbstractElementFinder.AbstractEnumRuleElementFinder {
 		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.mdsl.Mdsl.Enabled");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
@@ -928,7 +1116,9 @@ public class MdslGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 	private final ModelElements pModel;
 	private final DeclarationElements pDeclaration;
 	private final SystemElements pSystem;
-	private final TerminalRule tDATE;
+	private final SUPPORTED_OPERATING_SYSTEMSElements eSUPPORTED_OPERATING_SYSTEMS;
+	private final SUPPORTED_DISTRIBUTIONSElements eSUPPORTED_DISTRIBUTIONS;
+	private final SUPPORTED_RELEASESElements eSUPPORTED_RELEASES;
 	private final SoftwareElements pSoftware;
 	private final ModeElements pMode;
 	private final EnabledElements eEnabled;
@@ -950,7 +1140,9 @@ public class MdslGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		this.pModel = new ModelElements();
 		this.pDeclaration = new DeclarationElements();
 		this.pSystem = new SystemElements();
-		this.tDATE = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.mdsl.Mdsl.DATE");
+		this.eSUPPORTED_OPERATING_SYSTEMS = new SUPPORTED_OPERATING_SYSTEMSElements();
+		this.eSUPPORTED_DISTRIBUTIONS = new SUPPORTED_DISTRIBUTIONSElements();
+		this.eSUPPORTED_RELEASES = new SUPPORTED_RELEASESElements();
 		this.pSoftware = new SoftwareElements();
 		this.pMode = new ModeElements();
 		this.eEnabled = new EnabledElements();
@@ -1009,8 +1201,9 @@ public class MdslGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 	//System :
 	//    'System' name=ID 'has' 'following' 'modes'
 	//        (modes+=[Mode] (',' modes+=[Mode])*)?
-	//    'distribution' distribution=STRING
-	//    'releaseDate' releaseDate=STRING
+	//    ('operatingSystem' operatingSystem=SUPPORTED_OPERATING_SYSTEMS)?
+	//    ('distribution' distribution=SUPPORTED_DISTRIBUTIONS)?
+	//    ('release' release=SUPPORTED_RELEASES)?
 	//;
 	public SystemElements getSystemAccess() {
 		return pSystem;
@@ -1020,14 +1213,46 @@ public class MdslGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		return getSystemAccess().getRule();
 	}
 	
-	//terminal DATE : ('2000'..'2999')'-'('01'..'12')'-'('01'..'31');
-	public TerminalRule getDATERule() {
-		return tDATE;
+	//enum SUPPORTED_OPERATING_SYSTEMS:
+	//    Windows|Linux
+	//;
+	public SUPPORTED_OPERATING_SYSTEMSElements getSUPPORTED_OPERATING_SYSTEMSAccess() {
+		return eSUPPORTED_OPERATING_SYSTEMS;
+	}
+	
+	public EnumRule getSUPPORTED_OPERATING_SYSTEMSRule() {
+		return getSUPPORTED_OPERATING_SYSTEMSAccess().getRule();
+	}
+	
+	//enum SUPPORTED_DISTRIBUTIONS:
+	//    Debian|Ubuntu|Other
+	//;
+	public SUPPORTED_DISTRIBUTIONSElements getSUPPORTED_DISTRIBUTIONSAccess() {
+		return eSUPPORTED_DISTRIBUTIONS;
+	}
+	
+	public EnumRule getSUPPORTED_DISTRIBUTIONSRule() {
+		return getSUPPORTED_DISTRIBUTIONSAccess().getRule();
+	}
+	
+	//enum SUPPORTED_RELEASES:
+	//    Buster|Other
+	//;
+	public SUPPORTED_RELEASESElements getSUPPORTED_RELEASESAccess() {
+		return eSUPPORTED_RELEASES;
+	}
+	
+	public EnumRule getSUPPORTED_RELEASESRule() {
+		return getSUPPORTED_RELEASESAccess().getRule();
 	}
 	
 	//Software :
-	//    'Software' name=ID 'identified' 'by' 'cpe:/:'vendor=ID':'product=ID':'version=STRING
-	//    'package' package=STRING;
+	//    'Software' name=ID //software with a dot in the name should be specified in the package e.g. php7 package "php7.3"
+	//    ('vendor' vendor=STRING)?
+	//    ('product' product=STRING)?
+	//    ('version' version=STRING)?
+	//    ('package' package=STRING)?
+	//;
 	public SoftwareElements getSoftwareAccess() {
 		return pSoftware;
 	}
@@ -1036,10 +1261,8 @@ public class MdslGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		return getSoftwareAccess().getRule();
 	}
 	
-	//    //Software apache identified by cpe:/:apache:http_server:2.4.38
-	//    //package apache2
 	//Mode :
-	//    'Mode' name=ID ('extends' superType=[Mode])?
+	//    'Mode' name=ID ('extends' superMode=[Mode])?
 	//    'description' description=STRING
 	//    'priority' priority=INT
 	//    'startServices' (startServices+=[Service]
@@ -1048,8 +1271,8 @@ public class MdslGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 	//    'stopServices' (stopServices+=[Service]
 	//        (',' stopServices+=[Service])*
 	//    )?
-	//    //'usesSoftware' usesSoftware+=[Software] (',' usesSoftware+=[Software])*
 	//    (enabled=Enabled)?
+	//    ('exchangeable' 'with' alternativeMode=[Mode])?
 	//;
 	public ModeElements getModeAccess() {
 		return pMode;
@@ -1100,7 +1323,7 @@ public class MdslGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 	//Action :
 	//    'Action' name=ID ('extends' superAction=[Action])?
 	//    ('description' description=STRING)?
-	//    'shellCmd' shellCmd=STRING
+	//    (('shellCmd' shellCmd=STRING)|('params' params+=STRING (',' params+=STRING)*))
 	//;
 	public ActionElements getActionAccess() {
 		return pAction;

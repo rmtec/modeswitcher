@@ -88,7 +88,7 @@ public class MdslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     Action returns Action
 	 *
 	 * Constraint:
-	 *     (name=ID superAction=[Action|ID]? description=STRING? shellCmd=STRING)
+	 *     (name=ID superAction=[Action|ID]? description=STRING? (shellCmd=STRING | (params+=STRING params+=STRING*)))
 	 */
 	protected void sequence_Action(ISerializationContext context, org.xtext.mdsl.mdsl.Action semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -125,12 +125,13 @@ public class MdslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 * Constraint:
 	 *     (
 	 *         name=ID 
-	 *         superType=[Mode|ID]? 
+	 *         superMode=[Mode|ID]? 
 	 *         description=STRING 
 	 *         priority=INT 
 	 *         (startServices+=[Service|ID] startServices+=[Service|ID]*)? 
 	 *         (stopServices+=[Service|ID] stopServices+=[Service|ID]*)? 
-	 *         enabled=Enabled?
+	 *         enabled=Enabled? 
+	 *         alternativeMode=[Mode|ID]?
 	 *     )
 	 */
 	protected void sequence_Mode(ISerializationContext context, Mode semanticObject) {
@@ -189,28 +190,10 @@ public class MdslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     Software returns Software
 	 *
 	 * Constraint:
-	 *     (name=ID vendor=ID product=ID version=STRING package=STRING)
+	 *     (name=ID vendor=STRING? product=STRING? version=STRING? package=STRING?)
 	 */
 	protected void sequence_Software(ISerializationContext context, Software semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, MdslPackage.Literals.SOFTWARE__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MdslPackage.Literals.SOFTWARE__NAME));
-			if (transientValues.isValueTransient(semanticObject, MdslPackage.Literals.SOFTWARE__VENDOR) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MdslPackage.Literals.SOFTWARE__VENDOR));
-			if (transientValues.isValueTransient(semanticObject, MdslPackage.Literals.SOFTWARE__PRODUCT) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MdslPackage.Literals.SOFTWARE__PRODUCT));
-			if (transientValues.isValueTransient(semanticObject, MdslPackage.Literals.SOFTWARE__VERSION) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MdslPackage.Literals.SOFTWARE__VERSION));
-			if (transientValues.isValueTransient(semanticObject, MdslPackage.Literals.SOFTWARE__PACKAGE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MdslPackage.Literals.SOFTWARE__PACKAGE));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getSoftwareAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
-		feeder.accept(grammarAccess.getSoftwareAccess().getVendorIDTerminalRuleCall_5_0(), semanticObject.getVendor());
-		feeder.accept(grammarAccess.getSoftwareAccess().getProductIDTerminalRuleCall_7_0(), semanticObject.getProduct());
-		feeder.accept(grammarAccess.getSoftwareAccess().getVersionSTRINGTerminalRuleCall_9_0(), semanticObject.getVersion());
-		feeder.accept(grammarAccess.getSoftwareAccess().getPackageSTRINGTerminalRuleCall_11_0(), semanticObject.getPackage());
-		feeder.finish();
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -220,7 +203,13 @@ public class MdslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     System returns System
 	 *
 	 * Constraint:
-	 *     (name=ID (modes+=[Mode|ID] modes+=[Mode|ID]*)? distribution=STRING releaseDate=STRING)
+	 *     (
+	 *         name=ID 
+	 *         (modes+=[Mode|ID] modes+=[Mode|ID]*)? 
+	 *         operatingSystem=SUPPORTED_OPERATING_SYSTEMS? 
+	 *         distribution=SUPPORTED_DISTRIBUTIONS? 
+	 *         release=SUPPORTED_RELEASES?
+	 *     )
 	 */
 	protected void sequence_System(ISerializationContext context, org.xtext.mdsl.mdsl.System semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

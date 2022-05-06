@@ -30,12 +30,13 @@ import org.xtext.mdsl.mdsl.Service;
  * </p>
  * <ul>
  *   <li>{@link org.xtext.mdsl.mdsl.impl.ModeImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.xtext.mdsl.mdsl.impl.ModeImpl#getSuperType <em>Super Type</em>}</li>
+ *   <li>{@link org.xtext.mdsl.mdsl.impl.ModeImpl#getSuperMode <em>Super Mode</em>}</li>
  *   <li>{@link org.xtext.mdsl.mdsl.impl.ModeImpl#getDescription <em>Description</em>}</li>
  *   <li>{@link org.xtext.mdsl.mdsl.impl.ModeImpl#getPriority <em>Priority</em>}</li>
  *   <li>{@link org.xtext.mdsl.mdsl.impl.ModeImpl#getStartServices <em>Start Services</em>}</li>
  *   <li>{@link org.xtext.mdsl.mdsl.impl.ModeImpl#getStopServices <em>Stop Services</em>}</li>
  *   <li>{@link org.xtext.mdsl.mdsl.impl.ModeImpl#getEnabled <em>Enabled</em>}</li>
+ *   <li>{@link org.xtext.mdsl.mdsl.impl.ModeImpl#getAlternativeMode <em>Alternative Mode</em>}</li>
  * </ul>
  *
  * @generated
@@ -63,14 +64,14 @@ public class ModeImpl extends DeclarationImpl implements Mode
   protected String name = NAME_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getSuperType() <em>Super Type</em>}' reference.
+   * The cached value of the '{@link #getSuperMode() <em>Super Mode</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getSuperType()
+   * @see #getSuperMode()
    * @generated
    * @ordered
    */
-  protected Mode superType;
+  protected Mode superMode;
 
   /**
    * The default value of the '{@link #getDescription() <em>Description</em>}' attribute.
@@ -153,6 +154,16 @@ public class ModeImpl extends DeclarationImpl implements Mode
   protected Enabled enabled = ENABLED_EDEFAULT;
 
   /**
+   * The cached value of the '{@link #getAlternativeMode() <em>Alternative Mode</em>}' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getAlternativeMode()
+   * @generated
+   * @ordered
+   */
+  protected Mode alternativeMode;
+
+  /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -204,19 +215,19 @@ public class ModeImpl extends DeclarationImpl implements Mode
    * @generated
    */
   @Override
-  public Mode getSuperType()
+  public Mode getSuperMode()
   {
-    if (superType != null && superType.eIsProxy())
+    if (superMode != null && superMode.eIsProxy())
     {
-      InternalEObject oldSuperType = (InternalEObject)superType;
-      superType = (Mode)eResolveProxy(oldSuperType);
-      if (superType != oldSuperType)
+      InternalEObject oldSuperMode = (InternalEObject)superMode;
+      superMode = (Mode)eResolveProxy(oldSuperMode);
+      if (superMode != oldSuperMode)
       {
         if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, MdslPackage.MODE__SUPER_TYPE, oldSuperType, superType));
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, MdslPackage.MODE__SUPER_MODE, oldSuperMode, superMode));
       }
     }
-    return superType;
+    return superMode;
   }
 
   /**
@@ -224,9 +235,9 @@ public class ModeImpl extends DeclarationImpl implements Mode
    * <!-- end-user-doc -->
    * @generated
    */
-  public Mode basicGetSuperType()
+  public Mode basicGetSuperMode()
   {
-    return superType;
+    return superMode;
   }
 
   /**
@@ -235,12 +246,12 @@ public class ModeImpl extends DeclarationImpl implements Mode
    * @generated
    */
   @Override
-  public void setSuperType(Mode newSuperType)
+  public void setSuperMode(Mode newSuperMode)
   {
-    Mode oldSuperType = superType;
-    superType = newSuperType;
+    Mode oldSuperMode = superMode;
+    superMode = newSuperMode;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, MdslPackage.MODE__SUPER_TYPE, oldSuperType, superType));
+      eNotify(new ENotificationImpl(this, Notification.SET, MdslPackage.MODE__SUPER_MODE, oldSuperMode, superMode));
   }
 
   /**
@@ -354,15 +365,60 @@ public class ModeImpl extends DeclarationImpl implements Mode
    * @generated
    */
   @Override
+  public Mode getAlternativeMode()
+  {
+    if (alternativeMode != null && alternativeMode.eIsProxy())
+    {
+      InternalEObject oldAlternativeMode = (InternalEObject)alternativeMode;
+      alternativeMode = (Mode)eResolveProxy(oldAlternativeMode);
+      if (alternativeMode != oldAlternativeMode)
+      {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, MdslPackage.MODE__ALTERNATIVE_MODE, oldAlternativeMode, alternativeMode));
+      }
+    }
+    return alternativeMode;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Mode basicGetAlternativeMode()
+  {
+    return alternativeMode;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setAlternativeMode(Mode newAlternativeMode)
+  {
+    Mode oldAlternativeMode = alternativeMode;
+    alternativeMode = newAlternativeMode;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, MdslPackage.MODE__ALTERNATIVE_MODE, oldAlternativeMode, alternativeMode));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
     switch (featureID)
     {
       case MdslPackage.MODE__NAME:
         return getName();
-      case MdslPackage.MODE__SUPER_TYPE:
-        if (resolve) return getSuperType();
-        return basicGetSuperType();
+      case MdslPackage.MODE__SUPER_MODE:
+        if (resolve) return getSuperMode();
+        return basicGetSuperMode();
       case MdslPackage.MODE__DESCRIPTION:
         return getDescription();
       case MdslPackage.MODE__PRIORITY:
@@ -373,6 +429,9 @@ public class ModeImpl extends DeclarationImpl implements Mode
         return getStopServices();
       case MdslPackage.MODE__ENABLED:
         return getEnabled();
+      case MdslPackage.MODE__ALTERNATIVE_MODE:
+        if (resolve) return getAlternativeMode();
+        return basicGetAlternativeMode();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -391,8 +450,8 @@ public class ModeImpl extends DeclarationImpl implements Mode
       case MdslPackage.MODE__NAME:
         setName((String)newValue);
         return;
-      case MdslPackage.MODE__SUPER_TYPE:
-        setSuperType((Mode)newValue);
+      case MdslPackage.MODE__SUPER_MODE:
+        setSuperMode((Mode)newValue);
         return;
       case MdslPackage.MODE__DESCRIPTION:
         setDescription((String)newValue);
@@ -411,6 +470,9 @@ public class ModeImpl extends DeclarationImpl implements Mode
       case MdslPackage.MODE__ENABLED:
         setEnabled((Enabled)newValue);
         return;
+      case MdslPackage.MODE__ALTERNATIVE_MODE:
+        setAlternativeMode((Mode)newValue);
+        return;
     }
     super.eSet(featureID, newValue);
   }
@@ -428,8 +490,8 @@ public class ModeImpl extends DeclarationImpl implements Mode
       case MdslPackage.MODE__NAME:
         setName(NAME_EDEFAULT);
         return;
-      case MdslPackage.MODE__SUPER_TYPE:
-        setSuperType((Mode)null);
+      case MdslPackage.MODE__SUPER_MODE:
+        setSuperMode((Mode)null);
         return;
       case MdslPackage.MODE__DESCRIPTION:
         setDescription(DESCRIPTION_EDEFAULT);
@@ -445,6 +507,9 @@ public class ModeImpl extends DeclarationImpl implements Mode
         return;
       case MdslPackage.MODE__ENABLED:
         setEnabled(ENABLED_EDEFAULT);
+        return;
+      case MdslPackage.MODE__ALTERNATIVE_MODE:
+        setAlternativeMode((Mode)null);
         return;
     }
     super.eUnset(featureID);
@@ -462,8 +527,8 @@ public class ModeImpl extends DeclarationImpl implements Mode
     {
       case MdslPackage.MODE__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case MdslPackage.MODE__SUPER_TYPE:
-        return superType != null;
+      case MdslPackage.MODE__SUPER_MODE:
+        return superMode != null;
       case MdslPackage.MODE__DESCRIPTION:
         return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
       case MdslPackage.MODE__PRIORITY:
@@ -474,6 +539,8 @@ public class ModeImpl extends DeclarationImpl implements Mode
         return stopServices != null && !stopServices.isEmpty();
       case MdslPackage.MODE__ENABLED:
         return enabled != ENABLED_EDEFAULT;
+      case MdslPackage.MODE__ALTERNATIVE_MODE:
+        return alternativeMode != null;
     }
     return super.eIsSet(featureID);
   }

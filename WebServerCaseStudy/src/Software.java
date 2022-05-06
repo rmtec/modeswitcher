@@ -1,24 +1,52 @@
+import java.io.Serializable;
 import java.util.HashMap;
 
-public class Software {
+public class Software implements Serializable{
+	private static final long serialVersionUID = -2607922701220494169L;
 	private String vendor;
 	private String product;
 	private String version;
-	private String debianPackage;
-	private HashMap<String, Vulnerability> vulnerabilities;
+	private String packageName;
 	private boolean enabled;
+	private HashMap<String, Vulnerability> vulnerabilities;
 	
 	public Software(String vendor, String product, String version) {
 		this(vendor,product,version,"");
 	}
 	
-	public Software(String vendor, String product, String version, String link) {
+	public Software(String vendor, String product, String version, String packageName) {
+		initSoftware(vendor, product, version, packageName, true);
+	}
+
+	public Software(String packageName) {
+		String cpe = "";
+		String vendor = "";
+		String product = "";
+		String version = "";
+		//cpe:/a:apache:http_server
+		//cpe:/:apache:http_server:2.4.38
+		if(ModeSwitcher.getOS() != null) {
+			cpe = ModeSwitcher.getOS().getCpeForPackage(packageName); //apache
+		}
+		if(cpe == null) {
+			ModeSwitcher.log("No CPE for package " + packageName + " found");
+		}else {
+			String[] cpeArr;
+			cpeArr = cpe.split(":"); // separator
+			if(cpeArr.length >= 3) vendor = cpeArr[2]; //apache
+			if(cpeArr.length >= 4) product = cpeArr[3]; //http_server
+			if(cpeArr.length >= 5) version = cpeArr[4]; //2.4.38
+			initSoftware(vendor, product, version, packageName, true);
+		}
+	}
+	
+	private void initSoftware(String vendor, String product, String version, String packageName, Boolean enabled) {
 		this.setVendor(vendor);
 		this.setProduct(product);
 		this.setVersion(version);
-		this.setDebianPackage(link);
+		this.setPackage(packageName);
+		this.setEnabled(enabled);
 		this.vulnerabilities = new HashMap<String, Vulnerability>();
-		this.setEnabled(true);
 	}
 
 	public void addVulnerability(String date, String cveId, double score) {
@@ -32,27 +60,41 @@ public class Software {
 	}
 	
 	public double getActiveScoreSum() {
-		return vulnerabilities.values().stream().filter(Vulnerability::isActive).mapToDouble(Vulnerability::getScore).sum();
+		if (getVulnerabilities().isEmpty()) {
+			return 0.0;
+		}else {
+			return vulnerabilities.values().stream().filter(Vulnerability::isActive).mapToDouble(Vulnerability::getScore).sum();
+		}
 	}
 	
 	public double getScoreSum() {
 		double sum = 0;
-		for (Vulnerability vulnerability : vulnerabilities.values()) {
-			sum += vulnerability.getScore();
+		if (getVulnerabilities() != null) {
+			for (Vulnerability vulnerability : getVulnerabilities().values()) {
+				sum += vulnerability.getScore();
+			}
 		}
 		return sum;
 	}
 	
-	public int getNotOfActiveVulnerabilties() {
-		return (int) vulnerabilities.values().stream().filter(Vulnerability::isActive).count();
+	public int getNoOfActiveVulnerabilties() {
+		if (getVulnerabilities() == null || getVulnerabilities().isEmpty()) {
+			return 0;
+		}else {
+			return (int) getVulnerabilities().values().stream().filter(Vulnerability::isActive).count();
+		}
 	}
 	
 	public int getNoOfVulnerabilities() {
-		return vulnerabilities.size();
+		if(getVulnerabilities() == null || getVulnerabilities().isEmpty()) {
+			return 0;
+		}else {
+			return getVulnerabilities().size();
+		}
 	}
 	
 	public double getActiveScoreAvg() {
-		int noOfVulnerabilities = this.getNotOfActiveVulnerabilties();
+		int noOfVulnerabilities = this.getNoOfActiveVulnerabilties();
 		if (noOfVulnerabilities > 0) {
 			return this.getActiveScoreSum()/noOfVulnerabilities;
 		}
@@ -67,19 +109,23 @@ public class Software {
 		return 0;
 	}
 
-	public String getDebianPackage() {
-		return debianPackage;
+	public String getPackage() {
+		return packageName;
 	}
 
-	public void setDebianPackage(String debianPackage) {
-		this.debianPackage = debianPackage;
+	public void setPackage(String packageName) {
+		this.packageName = packageName;
 	}
 
 	public HashMap<String, Vulnerability> getVulnerabilities() {
+		if(vulnerabilities == null) vulnerabilities = new HashMap<String, Vulnerability>();
 		return vulnerabilities;
 	}
 
 	public boolean isEnabled() {
+		if(!enabled) {
+			System.out.println(getCpe() + " " + getPackage() + " is disabled");
+		}
 		return enabled;
 	}
 

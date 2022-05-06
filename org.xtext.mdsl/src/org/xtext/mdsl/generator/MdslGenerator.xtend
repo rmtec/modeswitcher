@@ -20,12 +20,30 @@ import org.xtext.mdsl.mdsl.System
  * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#code-generation
  */
 class MdslGenerator extends AbstractGenerator {
-
+	
 	override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
-		fsa.generateFile('SystemConfigurationCreator.java', generateModes(resource.contents.head as Model));
+		val model = resource.contents.head as Model;
+		val targetLanguage = "java"; //default
+		switch targetLanguage{
+			//case 'sh' : fsa.generateFile('modeswitcher.sh', generateShellscriptSystemConfiguration(model))
+			//case 'ansible' : fsa.generateFile('modeswitcher.yml', generateAnsibleSystemConfiguration(model))
+			//case 'java' : 
+			default : fsa.generateFile('SystemConfigurationCreator.java', generateJavaSystemConfigurationCreator(model))
+		}
 	}
 	
-	def generateModes(Model model) {'''
+	/*def generateShellscriptSystemConfiguration(Model model) {'''
+	shellscript
+	'''
+	}
+	
+	def generateAnsibleSystemConfiguration(Model model) {'''
+	ansible
+	'''
+	}*/
+		
+	
+	def generateJavaSystemConfigurationCreator(Model model) {'''
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -34,20 +52,25 @@ import java.util.List;
 public class SystemConfigurationCreator{
 		public static SystemConfiguration create() {
 			List<Mode> modes  = new ArrayList<Mode>();
-			HashMap<String, Software> software = new HashMap<String, Software>();
+			List<Software> software = new ArrayList<Software>();
 			String debianRelease;
 			String releaseDate;
 			«FOR sys : model.declarations.filter(System)»
-			debianRelease = "«sys.distribution»";
-			releaseDate = "«sys.releaseDate»";
+			debianRelease = "«sys.distribution.toString»";
 			«ENDFOR»
 			
 			«FOR s : model.declarations.filter(Software)»
-			Software «s.name.toFirstLower» = new Software("«s.vendor»","«s.product»","«s.version»", "«s.package»");
-			software.put("cpe:/:«s.vendor»:«s.product»:«s.version»", «s.name.toFirstLower»);
+			«IF s.package !== null»
+			Software «s.name.toFirstLower» = new Software("«s.package»");
+			«ELSE»
+			Software «s.name.toFirstLower» = new Software("«s.name»");
+			«ENDIF»
+			software.add(«s.name.toFirstLower»);
 			«ENDFOR»
 			
 			«FOR a : model.declarations.filter(Action)»
+			«IF a.superAction !== null»«a.shellCmd = a.superAction.shellCmd»«ENDIF»
+			«a.params.forEach[param, index| a.shellCmd = a.shellCmd.replace("$" + index, param)]»
 			Action «a.name.toFirstLower» = new Action("", "«a.shellCmd»");
 			«ENDFOR»
 			
@@ -60,18 +83,31 @@ public class SystemConfigurationCreator{
 			«ENDFOR»
 			
 			«FOR m : model.declarations.filter(Mode)»
-			Mode «m.name.toFirstLower» = new Mode("«m.description»", «m.priority»,
-				Arrays.asList(«m.startServices.map[name.toFirstLower].join(', ')»),
-				Arrays.asList(«m.stopServices.map[name.toFirstLower].join(', ')»)
+			Mode «m.name.toFirstLower» = new Mode("«m.name.toFirstLower»","«m.description»", «m.priority»,
+				Arrays.asList(«IF m.superMode !== null»«m.superMode.startServices.map[name.toFirstLower].join(', ')»«IF m.startServices !== null»,«ENDIF»«ENDIF»
+				«m.startServices.map[name.toFirstLower].join(', ')»),
+				Arrays.asList(«IF m.superMode !== null»«m.superMode.stopServices.map[name.toFirstLower].join(', ')»«IF m.stopServices !== null»,«ENDIF»«ENDIF»
+				«m.stopServices.map[name.toFirstLower].join(', ')»)
 			);
+			«IF m.enabled !==null && m.enabled == false»
+			«m.name.toFirstLower».setEnabled(false);
+			«ENDIF»
 			modes.add(«m.name.toFirstLower»);
 			«ENDFOR»
 			
-			return new SystemConfiguration(modes, software, debianRelease, releaseDate);
+			«FOR m : model.declarations.filter(Mode)»
+				«IF m.alternativeMode !==null»
+					«m.name.toFirstLower».setAlternativeMode(«m.alternativeMode.name.toFirstLower»);
+				«ENDIF»
+			«ENDFOR»			
+			
+			return new SystemConfiguration(modes, software);
 		}
 }
 	'''
 	}
+	
+	
 	
 	def getReleaseDate(System s) { s.releaseDate }
 	def getDistribution(System s) { s.distribution }

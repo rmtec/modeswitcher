@@ -17,6 +17,9 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
 import org.xtext.mdsl.mdsl.MdslPackage;
 import org.xtext.mdsl.mdsl.Mode;
+import org.xtext.mdsl.mdsl.SUPPORTED_DISTRIBUTIONS;
+import org.xtext.mdsl.mdsl.SUPPORTED_OPERATING_SYSTEMS;
+import org.xtext.mdsl.mdsl.SUPPORTED_RELEASES;
 
 /**
  * <!-- begin-user-doc -->
@@ -28,8 +31,9 @@ import org.xtext.mdsl.mdsl.Mode;
  * <ul>
  *   <li>{@link org.xtext.mdsl.mdsl.impl.SystemImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.xtext.mdsl.mdsl.impl.SystemImpl#getModes <em>Modes</em>}</li>
+ *   <li>{@link org.xtext.mdsl.mdsl.impl.SystemImpl#getOperatingSystem <em>Operating System</em>}</li>
  *   <li>{@link org.xtext.mdsl.mdsl.impl.SystemImpl#getDistribution <em>Distribution</em>}</li>
- *   <li>{@link org.xtext.mdsl.mdsl.impl.SystemImpl#getReleaseDate <em>Release Date</em>}</li>
+ *   <li>{@link org.xtext.mdsl.mdsl.impl.SystemImpl#getRelease <em>Release</em>}</li>
  * </ul>
  *
  * @generated
@@ -67,6 +71,26 @@ public class SystemImpl extends DeclarationImpl implements org.xtext.mdsl.mdsl.S
   protected EList<Mode> modes;
 
   /**
+   * The default value of the '{@link #getOperatingSystem() <em>Operating System</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getOperatingSystem()
+   * @generated
+   * @ordered
+   */
+  protected static final SUPPORTED_OPERATING_SYSTEMS OPERATING_SYSTEM_EDEFAULT = SUPPORTED_OPERATING_SYSTEMS.WINDOWS;
+
+  /**
+   * The cached value of the '{@link #getOperatingSystem() <em>Operating System</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getOperatingSystem()
+   * @generated
+   * @ordered
+   */
+  protected SUPPORTED_OPERATING_SYSTEMS operatingSystem = OPERATING_SYSTEM_EDEFAULT;
+
+  /**
    * The default value of the '{@link #getDistribution() <em>Distribution</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -74,7 +98,7 @@ public class SystemImpl extends DeclarationImpl implements org.xtext.mdsl.mdsl.S
    * @generated
    * @ordered
    */
-  protected static final String DISTRIBUTION_EDEFAULT = null;
+  protected static final SUPPORTED_DISTRIBUTIONS DISTRIBUTION_EDEFAULT = SUPPORTED_DISTRIBUTIONS.DEBIAN;
 
   /**
    * The cached value of the '{@link #getDistribution() <em>Distribution</em>}' attribute.
@@ -84,27 +108,27 @@ public class SystemImpl extends DeclarationImpl implements org.xtext.mdsl.mdsl.S
    * @generated
    * @ordered
    */
-  protected String distribution = DISTRIBUTION_EDEFAULT;
+  protected SUPPORTED_DISTRIBUTIONS distribution = DISTRIBUTION_EDEFAULT;
 
   /**
-   * The default value of the '{@link #getReleaseDate() <em>Release Date</em>}' attribute.
+   * The default value of the '{@link #getRelease() <em>Release</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getReleaseDate()
+   * @see #getRelease()
    * @generated
    * @ordered
    */
-  protected static final String RELEASE_DATE_EDEFAULT = null;
+  protected static final SUPPORTED_RELEASES RELEASE_EDEFAULT = SUPPORTED_RELEASES.BUSTER;
 
   /**
-   * The cached value of the '{@link #getReleaseDate() <em>Release Date</em>}' attribute.
+   * The cached value of the '{@link #getRelease() <em>Release</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getReleaseDate()
+   * @see #getRelease()
    * @generated
    * @ordered
    */
-  protected String releaseDate = RELEASE_DATE_EDEFAULT;
+  protected SUPPORTED_RELEASES release = RELEASE_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
@@ -173,7 +197,32 @@ public class SystemImpl extends DeclarationImpl implements org.xtext.mdsl.mdsl.S
    * @generated
    */
   @Override
-  public String getDistribution()
+  public SUPPORTED_OPERATING_SYSTEMS getOperatingSystem()
+  {
+    return operatingSystem;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setOperatingSystem(SUPPORTED_OPERATING_SYSTEMS newOperatingSystem)
+  {
+    SUPPORTED_OPERATING_SYSTEMS oldOperatingSystem = operatingSystem;
+    operatingSystem = newOperatingSystem == null ? OPERATING_SYSTEM_EDEFAULT : newOperatingSystem;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, MdslPackage.SYSTEM__OPERATING_SYSTEM, oldOperatingSystem, operatingSystem));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public SUPPORTED_DISTRIBUTIONS getDistribution()
   {
     return distribution;
   }
@@ -184,10 +233,10 @@ public class SystemImpl extends DeclarationImpl implements org.xtext.mdsl.mdsl.S
    * @generated
    */
   @Override
-  public void setDistribution(String newDistribution)
+  public void setDistribution(SUPPORTED_DISTRIBUTIONS newDistribution)
   {
-    String oldDistribution = distribution;
-    distribution = newDistribution;
+    SUPPORTED_DISTRIBUTIONS oldDistribution = distribution;
+    distribution = newDistribution == null ? DISTRIBUTION_EDEFAULT : newDistribution;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, MdslPackage.SYSTEM__DISTRIBUTION, oldDistribution, distribution));
   }
@@ -198,9 +247,9 @@ public class SystemImpl extends DeclarationImpl implements org.xtext.mdsl.mdsl.S
    * @generated
    */
   @Override
-  public String getReleaseDate()
+  public SUPPORTED_RELEASES getRelease()
   {
-    return releaseDate;
+    return release;
   }
 
   /**
@@ -209,12 +258,12 @@ public class SystemImpl extends DeclarationImpl implements org.xtext.mdsl.mdsl.S
    * @generated
    */
   @Override
-  public void setReleaseDate(String newReleaseDate)
+  public void setRelease(SUPPORTED_RELEASES newRelease)
   {
-    String oldReleaseDate = releaseDate;
-    releaseDate = newReleaseDate;
+    SUPPORTED_RELEASES oldRelease = release;
+    release = newRelease == null ? RELEASE_EDEFAULT : newRelease;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, MdslPackage.SYSTEM__RELEASE_DATE, oldReleaseDate, releaseDate));
+      eNotify(new ENotificationImpl(this, Notification.SET, MdslPackage.SYSTEM__RELEASE, oldRelease, release));
   }
 
   /**
@@ -231,10 +280,12 @@ public class SystemImpl extends DeclarationImpl implements org.xtext.mdsl.mdsl.S
         return getName();
       case MdslPackage.SYSTEM__MODES:
         return getModes();
+      case MdslPackage.SYSTEM__OPERATING_SYSTEM:
+        return getOperatingSystem();
       case MdslPackage.SYSTEM__DISTRIBUTION:
         return getDistribution();
-      case MdslPackage.SYSTEM__RELEASE_DATE:
-        return getReleaseDate();
+      case MdslPackage.SYSTEM__RELEASE:
+        return getRelease();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -257,11 +308,14 @@ public class SystemImpl extends DeclarationImpl implements org.xtext.mdsl.mdsl.S
         getModes().clear();
         getModes().addAll((Collection<? extends Mode>)newValue);
         return;
-      case MdslPackage.SYSTEM__DISTRIBUTION:
-        setDistribution((String)newValue);
+      case MdslPackage.SYSTEM__OPERATING_SYSTEM:
+        setOperatingSystem((SUPPORTED_OPERATING_SYSTEMS)newValue);
         return;
-      case MdslPackage.SYSTEM__RELEASE_DATE:
-        setReleaseDate((String)newValue);
+      case MdslPackage.SYSTEM__DISTRIBUTION:
+        setDistribution((SUPPORTED_DISTRIBUTIONS)newValue);
+        return;
+      case MdslPackage.SYSTEM__RELEASE:
+        setRelease((SUPPORTED_RELEASES)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -283,11 +337,14 @@ public class SystemImpl extends DeclarationImpl implements org.xtext.mdsl.mdsl.S
       case MdslPackage.SYSTEM__MODES:
         getModes().clear();
         return;
+      case MdslPackage.SYSTEM__OPERATING_SYSTEM:
+        setOperatingSystem(OPERATING_SYSTEM_EDEFAULT);
+        return;
       case MdslPackage.SYSTEM__DISTRIBUTION:
         setDistribution(DISTRIBUTION_EDEFAULT);
         return;
-      case MdslPackage.SYSTEM__RELEASE_DATE:
-        setReleaseDate(RELEASE_DATE_EDEFAULT);
+      case MdslPackage.SYSTEM__RELEASE:
+        setRelease(RELEASE_EDEFAULT);
         return;
     }
     super.eUnset(featureID);
@@ -307,10 +364,12 @@ public class SystemImpl extends DeclarationImpl implements org.xtext.mdsl.mdsl.S
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case MdslPackage.SYSTEM__MODES:
         return modes != null && !modes.isEmpty();
+      case MdslPackage.SYSTEM__OPERATING_SYSTEM:
+        return operatingSystem != OPERATING_SYSTEM_EDEFAULT;
       case MdslPackage.SYSTEM__DISTRIBUTION:
-        return DISTRIBUTION_EDEFAULT == null ? distribution != null : !DISTRIBUTION_EDEFAULT.equals(distribution);
-      case MdslPackage.SYSTEM__RELEASE_DATE:
-        return RELEASE_DATE_EDEFAULT == null ? releaseDate != null : !RELEASE_DATE_EDEFAULT.equals(releaseDate);
+        return distribution != DISTRIBUTION_EDEFAULT;
+      case MdslPackage.SYSTEM__RELEASE:
+        return release != RELEASE_EDEFAULT;
     }
     return super.eIsSet(featureID);
   }
@@ -328,10 +387,12 @@ public class SystemImpl extends DeclarationImpl implements org.xtext.mdsl.mdsl.S
     StringBuilder result = new StringBuilder(super.toString());
     result.append(" (name: ");
     result.append(name);
+    result.append(", operatingSystem: ");
+    result.append(operatingSystem);
     result.append(", distribution: ");
     result.append(distribution);
-    result.append(", releaseDate: ");
-    result.append(releaseDate);
+    result.append(", release: ");
+    result.append(release);
     result.append(')');
     return result.toString();
   }

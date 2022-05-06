@@ -10,8 +10,22 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="modes" unique="false" upperBound="-1"
         eType="#//Mode"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="distribution" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="releaseDate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operatingSystem" eType="#//SUPPORTED_OPERATING_SYSTEMS"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="distribution" eType="#//SUPPORTED_DISTRIBUTIONS"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="release" eType="#//SUPPORTED_RELEASES"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="SUPPORTED_OPERATING_SYSTEMS">
+    <eLiterals name="Windows" literal="Windows"/>
+    <eLiterals name="Linux" value="1" literal="Linux"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="SUPPORTED_DISTRIBUTIONS">
+    <eLiterals name="Debian" literal="Debian"/>
+    <eLiterals name="Ubuntu" value="1" literal="Ubuntu"/>
+    <eLiterals name="Other" value="2" literal="Other"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="SUPPORTED_RELEASES">
+    <eLiterals name="Buster" literal="Buster"/>
+    <eLiterals name="Other" value="1" literal="Other"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Software" eSuperTypes="#//Declaration">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -22,7 +36,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Mode" eSuperTypes="#//Declaration">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="superType" eType="#//Mode"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="superMode" eType="#//Mode"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="priority" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="startServices" unique="false"
@@ -30,6 +44,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="stopServices" unique="false"
         upperBound="-1" eType="#//Service"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="enabled" eType="#//Enabled"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="alternativeMode" eType="#//Mode"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="Enabled">
     <eLiterals name="true" literal="true"/>
@@ -54,6 +69,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="superAction" eType="#//Action"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="shellCmd" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="params" unique="false"
+        upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Rule" eSuperTypes="#//Declaration">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

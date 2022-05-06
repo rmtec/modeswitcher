@@ -22,6 +22,9 @@ import org.xtext.mdsl.mdsl.MdslPackage;
 import org.xtext.mdsl.mdsl.Mode;
 import org.xtext.mdsl.mdsl.Model;
 import org.xtext.mdsl.mdsl.Rule;
+import org.xtext.mdsl.mdsl.SUPPORTED_DISTRIBUTIONS;
+import org.xtext.mdsl.mdsl.SUPPORTED_OPERATING_SYSTEMS;
+import org.xtext.mdsl.mdsl.SUPPORTED_RELEASES;
 import org.xtext.mdsl.mdsl.Service;
 import org.xtext.mdsl.mdsl.Software;
 
@@ -102,6 +105,12 @@ public class MdslFactoryImpl extends EFactoryImpl implements MdslFactory
   {
     switch (eDataType.getClassifierID())
     {
+      case MdslPackage.SUPPORTED_OPERATING_SYSTEMS:
+        return createSUPPORTED_OPERATING_SYSTEMSFromString(eDataType, initialValue);
+      case MdslPackage.SUPPORTED_DISTRIBUTIONS:
+        return createSUPPORTED_DISTRIBUTIONSFromString(eDataType, initialValue);
+      case MdslPackage.SUPPORTED_RELEASES:
+        return createSUPPORTED_RELEASESFromString(eDataType, initialValue);
       case MdslPackage.ENABLED:
         return createEnabledFromString(eDataType, initialValue);
       default:
@@ -119,6 +128,12 @@ public class MdslFactoryImpl extends EFactoryImpl implements MdslFactory
   {
     switch (eDataType.getClassifierID())
     {
+      case MdslPackage.SUPPORTED_OPERATING_SYSTEMS:
+        return convertSUPPORTED_OPERATING_SYSTEMSToString(eDataType, instanceValue);
+      case MdslPackage.SUPPORTED_DISTRIBUTIONS:
+        return convertSUPPORTED_DISTRIBUTIONSToString(eDataType, instanceValue);
+      case MdslPackage.SUPPORTED_RELEASES:
+        return convertSUPPORTED_RELEASESToString(eDataType, instanceValue);
       case MdslPackage.ENABLED:
         return convertEnabledToString(eDataType, instanceValue);
       default:
@@ -244,6 +259,72 @@ public class MdslFactoryImpl extends EFactoryImpl implements MdslFactory
   {
     EventImpl event = new EventImpl();
     return event;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public SUPPORTED_OPERATING_SYSTEMS createSUPPORTED_OPERATING_SYSTEMSFromString(EDataType eDataType, String initialValue)
+  {
+    SUPPORTED_OPERATING_SYSTEMS result = SUPPORTED_OPERATING_SYSTEMS.get(initialValue);
+    if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+    return result;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public String convertSUPPORTED_OPERATING_SYSTEMSToString(EDataType eDataType, Object instanceValue)
+  {
+    return instanceValue == null ? null : instanceValue.toString();
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public SUPPORTED_DISTRIBUTIONS createSUPPORTED_DISTRIBUTIONSFromString(EDataType eDataType, String initialValue)
+  {
+    SUPPORTED_DISTRIBUTIONS result = SUPPORTED_DISTRIBUTIONS.get(initialValue);
+    if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+    return result;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public String convertSUPPORTED_DISTRIBUTIONSToString(EDataType eDataType, Object instanceValue)
+  {
+    return instanceValue == null ? null : instanceValue.toString();
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public SUPPORTED_RELEASES createSUPPORTED_RELEASESFromString(EDataType eDataType, String initialValue)
+  {
+    SUPPORTED_RELEASES result = SUPPORTED_RELEASES.get(initialValue);
+    if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+    return result;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public String convertSUPPORTED_RELEASESToString(EDataType eDataType, Object instanceValue)
+  {
+    return instanceValue == null ? null : instanceValue.toString();
   }
 
   /**

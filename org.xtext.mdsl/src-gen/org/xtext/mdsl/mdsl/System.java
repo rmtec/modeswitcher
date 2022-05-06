@@ -16,8 +16,9 @@ import org.eclipse.emf.common.util.EList;
  * <ul>
  *   <li>{@link org.xtext.mdsl.mdsl.System#getName <em>Name</em>}</li>
  *   <li>{@link org.xtext.mdsl.mdsl.System#getModes <em>Modes</em>}</li>
+ *   <li>{@link org.xtext.mdsl.mdsl.System#getOperatingSystem <em>Operating System</em>}</li>
  *   <li>{@link org.xtext.mdsl.mdsl.System#getDistribution <em>Distribution</em>}</li>
- *   <li>{@link org.xtext.mdsl.mdsl.System#getReleaseDate <em>Release Date</em>}</li>
+ *   <li>{@link org.xtext.mdsl.mdsl.System#getRelease <em>Release</em>}</li>
  * </ul>
  *
  * @see org.xtext.mdsl.mdsl.MdslPackage#getSystem()
@@ -61,47 +62,78 @@ public interface System extends Declaration
   EList<Mode> getModes();
 
   /**
+   * Returns the value of the '<em><b>Operating System</b></em>' attribute.
+   * The literals are from the enumeration {@link org.xtext.mdsl.mdsl.SUPPORTED_OPERATING_SYSTEMS}.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Operating System</em>' attribute.
+   * @see org.xtext.mdsl.mdsl.SUPPORTED_OPERATING_SYSTEMS
+   * @see #setOperatingSystem(SUPPORTED_OPERATING_SYSTEMS)
+   * @see org.xtext.mdsl.mdsl.MdslPackage#getSystem_OperatingSystem()
+   * @model
+   * @generated
+   */
+  SUPPORTED_OPERATING_SYSTEMS getOperatingSystem();
+
+  /**
+   * Sets the value of the '{@link org.xtext.mdsl.mdsl.System#getOperatingSystem <em>Operating System</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Operating System</em>' attribute.
+   * @see org.xtext.mdsl.mdsl.SUPPORTED_OPERATING_SYSTEMS
+   * @see #getOperatingSystem()
+   * @generated
+   */
+  void setOperatingSystem(SUPPORTED_OPERATING_SYSTEMS value);
+
+  /**
    * Returns the value of the '<em><b>Distribution</b></em>' attribute.
+   * The literals are from the enumeration {@link org.xtext.mdsl.mdsl.SUPPORTED_DISTRIBUTIONS}.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Distribution</em>' attribute.
-   * @see #setDistribution(String)
+   * @see org.xtext.mdsl.mdsl.SUPPORTED_DISTRIBUTIONS
+   * @see #setDistribution(SUPPORTED_DISTRIBUTIONS)
    * @see org.xtext.mdsl.mdsl.MdslPackage#getSystem_Distribution()
    * @model
    * @generated
    */
-  String getDistribution();
+  SUPPORTED_DISTRIBUTIONS getDistribution();
 
   /**
    * Sets the value of the '{@link org.xtext.mdsl.mdsl.System#getDistribution <em>Distribution</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Distribution</em>' attribute.
+   * @see org.xtext.mdsl.mdsl.SUPPORTED_DISTRIBUTIONS
    * @see #getDistribution()
    * @generated
    */
-  void setDistribution(String value);
+  void setDistribution(SUPPORTED_DISTRIBUTIONS value);
 
   /**
-   * Returns the value of the '<em><b>Release Date</b></em>' attribute.
+   * Returns the value of the '<em><b>Release</b></em>' attribute.
+   * The literals are from the enumeration {@link org.xtext.mdsl.mdsl.SUPPORTED_RELEASES}.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Release Date</em>' attribute.
-   * @see #setReleaseDate(String)
-   * @see org.xtext.mdsl.mdsl.MdslPackage#getSystem_ReleaseDate()
+   * @return the value of the '<em>Release</em>' attribute.
+   * @see org.xtext.mdsl.mdsl.SUPPORTED_RELEASES
+   * @see #setRelease(SUPPORTED_RELEASES)
+   * @see org.xtext.mdsl.mdsl.MdslPackage#getSystem_Release()
    * @model
    * @generated
    */
-  String getReleaseDate();
+  SUPPORTED_RELEASES getRelease();
 
   /**
-   * Sets the value of the '{@link org.xtext.mdsl.mdsl.System#getReleaseDate <em>Release Date</em>}' attribute.
+   * Sets the value of the '{@link org.xtext.mdsl.mdsl.System#getRelease <em>Release</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Release Date</em>' attribute.
-   * @see #getReleaseDate()
+   * @param value the new value of the '<em>Release</em>' attribute.
+   * @see org.xtext.mdsl.mdsl.SUPPORTED_RELEASES
+   * @see #getRelease()
    * @generated
    */
-  void setReleaseDate(String value);
+  void setRelease(SUPPORTED_RELEASES value);
 
 } // System

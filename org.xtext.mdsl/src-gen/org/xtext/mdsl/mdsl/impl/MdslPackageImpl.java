@@ -107,6 +107,27 @@ public class MdslPackageImpl extends EPackageImpl implements MdslPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  private EEnum supporteD_OPERATING_SYSTEMSEEnum = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EEnum supporteD_DISTRIBUTIONSEEnum = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EEnum supporteD_RELEASESEEnum = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   private EEnum enabledEEnum = null;
 
   /**
@@ -244,7 +265,7 @@ public class MdslPackageImpl extends EPackageImpl implements MdslPackage
    * @generated
    */
   @Override
-  public EAttribute getSystem_Distribution()
+  public EAttribute getSystem_OperatingSystem()
   {
     return (EAttribute)systemEClass.getEStructuralFeatures().get(2);
   }
@@ -255,9 +276,20 @@ public class MdslPackageImpl extends EPackageImpl implements MdslPackage
    * @generated
    */
   @Override
-  public EAttribute getSystem_ReleaseDate()
+  public EAttribute getSystem_Distribution()
   {
     return (EAttribute)systemEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getSystem_Release()
+  {
+    return (EAttribute)systemEClass.getEStructuralFeatures().get(4);
   }
 
   /**
@@ -354,7 +386,7 @@ public class MdslPackageImpl extends EPackageImpl implements MdslPackage
    * @generated
    */
   @Override
-  public EReference getMode_SuperType()
+  public EReference getMode_SuperMode()
   {
     return (EReference)modeEClass.getEStructuralFeatures().get(1);
   }
@@ -412,6 +444,17 @@ public class MdslPackageImpl extends EPackageImpl implements MdslPackage
   public EAttribute getMode_Enabled()
   {
     return (EAttribute)modeEClass.getEStructuralFeatures().get(6);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getMode_AlternativeMode()
+  {
+    return (EReference)modeEClass.getEStructuralFeatures().get(7);
   }
 
   /**
@@ -563,6 +606,17 @@ public class MdslPackageImpl extends EPackageImpl implements MdslPackage
    * @generated
    */
   @Override
+  public EAttribute getAction_Params()
+  {
+    return (EAttribute)actionEClass.getEStructuralFeatures().get(4);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EClass getRule()
   {
     return ruleEClass;
@@ -673,6 +727,39 @@ public class MdslPackageImpl extends EPackageImpl implements MdslPackage
    * @generated
    */
   @Override
+  public EEnum getSUPPORTED_OPERATING_SYSTEMS()
+  {
+    return supporteD_OPERATING_SYSTEMSEEnum;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EEnum getSUPPORTED_DISTRIBUTIONS()
+  {
+    return supporteD_DISTRIBUTIONSEEnum;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EEnum getSUPPORTED_RELEASES()
+  {
+    return supporteD_RELEASESEEnum;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EEnum getEnabled()
   {
     return enabledEEnum;
@@ -717,8 +804,9 @@ public class MdslPackageImpl extends EPackageImpl implements MdslPackage
     systemEClass = createEClass(SYSTEM);
     createEAttribute(systemEClass, SYSTEM__NAME);
     createEReference(systemEClass, SYSTEM__MODES);
+    createEAttribute(systemEClass, SYSTEM__OPERATING_SYSTEM);
     createEAttribute(systemEClass, SYSTEM__DISTRIBUTION);
-    createEAttribute(systemEClass, SYSTEM__RELEASE_DATE);
+    createEAttribute(systemEClass, SYSTEM__RELEASE);
 
     softwareEClass = createEClass(SOFTWARE);
     createEAttribute(softwareEClass, SOFTWARE__NAME);
@@ -729,12 +817,13 @@ public class MdslPackageImpl extends EPackageImpl implements MdslPackage
 
     modeEClass = createEClass(MODE);
     createEAttribute(modeEClass, MODE__NAME);
-    createEReference(modeEClass, MODE__SUPER_TYPE);
+    createEReference(modeEClass, MODE__SUPER_MODE);
     createEAttribute(modeEClass, MODE__DESCRIPTION);
     createEAttribute(modeEClass, MODE__PRIORITY);
     createEReference(modeEClass, MODE__START_SERVICES);
     createEReference(modeEClass, MODE__STOP_SERVICES);
     createEAttribute(modeEClass, MODE__ENABLED);
+    createEReference(modeEClass, MODE__ALTERNATIVE_MODE);
 
     serviceEClass = createEClass(SERVICE);
     createEAttribute(serviceEClass, SERVICE__NAME);
@@ -751,6 +840,7 @@ public class MdslPackageImpl extends EPackageImpl implements MdslPackage
     createEReference(actionEClass, ACTION__SUPER_ACTION);
     createEAttribute(actionEClass, ACTION__DESCRIPTION);
     createEAttribute(actionEClass, ACTION__SHELL_CMD);
+    createEAttribute(actionEClass, ACTION__PARAMS);
 
     ruleEClass = createEClass(RULE);
     createEAttribute(ruleEClass, RULE__DESCRIPTION);
@@ -765,6 +855,9 @@ public class MdslPackageImpl extends EPackageImpl implements MdslPackage
     createEAttribute(eventEClass, EVENT__DESCRIPTION);
 
     // Create enums
+    supporteD_OPERATING_SYSTEMSEEnum = createEEnum(SUPPORTED_OPERATING_SYSTEMS);
+    supporteD_DISTRIBUTIONSEEnum = createEEnum(SUPPORTED_DISTRIBUTIONS);
+    supporteD_RELEASESEEnum = createEEnum(SUPPORTED_RELEASES);
     enabledEEnum = createEEnum(ENABLED);
   }
 
@@ -814,8 +907,9 @@ public class MdslPackageImpl extends EPackageImpl implements MdslPackage
     initEClass(systemEClass, org.xtext.mdsl.mdsl.System.class, "System", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getSystem_Name(), ecorePackage.getEString(), "name", null, 0, 1, org.xtext.mdsl.mdsl.System.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getSystem_Modes(), this.getMode(), null, "modes", null, 0, -1, org.xtext.mdsl.mdsl.System.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getSystem_Distribution(), ecorePackage.getEString(), "distribution", null, 0, 1, org.xtext.mdsl.mdsl.System.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getSystem_ReleaseDate(), ecorePackage.getEString(), "releaseDate", null, 0, 1, org.xtext.mdsl.mdsl.System.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getSystem_OperatingSystem(), this.getSUPPORTED_OPERATING_SYSTEMS(), "operatingSystem", null, 0, 1, org.xtext.mdsl.mdsl.System.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getSystem_Distribution(), this.getSUPPORTED_DISTRIBUTIONS(), "distribution", null, 0, 1, org.xtext.mdsl.mdsl.System.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getSystem_Release(), this.getSUPPORTED_RELEASES(), "release", null, 0, 1, org.xtext.mdsl.mdsl.System.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(softwareEClass, Software.class, "Software", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getSoftware_Name(), ecorePackage.getEString(), "name", null, 0, 1, Software.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -826,12 +920,13 @@ public class MdslPackageImpl extends EPackageImpl implements MdslPackage
 
     initEClass(modeEClass, Mode.class, "Mode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getMode_Name(), ecorePackage.getEString(), "name", null, 0, 1, Mode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getMode_SuperType(), this.getMode(), null, "superType", null, 0, 1, Mode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getMode_SuperMode(), this.getMode(), null, "superMode", null, 0, 1, Mode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getMode_Description(), ecorePackage.getEString(), "description", null, 0, 1, Mode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getMode_Priority(), ecorePackage.getEInt(), "priority", null, 0, 1, Mode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getMode_StartServices(), this.getService(), null, "startServices", null, 0, -1, Mode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getMode_StopServices(), this.getService(), null, "stopServices", null, 0, -1, Mode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getMode_Enabled(), this.getEnabled(), "enabled", null, 0, 1, Mode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getMode_AlternativeMode(), this.getMode(), null, "alternativeMode", null, 0, 1, Mode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(serviceEClass, Service.class, "Service", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getService_Name(), ecorePackage.getEString(), "name", null, 0, 1, Service.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -848,6 +943,7 @@ public class MdslPackageImpl extends EPackageImpl implements MdslPackage
     initEReference(getAction_SuperAction(), this.getAction(), null, "superAction", null, 0, 1, Action.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getAction_Description(), ecorePackage.getEString(), "description", null, 0, 1, Action.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getAction_ShellCmd(), ecorePackage.getEString(), "shellCmd", null, 0, 1, Action.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getAction_Params(), ecorePackage.getEString(), "params", null, 0, -1, Action.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(ruleEClass, Rule.class, "Rule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getRule_Description(), ecorePackage.getEString(), "description", null, 0, 1, Rule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -862,6 +958,19 @@ public class MdslPackageImpl extends EPackageImpl implements MdslPackage
     initEAttribute(getEvent_Description(), ecorePackage.getEString(), "description", null, 0, 1, Event.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Initialize enums and add enum literals
+    initEEnum(supporteD_OPERATING_SYSTEMSEEnum, org.xtext.mdsl.mdsl.SUPPORTED_OPERATING_SYSTEMS.class, "SUPPORTED_OPERATING_SYSTEMS");
+    addEEnumLiteral(supporteD_OPERATING_SYSTEMSEEnum, org.xtext.mdsl.mdsl.SUPPORTED_OPERATING_SYSTEMS.WINDOWS);
+    addEEnumLiteral(supporteD_OPERATING_SYSTEMSEEnum, org.xtext.mdsl.mdsl.SUPPORTED_OPERATING_SYSTEMS.LINUX);
+
+    initEEnum(supporteD_DISTRIBUTIONSEEnum, org.xtext.mdsl.mdsl.SUPPORTED_DISTRIBUTIONS.class, "SUPPORTED_DISTRIBUTIONS");
+    addEEnumLiteral(supporteD_DISTRIBUTIONSEEnum, org.xtext.mdsl.mdsl.SUPPORTED_DISTRIBUTIONS.DEBIAN);
+    addEEnumLiteral(supporteD_DISTRIBUTIONSEEnum, org.xtext.mdsl.mdsl.SUPPORTED_DISTRIBUTIONS.UBUNTU);
+    addEEnumLiteral(supporteD_DISTRIBUTIONSEEnum, org.xtext.mdsl.mdsl.SUPPORTED_DISTRIBUTIONS.OTHER);
+
+    initEEnum(supporteD_RELEASESEEnum, org.xtext.mdsl.mdsl.SUPPORTED_RELEASES.class, "SUPPORTED_RELEASES");
+    addEEnumLiteral(supporteD_RELEASESEEnum, org.xtext.mdsl.mdsl.SUPPORTED_RELEASES.BUSTER);
+    addEEnumLiteral(supporteD_RELEASESEEnum, org.xtext.mdsl.mdsl.SUPPORTED_RELEASES.OTHER);
+
     initEEnum(enabledEEnum, Enabled.class, "Enabled");
     addEEnumLiteral(enabledEEnum, Enabled.TRUE);
     addEEnumLiteral(enabledEEnum, Enabled.FALSE);

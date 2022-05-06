@@ -38,12 +38,14 @@ Workflow {
 				generateStub = false
 			}
 			validator = {
-				// composedCheck = "org.eclipse.xtext.validation.NamesAreUniqueValidator"
+				//composedCheck = "org.eclipse.xtext.validation."
 				// Generates checks for @Deprecated grammar annotations, an IssueProvider and a corresponding PropertyPage
+				composedCheck = "org.eclipse.xtext.validation.NamesAreUniqueValidator" //checks that there are no duplicate modes, etc.
 				generateDeprecationValidation = true
 			}
 			generator = {
 				generateXtendStub = true
+				generateJavaMain = true
 			}
 			junitSupport = {
 				junitVersion = "5"

@@ -1,7 +1,11 @@
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
-public class Mode {
+public class Mode  implements Serializable{
+	private static final long serialVersionUID = -3657746991055083978L;
+	private String name;
 	private String desc;
 	private boolean enabled;
 	private List<Service> startServices;
@@ -9,12 +13,14 @@ public class Mode {
 	private int priority;
 	private int startCounter; //count the number of starts
 	private int counter; //counts the number of calculated next mode
+	private Mode alternativeMode; //used for shuffle modes (moving target defense)
 	
-	public Mode(String desc, int priority, Service startService, Service stopService) {
-		this(desc,priority,Arrays.asList(startService),Arrays.asList(stopService));
+	public Mode(String name, String desc, int priority, Service startService, Service stopService) {
+		this(name, desc,priority,Arrays.asList(startService),Arrays.asList(stopService));
 	}
 	
-	public Mode(String desc, int priority, List<Service> startServices, List<Service> stopServices) {
+	public Mode(String name, String desc, int priority, List<Service> startServices, List<Service> stopServices) {
+		this.setName(name);
 		this.setDesc(desc);
 		this.setPriority(priority);
 		this.setStartServices(startServices);
@@ -23,7 +29,7 @@ public class Mode {
 		counter = 0;
 		startCounter = 0;
 	}
-	
+
 	public void start() {
 		start(startServices);
 	}
@@ -66,7 +72,11 @@ public class Mode {
 	}
 	
 	public double getActiveTotalScore() {
-		return startServices.stream().mapToDouble(Service::getActiveTotalScore).sum();
+		if ( startServices.isEmpty()) {
+			return 0.0;
+		}else {
+			return startServices.stream().mapToDouble(Service::getActiveTotalScore).sum();
+		}
 	}
 	
 	public double getTotalScore() {
@@ -93,6 +103,14 @@ public class Mode {
 			scoreAvg = this.getTotalScore()/noOfVulnerabilities;
 		}
 		return scoreAvg;
+	}
+	
+	private void setName(String name) {
+		this.name = name;		
+	}
+	
+	public String getName() {
+		return name;
 	}
 
 	public String getDesc() {
@@ -144,7 +162,7 @@ public class Mode {
 	}
 	
 	public String toString() {
-		return desc;
+		return name;
 	}
 
 	public int getCounter() {
@@ -158,5 +176,30 @@ public class Mode {
 	public void increaseCounter() {
 		counter++;		
 	}
+
+	public Mode getAlternativeMode() {
+		return alternativeMode;
+	}
+
+	public void setAlternativeMode(Mode alternativeMode) {
+		this.alternativeMode = alternativeMode;
+	}
+	
+	@Override
+	public boolean equals(Object o) {
+	    // self check
+	    if (this == o)
+	        return true;
+	    // null check
+	    if (o == null)
+	        return false;
+	    // type check and cast
+	    if (getClass() != o.getClass())
+	        return false;
+	    Mode mode = (Mode) o;
+	    // field comparison
+	    return Objects.equals(getName(), mode.getName());
+	}
+
 
 }

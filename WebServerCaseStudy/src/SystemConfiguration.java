@@ -4,14 +4,11 @@ import java.util.List;
 public class SystemConfiguration {
 	private List<Mode> modes;
 	private HashMap<String, Software> software;
-	private String debianRelease;
-	private String releaseDate;
 	
-	public SystemConfiguration(List<Mode> modes, HashMap<String, Software>software, String debianRelease, String releaseDate) {
+	public SystemConfiguration(List<Mode> modes, List<Software> swList) {
+		software = new HashMap<String, Software>();
 		setModes(modes);
-		setSoftware(software);
-		setDebianRelease(debianRelease);
-		setReleaseDate(releaseDate);
+		setSoftware(swList);
 	}
 
 	public List<Mode> getModes() {
@@ -25,24 +22,20 @@ public class SystemConfiguration {
 	public HashMap<String, Software> getSoftware() {
 		return software;
 	}
-
-	public void setSoftware(HashMap<String, Software> software) {
-		this.software = software;
+	
+	public void setSoftware(List<Software> swList) {
+		for(Software sw : swList) {
+			putSoftware(sw);
+		}
 	}
-
-	public String getDebianRelease() {
-		return debianRelease;
+	
+	public void putSoftware(Software sw) {
+		if(sw == null) {
+			System.out.println("Cannot add software null");
+		}else {
+			software.put(sw.getCpe(), sw);
+		}
 	}
-
-	public void setDebianRelease(String debianRelease) {
-		this.debianRelease = debianRelease;
-	}
-
-	public String getReleaseDate() {
-		return releaseDate;
-	}
-
-	public void setReleaseDate(String releaseDate) {
-		this.releaseDate = releaseDate;
-	}
+	
+	
 }

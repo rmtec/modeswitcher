@@ -8,20 +8,31 @@ Declaration : System | Software | Mode | Service | Action | Rule | Event;
 System :
 	'System' name=ID 'has' 'following' 'modes'
 		(modes+=[Mode] (',' modes+=[Mode])*)?
-	'distribution' distribution=STRING
-	'releaseDate' releaseDate=STRING
+	('operatingSystem' operatingSystem=SUPPORTED_OPERATING_SYSTEMS)?
+	('distribution' distribution=SUPPORTED_DISTRIBUTIONS)?
+	('release' release=SUPPORTED_RELEASES)?
 ;
 
-terminal DATE : ('2000'..'2999')'-'('01'..'12')'-'('01'..'31');
+enum SUPPORTED_OPERATING_SYSTEMS:
+	Windows|Linux
+;
+enum SUPPORTED_DISTRIBUTIONS:
+	Debian|Ubuntu|Other
+;
+enum SUPPORTED_RELEASES:
+	Buster|Other
+;
 
 Software : 
-	'Software' name=ID 'identified' 'by' 'cpe:/:'vendor=ID':'product=ID':'version=STRING
-	'package' package=STRING;
-	//Software apache identified by cpe:/:apache:http_server:2.4.38
-	//package apache2
+	'Software' name=ID //software with a dot in the name should be specified in the package e.g. php7 package "php7.3"
+	('vendor' vendor=STRING)?
+	('product' product=STRING)?
+	('version' version=STRING)?
+	('package' package=STRING)?
+;
 
 Mode :
-	'Mode' name=ID ('extends' superType=[Mode])?
+	'Mode' name=ID ('extends' superMode=[Mode])?
 	'description' description=STRING
 	'priority' priority=INT
 	'startServices' (startServices+=[Service] 
@@ -30,8 +41,8 @@ Mode :
 	'stopServices' (stopServices+=[Service] 
 		(',' stopServices+=[Service])*
 	)?
-	//'usesSoftware' usesSoftware+=[Software] (',' usesSoftware+=[Software])*
 	(enabled=Enabled)?
+	('exchangeable' 'with' alternativeMode=[Mode])?
 ;
 
 enum Enabled:
@@ -54,7 +65,7 @@ ActionWithParams :
 Action :
 	'Action' name=ID ('extends' superAction=[Action])?
 	('description' description=STRING)?
-	'shellCmd' shellCmd=STRING
+	(('shellCmd' shellCmd=STRING)|('params' params+=STRING (',' params+=STRING)*))
 ;
 
 Rule :

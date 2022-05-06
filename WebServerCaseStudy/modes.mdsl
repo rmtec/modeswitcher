@@ -1,0 +1,155 @@
+System Webserver has following modes 
+	Apache,ApacheWithPhp,NginxOnly,NginxWithPhp
+operatingSystem Linux
+distribution Debian
+
+Software apache2
+Software nginx
+Software php7 package "php7.3"
+
+Mode Apache
+description "Only static HTML pages"
+priority 3
+startServices apache2Service
+stopServices apache2Service
+exchangeable with NginxOnly
+
+Mode ApacheWithPhp extends Apache
+description "Static HTML and dynamicX PHP pages"
+priority 1
+startServices apacheModProxyFcgiService,apacheModSetenvifService,phpFpmService,apacheConfPhpFpmService,apache2restart
+stopServices apacheConfPhpFpmService,phpFpmService,apacheModSetenvifService,apacheModProxyFcgiService,apache2restart
+exchangeable with NginxWithPhp
+
+Mode NginxOnly
+description "Only static HTML pages"
+priority 4
+startServices nginxService
+stopServices nginxService
+exchangeable with Apache
+
+Mode NginxWithPhp extends NginxOnly
+description "Static HTML and dynamic PHP pages"
+priority 2
+startServices phpFpmService
+stopServices phpFpmService
+exchangeable with ApacheWithPhp
+
+/*Mode WordpressApache extends ApacheWithPhp
+description "WordpressApache Mode"
+priority 1
+startServices adaptApacheConfig
+stopServices adaptApacheConfig
+
+Mode WordpressNginx extends NginxWithPhp
+description "WordpressNginx Mode"
+priority 1
+startServices adaptNginxConfig
+stopServices adaptNginxConfig*/
+
+Service apache2Service usesSoftware apache2
+startActions startService("apache2")
+stopActions stopService("apache2")
+Service apacheModProxyFcgiService
+startActions enableApacheMod("proxy_fcgi")
+stopActions enableApacheMod("proxy_fcgi")
+Service apacheModSetenvifService
+startActions enableApacheMod("setenvif")
+stopActions disableApacheMod("setenvif")
+Service apacheConfPhpFpmService
+startActions enableApacheConf("php7.3-fpm")
+stopActions disableApacheConf("php7.3-fpm")
+Service nginxService usesSoftware nginx
+startActions startService("nginx")
+stopActions stopService("nginx")
+Service phpFpmService usesSoftware php7
+startActions startService("php7.3-fpm")
+stopActions stopService("php7.3-fpm")
+Service apache2restart
+startActions restartService("apache2") //to activate the new configuration
+stopActions reloadService("apache2") //to refresh the changed configuration
+
+Service adaptApacheConfig
+startActions setWordpressApacheDocumentRoot()
+stopActions setDefaultApacheDocumentRoot()
+
+Service adaptNginxConfig
+startActions setWordpressNginxDocumentRoot()
+stopActions setDefaultNginxDocumentRoot()
+
+Action startService shellCmd "/usr/bin/systemctl start" //param(s) were added after shellCmd
+Action stopService shellCmd "/usr/bin/systemctl stop"
+Action restartService shellCmd "/usr/bin/systemctl restart"
+Action reloadService shellCmd "/usr/bin/systemctl reload"
+Action enableApacheMod shellCmd "/usr/sbin/a2enmod --quiet"
+Action disableApacheMod shellCmd "/usr/sbin/a2dismod -f --quiet"
+Action enableApacheConf shellCmd "/usr/sbin/a2enconf --quiet"
+Action disableApacheConf shellCmd "/usr/sbin/a2disconf --quiet"
+Action sedReplace shellCmd "sed -i 's/$0\\\\s*=.*/$1/g' $2"
+Action phpConfigReplace shellCmd "sed -i 's/$0\\\\s*=.*/$0=$1/g' ~/php.ini"
+Action enablePhpFileUploads		extends phpConfigReplace params "file_uploads","On"
+Action disablePhpFileUploads	extends phpConfigReplace params "file_uploads","Off"
+Action disablePhpOpenRemoteFiles extends phpConfigReplace params "allow_url_fopen","Off"
+Action enablePhpOpenRemoteFiles	extends phpConfigReplace params "allow_url_fopen","On"
+Action setPhpUploadMaxFilesize	extends phpConfigReplace params "upload_max_filesize","1M"
+Action setPhpErrorLoggingAll	extends phpConfigReplace params "error_reporting","E_ALL"
+Action apacheConfigReplace shellCmd "sed -i 's#^$0.*#$1#' /etc/apache2/sites-enabled/000-default.conf"
+Action setWordpressApacheDocumentRoot extends apacheConfigReplace params "DocumentRoot","DocumentRoot /var/www/wordpress"
+Action setDefaultApacheDocumentRoot extends apacheConfigReplace params "DocumentRoot","DocumentRoot /var/www"
+Action nginxConfigReplace shellCmd "sed -i 's#^$0.*#$1#' /etc/nginx/sites-enabled/default"
+Action setWordpressNginxDocumentRoot extends nginxConfigReplace params "root","root /var/www/wordpress;"
+Action setDefaultNginxDocumentRoot extends nginxConfigReplace params "root","root /var/www;"
+
+Rule "Switch to NginxWithPHPfpm after ApacheVulnerability
+ and current mode is Apache2withPHP or Apache2withPHPfpm"
+if ApacheVulnerability and current mode in (ApacheWithPhp)
+then NginxWithPhp
+
+Rule "Switch to Nginx after ApacheVulnerability
+ and current mode is Apache2"
+if ApacheVulnerability and current mode in (Apache)
+then NginxOnly
+
+Rule "Switch to Apache2withPHPfpm after NginxVulnerability
+ and current mode is NginxWithPHPfpm"
+if NginxVulnerability and current mode in (NginxWithPhp)
+then ApacheWithPhp
+
+Rule "Switch to Apache2 after NginxVulnerability
+ and current mode is Nginx"
+if NginxVulnerability and current mode in (NginxOnly)
+then Apache
+
+Rule "Switch to static pages after PHP vulnerability"
+if PHPVulnerability and current mode in (ApacheWithPhp)
+then Apache
+else NginxOnly
+
+Event ApacheVulnerability
+description "Vulnerability at Apache webserver version detected"
+
+Event NginxVulnerability
+description "Vulnerability at Nginx webserver version detected"
+
+Event PHPVulnerability
+description "Vulnerability at PHP version detected"
+
+Event PHPFPMVulnerability
+description "Vulnerability at PHP fpm version detected"
+
+/*
+ 	Rules and possible modes
+ 	
+	R=rule, A=Apache, AP=ApacheWithPHP, APF=ApacheWithPHPfpm, N=Nginx, NPF=NginxWithPHPfpm
+	3 services, 2 states (vulnerable, or not) => 2^3 states => 8 states
+	
+	R|A|N|P|Possible Modes
+	1|0|0|0|A,AP,APF,N,NPF => priority? AP,APF,NPF
+	2|0|0|1|A,N => priority?
+	3|0|1|0|A,AP,APF => priority? AP, APF
+	4|0|1|1|A
+	5|1|0|0|N,NPF => NPF
+	6|1|0|1|N
+	7|1|1|0|- => emergency mode?
+	8|1|1|1|- => emergency mode?
+ */

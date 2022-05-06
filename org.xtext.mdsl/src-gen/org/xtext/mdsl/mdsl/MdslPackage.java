@@ -134,22 +134,31 @@ public interface MdslPackage extends EPackage
   int SYSTEM__MODES = DECLARATION_FEATURE_COUNT + 1;
 
   /**
+   * The feature id for the '<em><b>Operating System</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SYSTEM__OPERATING_SYSTEM = DECLARATION_FEATURE_COUNT + 2;
+
+  /**
    * The feature id for the '<em><b>Distribution</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int SYSTEM__DISTRIBUTION = DECLARATION_FEATURE_COUNT + 2;
+  int SYSTEM__DISTRIBUTION = DECLARATION_FEATURE_COUNT + 3;
 
   /**
-   * The feature id for the '<em><b>Release Date</b></em>' attribute.
+   * The feature id for the '<em><b>Release</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int SYSTEM__RELEASE_DATE = DECLARATION_FEATURE_COUNT + 3;
+  int SYSTEM__RELEASE = DECLARATION_FEATURE_COUNT + 4;
 
   /**
    * The number of structural features of the '<em>System</em>' class.
@@ -158,7 +167,7 @@ public interface MdslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int SYSTEM_FEATURE_COUNT = DECLARATION_FEATURE_COUNT + 4;
+  int SYSTEM_FEATURE_COUNT = DECLARATION_FEATURE_COUNT + 5;
 
   /**
    * The meta object id for the '{@link org.xtext.mdsl.mdsl.impl.SoftwareImpl <em>Software</em>}' class.
@@ -244,13 +253,13 @@ public interface MdslPackage extends EPackage
   int MODE__NAME = DECLARATION_FEATURE_COUNT + 0;
 
   /**
-   * The feature id for the '<em><b>Super Type</b></em>' reference.
+   * The feature id for the '<em><b>Super Mode</b></em>' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MODE__SUPER_TYPE = DECLARATION_FEATURE_COUNT + 1;
+  int MODE__SUPER_MODE = DECLARATION_FEATURE_COUNT + 1;
 
   /**
    * The feature id for the '<em><b>Description</b></em>' attribute.
@@ -298,13 +307,22 @@ public interface MdslPackage extends EPackage
   int MODE__ENABLED = DECLARATION_FEATURE_COUNT + 6;
 
   /**
+   * The feature id for the '<em><b>Alternative Mode</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MODE__ALTERNATIVE_MODE = DECLARATION_FEATURE_COUNT + 7;
+
+  /**
    * The number of structural features of the '<em>Mode</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MODE_FEATURE_COUNT = DECLARATION_FEATURE_COUNT + 7;
+  int MODE_FEATURE_COUNT = DECLARATION_FEATURE_COUNT + 8;
 
   /**
    * The meta object id for the '{@link org.xtext.mdsl.mdsl.impl.ServiceImpl <em>Service</em>}' class.
@@ -445,13 +463,22 @@ public interface MdslPackage extends EPackage
   int ACTION__SHELL_CMD = DECLARATION_FEATURE_COUNT + 3;
 
   /**
+   * The feature id for the '<em><b>Params</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ACTION__PARAMS = DECLARATION_FEATURE_COUNT + 4;
+
+  /**
    * The number of structural features of the '<em>Action</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ACTION_FEATURE_COUNT = DECLARATION_FEATURE_COUNT + 4;
+  int ACTION_FEATURE_COUNT = DECLARATION_FEATURE_COUNT + 5;
 
   /**
    * The meta object id for the '{@link org.xtext.mdsl.mdsl.impl.RuleImpl <em>Rule</em>}' class.
@@ -564,6 +591,36 @@ public interface MdslPackage extends EPackage
   int EVENT_FEATURE_COUNT = DECLARATION_FEATURE_COUNT + 2;
 
   /**
+   * The meta object id for the '{@link org.xtext.mdsl.mdsl.SUPPORTED_OPERATING_SYSTEMS <em>SUPPORTED OPERATING SYSTEMS</em>}' enum.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.mdsl.mdsl.SUPPORTED_OPERATING_SYSTEMS
+   * @see org.xtext.mdsl.mdsl.impl.MdslPackageImpl#getSUPPORTED_OPERATING_SYSTEMS()
+   * @generated
+   */
+  int SUPPORTED_OPERATING_SYSTEMS = 10;
+
+  /**
+   * The meta object id for the '{@link org.xtext.mdsl.mdsl.SUPPORTED_DISTRIBUTIONS <em>SUPPORTED DISTRIBUTIONS</em>}' enum.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.mdsl.mdsl.SUPPORTED_DISTRIBUTIONS
+   * @see org.xtext.mdsl.mdsl.impl.MdslPackageImpl#getSUPPORTED_DISTRIBUTIONS()
+   * @generated
+   */
+  int SUPPORTED_DISTRIBUTIONS = 11;
+
+  /**
+   * The meta object id for the '{@link org.xtext.mdsl.mdsl.SUPPORTED_RELEASES <em>SUPPORTED RELEASES</em>}' enum.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.mdsl.mdsl.SUPPORTED_RELEASES
+   * @see org.xtext.mdsl.mdsl.impl.MdslPackageImpl#getSUPPORTED_RELEASES()
+   * @generated
+   */
+  int SUPPORTED_RELEASES = 12;
+
+  /**
    * The meta object id for the '{@link org.xtext.mdsl.mdsl.Enabled <em>Enabled</em>}' enum.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -571,7 +628,7 @@ public interface MdslPackage extends EPackage
    * @see org.xtext.mdsl.mdsl.impl.MdslPackageImpl#getEnabled()
    * @generated
    */
-  int ENABLED = 10;
+  int ENABLED = 13;
 
 
   /**
@@ -638,6 +695,17 @@ public interface MdslPackage extends EPackage
   EReference getSystem_Modes();
 
   /**
+   * Returns the meta object for the attribute '{@link org.xtext.mdsl.mdsl.System#getOperatingSystem <em>Operating System</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Operating System</em>'.
+   * @see org.xtext.mdsl.mdsl.System#getOperatingSystem()
+   * @see #getSystem()
+   * @generated
+   */
+  EAttribute getSystem_OperatingSystem();
+
+  /**
    * Returns the meta object for the attribute '{@link org.xtext.mdsl.mdsl.System#getDistribution <em>Distribution</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -649,15 +717,15 @@ public interface MdslPackage extends EPackage
   EAttribute getSystem_Distribution();
 
   /**
-   * Returns the meta object for the attribute '{@link org.xtext.mdsl.mdsl.System#getReleaseDate <em>Release Date</em>}'.
+   * Returns the meta object for the attribute '{@link org.xtext.mdsl.mdsl.System#getRelease <em>Release</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Release Date</em>'.
-   * @see org.xtext.mdsl.mdsl.System#getReleaseDate()
+   * @return the meta object for the attribute '<em>Release</em>'.
+   * @see org.xtext.mdsl.mdsl.System#getRelease()
    * @see #getSystem()
    * @generated
    */
-  EAttribute getSystem_ReleaseDate();
+  EAttribute getSystem_Release();
 
   /**
    * Returns the meta object for class '{@link org.xtext.mdsl.mdsl.Software <em>Software</em>}'.
@@ -746,15 +814,15 @@ public interface MdslPackage extends EPackage
   EAttribute getMode_Name();
 
   /**
-   * Returns the meta object for the reference '{@link org.xtext.mdsl.mdsl.Mode#getSuperType <em>Super Type</em>}'.
+   * Returns the meta object for the reference '{@link org.xtext.mdsl.mdsl.Mode#getSuperMode <em>Super Mode</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Super Type</em>'.
-   * @see org.xtext.mdsl.mdsl.Mode#getSuperType()
+   * @return the meta object for the reference '<em>Super Mode</em>'.
+   * @see org.xtext.mdsl.mdsl.Mode#getSuperMode()
    * @see #getMode()
    * @generated
    */
-  EReference getMode_SuperType();
+  EReference getMode_SuperMode();
 
   /**
    * Returns the meta object for the attribute '{@link org.xtext.mdsl.mdsl.Mode#getDescription <em>Description</em>}'.
@@ -810,6 +878,17 @@ public interface MdslPackage extends EPackage
    * @generated
    */
   EAttribute getMode_Enabled();
+
+  /**
+   * Returns the meta object for the reference '{@link org.xtext.mdsl.mdsl.Mode#getAlternativeMode <em>Alternative Mode</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Alternative Mode</em>'.
+   * @see org.xtext.mdsl.mdsl.Mode#getAlternativeMode()
+   * @see #getMode()
+   * @generated
+   */
+  EReference getMode_AlternativeMode();
 
   /**
    * Returns the meta object for class '{@link org.xtext.mdsl.mdsl.Service <em>Service</em>}'.
@@ -952,6 +1031,17 @@ public interface MdslPackage extends EPackage
   EAttribute getAction_ShellCmd();
 
   /**
+   * Returns the meta object for the attribute list '{@link org.xtext.mdsl.mdsl.Action#getParams <em>Params</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute list '<em>Params</em>'.
+   * @see org.xtext.mdsl.mdsl.Action#getParams()
+   * @see #getAction()
+   * @generated
+   */
+  EAttribute getAction_Params();
+
+  /**
    * Returns the meta object for class '{@link org.xtext.mdsl.mdsl.Rule <em>Rule</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1060,6 +1150,36 @@ public interface MdslPackage extends EPackage
   EAttribute getEvent_Description();
 
   /**
+   * Returns the meta object for enum '{@link org.xtext.mdsl.mdsl.SUPPORTED_OPERATING_SYSTEMS <em>SUPPORTED OPERATING SYSTEMS</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for enum '<em>SUPPORTED OPERATING SYSTEMS</em>'.
+   * @see org.xtext.mdsl.mdsl.SUPPORTED_OPERATING_SYSTEMS
+   * @generated
+   */
+  EEnum getSUPPORTED_OPERATING_SYSTEMS();
+
+  /**
+   * Returns the meta object for enum '{@link org.xtext.mdsl.mdsl.SUPPORTED_DISTRIBUTIONS <em>SUPPORTED DISTRIBUTIONS</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for enum '<em>SUPPORTED DISTRIBUTIONS</em>'.
+   * @see org.xtext.mdsl.mdsl.SUPPORTED_DISTRIBUTIONS
+   * @generated
+   */
+  EEnum getSUPPORTED_DISTRIBUTIONS();
+
+  /**
+   * Returns the meta object for enum '{@link org.xtext.mdsl.mdsl.SUPPORTED_RELEASES <em>SUPPORTED RELEASES</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for enum '<em>SUPPORTED RELEASES</em>'.
+   * @see org.xtext.mdsl.mdsl.SUPPORTED_RELEASES
+   * @generated
+   */
+  EEnum getSUPPORTED_RELEASES();
+
+  /**
    * Returns the meta object for enum '{@link org.xtext.mdsl.mdsl.Enabled <em>Enabled</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1147,6 +1267,14 @@ public interface MdslPackage extends EPackage
     EReference SYSTEM__MODES = eINSTANCE.getSystem_Modes();
 
     /**
+     * The meta object literal for the '<em><b>Operating System</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute SYSTEM__OPERATING_SYSTEM = eINSTANCE.getSystem_OperatingSystem();
+
+    /**
      * The meta object literal for the '<em><b>Distribution</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1155,12 +1283,12 @@ public interface MdslPackage extends EPackage
     EAttribute SYSTEM__DISTRIBUTION = eINSTANCE.getSystem_Distribution();
 
     /**
-     * The meta object literal for the '<em><b>Release Date</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Release</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute SYSTEM__RELEASE_DATE = eINSTANCE.getSystem_ReleaseDate();
+    EAttribute SYSTEM__RELEASE = eINSTANCE.getSystem_Release();
 
     /**
      * The meta object literal for the '{@link org.xtext.mdsl.mdsl.impl.SoftwareImpl <em>Software</em>}' class.
@@ -1231,12 +1359,12 @@ public interface MdslPackage extends EPackage
     EAttribute MODE__NAME = eINSTANCE.getMode_Name();
 
     /**
-     * The meta object literal for the '<em><b>Super Type</b></em>' reference feature.
+     * The meta object literal for the '<em><b>Super Mode</b></em>' reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference MODE__SUPER_TYPE = eINSTANCE.getMode_SuperType();
+    EReference MODE__SUPER_MODE = eINSTANCE.getMode_SuperMode();
 
     /**
      * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
@@ -1277,6 +1405,14 @@ public interface MdslPackage extends EPackage
      * @generated
      */
     EAttribute MODE__ENABLED = eINSTANCE.getMode_Enabled();
+
+    /**
+     * The meta object literal for the '<em><b>Alternative Mode</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MODE__ALTERNATIVE_MODE = eINSTANCE.getMode_AlternativeMode();
 
     /**
      * The meta object literal for the '{@link org.xtext.mdsl.mdsl.impl.ServiceImpl <em>Service</em>}' class.
@@ -1389,6 +1525,14 @@ public interface MdslPackage extends EPackage
     EAttribute ACTION__SHELL_CMD = eINSTANCE.getAction_ShellCmd();
 
     /**
+     * The meta object literal for the '<em><b>Params</b></em>' attribute list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ACTION__PARAMS = eINSTANCE.getAction_Params();
+
+    /**
      * The meta object literal for the '{@link org.xtext.mdsl.mdsl.impl.RuleImpl <em>Rule</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1471,6 +1615,36 @@ public interface MdslPackage extends EPackage
      * @generated
      */
     EAttribute EVENT__DESCRIPTION = eINSTANCE.getEvent_Description();
+
+    /**
+     * The meta object literal for the '{@link org.xtext.mdsl.mdsl.SUPPORTED_OPERATING_SYSTEMS <em>SUPPORTED OPERATING SYSTEMS</em>}' enum.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.xtext.mdsl.mdsl.SUPPORTED_OPERATING_SYSTEMS
+     * @see org.xtext.mdsl.mdsl.impl.MdslPackageImpl#getSUPPORTED_OPERATING_SYSTEMS()
+     * @generated
+     */
+    EEnum SUPPORTED_OPERATING_SYSTEMS = eINSTANCE.getSUPPORTED_OPERATING_SYSTEMS();
+
+    /**
+     * The meta object literal for the '{@link org.xtext.mdsl.mdsl.SUPPORTED_DISTRIBUTIONS <em>SUPPORTED DISTRIBUTIONS</em>}' enum.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.xtext.mdsl.mdsl.SUPPORTED_DISTRIBUTIONS
+     * @see org.xtext.mdsl.mdsl.impl.MdslPackageImpl#getSUPPORTED_DISTRIBUTIONS()
+     * @generated
+     */
+    EEnum SUPPORTED_DISTRIBUTIONS = eINSTANCE.getSUPPORTED_DISTRIBUTIONS();
+
+    /**
+     * The meta object literal for the '{@link org.xtext.mdsl.mdsl.SUPPORTED_RELEASES <em>SUPPORTED RELEASES</em>}' enum.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.xtext.mdsl.mdsl.SUPPORTED_RELEASES
+     * @see org.xtext.mdsl.mdsl.impl.MdslPackageImpl#getSUPPORTED_RELEASES()
+     * @generated
+     */
+    EEnum SUPPORTED_RELEASES = eINSTANCE.getSUPPORTED_RELEASES();
 
     /**
      * The meta object literal for the '{@link org.xtext.mdsl.mdsl.Enabled <em>Enabled</em>}' enum.

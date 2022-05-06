@@ -6,6 +6,19 @@
     copyrightFields="false" runtimeVersion="2.20">
   <genPackages prefix="Mdsl" basePackage="org.xtext.mdsl" disposableProviderFactory="true"
       fileExtensions="mdsl" ecorePackage="Mdsl.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Mdsl.ecore#//SUPPORTED_OPERATING_SYSTEMS">
+      <genEnumLiterals ecoreEnumLiteral="Mdsl.ecore#//SUPPORTED_OPERATING_SYSTEMS/Windows"/>
+      <genEnumLiterals ecoreEnumLiteral="Mdsl.ecore#//SUPPORTED_OPERATING_SYSTEMS/Linux"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Mdsl.ecore#//SUPPORTED_DISTRIBUTIONS">
+      <genEnumLiterals ecoreEnumLiteral="Mdsl.ecore#//SUPPORTED_DISTRIBUTIONS/Debian"/>
+      <genEnumLiterals ecoreEnumLiteral="Mdsl.ecore#//SUPPORTED_DISTRIBUTIONS/Ubuntu"/>
+      <genEnumLiterals ecoreEnumLiteral="Mdsl.ecore#//SUPPORTED_DISTRIBUTIONS/Other"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Mdsl.ecore#//SUPPORTED_RELEASES">
+      <genEnumLiterals ecoreEnumLiteral="Mdsl.ecore#//SUPPORTED_RELEASES/Buster"/>
+      <genEnumLiterals ecoreEnumLiteral="Mdsl.ecore#//SUPPORTED_RELEASES/Other"/>
+    </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="Mdsl.ecore#//Enabled">
       <genEnumLiterals ecoreEnumLiteral="Mdsl.ecore#//Enabled/true"/>
       <genEnumLiterals ecoreEnumLiteral="Mdsl.ecore#//Enabled/false"/>
@@ -17,8 +30,9 @@
     <genClasses ecoreClass="Mdsl.ecore#//System">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mdsl.ecore#//System/name"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Mdsl.ecore#//System/modes"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mdsl.ecore#//System/operatingSystem"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mdsl.ecore#//System/distribution"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mdsl.ecore#//System/releaseDate"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mdsl.ecore#//System/release"/>
     </genClasses>
     <genClasses ecoreClass="Mdsl.ecore#//Software">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mdsl.ecore#//Software/name"/>
@@ -29,12 +43,13 @@
     </genClasses>
     <genClasses ecoreClass="Mdsl.ecore#//Mode">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mdsl.ecore#//Mode/name"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Mdsl.ecore#//Mode/superType"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Mdsl.ecore#//Mode/superMode"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mdsl.ecore#//Mode/description"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mdsl.ecore#//Mode/priority"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Mdsl.ecore#//Mode/startServices"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Mdsl.ecore#//Mode/stopServices"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mdsl.ecore#//Mode/enabled"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Mdsl.ecore#//Mode/alternativeMode"/>
     </genClasses>
     <genClasses ecoreClass="Mdsl.ecore#//Service">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mdsl.ecore#//Service/name"/>
@@ -51,6 +66,7 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Mdsl.ecore#//Action/superAction"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mdsl.ecore#//Action/description"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mdsl.ecore#//Action/shellCmd"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mdsl.ecore#//Action/params"/>
     </genClasses>
     <genClasses ecoreClass="Mdsl.ecore#//Rule">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mdsl.ecore#//Rule/description"/>

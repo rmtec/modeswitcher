@@ -3,12 +3,18 @@
  */
 package org.xtext.mdsl.mdsl.impl;
 
+import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
+import org.eclipse.emf.ecore.util.EDataTypeEList;
 
 import org.xtext.mdsl.mdsl.Action;
 import org.xtext.mdsl.mdsl.MdslPackage;
@@ -25,6 +31,7 @@ import org.xtext.mdsl.mdsl.MdslPackage;
  *   <li>{@link org.xtext.mdsl.mdsl.impl.ActionImpl#getSuperAction <em>Super Action</em>}</li>
  *   <li>{@link org.xtext.mdsl.mdsl.impl.ActionImpl#getDescription <em>Description</em>}</li>
  *   <li>{@link org.xtext.mdsl.mdsl.impl.ActionImpl#getShellCmd <em>Shell Cmd</em>}</li>
+ *   <li>{@link org.xtext.mdsl.mdsl.impl.ActionImpl#getParams <em>Params</em>}</li>
  * </ul>
  *
  * @generated
@@ -100,6 +107,16 @@ public class ActionImpl extends DeclarationImpl implements Action
    * @ordered
    */
   protected String shellCmd = SHELL_CMD_EDEFAULT;
+
+  /**
+   * The cached value of the '{@link #getParams() <em>Params</em>}' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getParams()
+   * @generated
+   * @ordered
+   */
+  protected EList<String> params;
 
   /**
    * <!-- begin-user-doc -->
@@ -248,6 +265,21 @@ public class ActionImpl extends DeclarationImpl implements Action
    * @generated
    */
   @Override
+  public EList<String> getParams()
+  {
+    if (params == null)
+    {
+      params = new EDataTypeEList<String>(String.class, this, MdslPackage.ACTION__PARAMS);
+    }
+    return params;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
     switch (featureID)
@@ -261,6 +293,8 @@ public class ActionImpl extends DeclarationImpl implements Action
         return getDescription();
       case MdslPackage.ACTION__SHELL_CMD:
         return getShellCmd();
+      case MdslPackage.ACTION__PARAMS:
+        return getParams();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -270,6 +304,7 @@ public class ActionImpl extends DeclarationImpl implements Action
    * <!-- end-user-doc -->
    * @generated
    */
+  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
@@ -286,6 +321,10 @@ public class ActionImpl extends DeclarationImpl implements Action
         return;
       case MdslPackage.ACTION__SHELL_CMD:
         setShellCmd((String)newValue);
+        return;
+      case MdslPackage.ACTION__PARAMS:
+        getParams().clear();
+        getParams().addAll((Collection<? extends String>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -313,6 +352,9 @@ public class ActionImpl extends DeclarationImpl implements Action
       case MdslPackage.ACTION__SHELL_CMD:
         setShellCmd(SHELL_CMD_EDEFAULT);
         return;
+      case MdslPackage.ACTION__PARAMS:
+        getParams().clear();
+        return;
     }
     super.eUnset(featureID);
   }
@@ -335,6 +377,8 @@ public class ActionImpl extends DeclarationImpl implements Action
         return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
       case MdslPackage.ACTION__SHELL_CMD:
         return SHELL_CMD_EDEFAULT == null ? shellCmd != null : !SHELL_CMD_EDEFAULT.equals(shellCmd);
+      case MdslPackage.ACTION__PARAMS:
+        return params != null && !params.isEmpty();
     }
     return super.eIsSet(featureID);
   }
@@ -356,6 +400,8 @@ public class ActionImpl extends DeclarationImpl implements Action
     result.append(description);
     result.append(", shellCmd: ");
     result.append(shellCmd);
+    result.append(", params: ");
+    result.append(params);
     result.append(')');
     return result.toString();
   }

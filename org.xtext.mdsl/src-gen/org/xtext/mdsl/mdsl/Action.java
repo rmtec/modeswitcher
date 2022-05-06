@@ -3,6 +3,7 @@
  */
 package org.xtext.mdsl.mdsl;
 
+import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
@@ -17,6 +18,7 @@ package org.xtext.mdsl.mdsl;
  *   <li>{@link org.xtext.mdsl.mdsl.Action#getSuperAction <em>Super Action</em>}</li>
  *   <li>{@link org.xtext.mdsl.mdsl.Action#getDescription <em>Description</em>}</li>
  *   <li>{@link org.xtext.mdsl.mdsl.Action#getShellCmd <em>Shell Cmd</em>}</li>
+ *   <li>{@link org.xtext.mdsl.mdsl.Action#getParams <em>Params</em>}</li>
  * </ul>
  *
  * @see org.xtext.mdsl.mdsl.MdslPackage#getAction()
@@ -112,5 +114,17 @@ public interface Action extends Declaration
    * @generated
    */
   void setShellCmd(String value);
+
+  /**
+   * Returns the value of the '<em><b>Params</b></em>' attribute list.
+   * The list contents are of type {@link java.lang.String}.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Params</em>' attribute list.
+   * @see org.xtext.mdsl.mdsl.MdslPackage#getAction_Params()
+   * @model unique="false"
+   * @generated
+   */
+  EList<String> getParams();
 
 } // Action

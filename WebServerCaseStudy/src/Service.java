@@ -1,8 +1,10 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Service {
+public class Service implements Serializable{
+	private static final long serialVersionUID = 8018334957457489102L;
 	private String desc;
 	private boolean enabled;
 	private List<Action> startActions;
@@ -48,7 +50,7 @@ public class Service {
 	}
 	
 	public int getNoOfActiveVulnerabilities() {
-		return usedSoftware.stream().mapToInt(Software::getNotOfActiveVulnerabilties).sum();
+		return usedSoftware.stream().mapToInt(Software::getNoOfActiveVulnerabilties).sum();
 	}
 	
 	public int getNoOfVulnerabilities() {
@@ -60,7 +62,11 @@ public class Service {
 	}
 	
 	public double getActiveTotalScore() {
-		return usedSoftware.stream().mapToDouble(Software::getActiveScoreSum).sum();
+		if ( usedSoftware.isEmpty()) {
+			return 0.0;
+		}else {
+			return usedSoftware.stream().mapToDouble(Software::getActiveScoreSum).sum();
+		}
 	}
 	
 	public double getTotalScore() {

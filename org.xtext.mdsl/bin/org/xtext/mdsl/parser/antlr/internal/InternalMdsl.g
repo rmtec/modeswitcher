@@ -262,50 +262,81 @@ ruleSystem returns [EObject current=null]
 				)
 			)*
 		)?
-		otherlv_8='distribution'
-		{
-			newLeafNode(otherlv_8, grammarAccess.getSystemAccess().getDistributionKeyword_6());
-		}
 		(
+			otherlv_8='operatingSystem'
+			{
+				newLeafNode(otherlv_8, grammarAccess.getSystemAccess().getOperatingSystemKeyword_6_0());
+			}
 			(
-				lv_distribution_9_0=RULE_STRING
-				{
-					newLeafNode(lv_distribution_9_0, grammarAccess.getSystemAccess().getDistributionSTRINGTerminalRuleCall_7_0());
-				}
-				{
-					if ($current==null) {
-						$current = createModelElement(grammarAccess.getSystemRule());
+				(
+					{
+						newCompositeNode(grammarAccess.getSystemAccess().getOperatingSystemSUPPORTED_OPERATING_SYSTEMSEnumRuleCall_6_1_0());
 					}
-					setWithLastConsumed(
-						$current,
-						"distribution",
-						lv_distribution_9_0,
-						"org.eclipse.xtext.common.Terminals.STRING");
-				}
+					lv_operatingSystem_9_0=ruleSUPPORTED_OPERATING_SYSTEMS
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getSystemRule());
+						}
+						set(
+							$current,
+							"operatingSystem",
+							lv_operatingSystem_9_0,
+							"org.xtext.mdsl.Mdsl.SUPPORTED_OPERATING_SYSTEMS");
+						afterParserOrEnumRuleCall();
+					}
+				)
 			)
-		)
-		otherlv_10='releaseDate'
-		{
-			newLeafNode(otherlv_10, grammarAccess.getSystemAccess().getReleaseDateKeyword_8());
-		}
+		)?
 		(
+			otherlv_10='distribution'
+			{
+				newLeafNode(otherlv_10, grammarAccess.getSystemAccess().getDistributionKeyword_7_0());
+			}
 			(
-				lv_releaseDate_11_0=RULE_STRING
-				{
-					newLeafNode(lv_releaseDate_11_0, grammarAccess.getSystemAccess().getReleaseDateSTRINGTerminalRuleCall_9_0());
-				}
-				{
-					if ($current==null) {
-						$current = createModelElement(grammarAccess.getSystemRule());
+				(
+					{
+						newCompositeNode(grammarAccess.getSystemAccess().getDistributionSUPPORTED_DISTRIBUTIONSEnumRuleCall_7_1_0());
 					}
-					setWithLastConsumed(
-						$current,
-						"releaseDate",
-						lv_releaseDate_11_0,
-						"org.eclipse.xtext.common.Terminals.STRING");
-				}
+					lv_distribution_11_0=ruleSUPPORTED_DISTRIBUTIONS
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getSystemRule());
+						}
+						set(
+							$current,
+							"distribution",
+							lv_distribution_11_0,
+							"org.xtext.mdsl.Mdsl.SUPPORTED_DISTRIBUTIONS");
+						afterParserOrEnumRuleCall();
+					}
+				)
 			)
-		)
+		)?
+		(
+			otherlv_12='release'
+			{
+				newLeafNode(otherlv_12, grammarAccess.getSystemAccess().getReleaseKeyword_8_0());
+			}
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getSystemAccess().getReleaseSUPPORTED_RELEASESEnumRuleCall_8_1_0());
+					}
+					lv_release_13_0=ruleSUPPORTED_RELEASES
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getSystemRule());
+						}
+						set(
+							$current,
+							"release",
+							lv_release_13_0,
+							"org.xtext.mdsl.Mdsl.SUPPORTED_RELEASES");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+		)?
 	)
 ;
 
@@ -347,102 +378,102 @@ ruleSoftware returns [EObject current=null]
 				}
 			)
 		)
-		otherlv_2='identified'
-		{
-			newLeafNode(otherlv_2, grammarAccess.getSoftwareAccess().getIdentifiedKeyword_2());
-		}
-		otherlv_3='by'
-		{
-			newLeafNode(otherlv_3, grammarAccess.getSoftwareAccess().getByKeyword_3());
-		}
-		otherlv_4='cpe:/:'
-		{
-			newLeafNode(otherlv_4, grammarAccess.getSoftwareAccess().getCpeKeyword_4());
-		}
 		(
+			otherlv_2='vendor'
+			{
+				newLeafNode(otherlv_2, grammarAccess.getSoftwareAccess().getVendorKeyword_2_0());
+			}
 			(
-				lv_vendor_5_0=RULE_ID
-				{
-					newLeafNode(lv_vendor_5_0, grammarAccess.getSoftwareAccess().getVendorIDTerminalRuleCall_5_0());
-				}
-				{
-					if ($current==null) {
-						$current = createModelElement(grammarAccess.getSoftwareRule());
+				(
+					lv_vendor_3_0=RULE_STRING
+					{
+						newLeafNode(lv_vendor_3_0, grammarAccess.getSoftwareAccess().getVendorSTRINGTerminalRuleCall_2_1_0());
 					}
-					setWithLastConsumed(
-						$current,
-						"vendor",
-						lv_vendor_5_0,
-						"org.eclipse.xtext.common.Terminals.ID");
-				}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getSoftwareRule());
+						}
+						setWithLastConsumed(
+							$current,
+							"vendor",
+							lv_vendor_3_0,
+							"org.eclipse.xtext.common.Terminals.STRING");
+					}
+				)
 			)
-		)
-		otherlv_6=':'
-		{
-			newLeafNode(otherlv_6, grammarAccess.getSoftwareAccess().getColonKeyword_6());
-		}
+		)?
 		(
+			otherlv_4='product'
+			{
+				newLeafNode(otherlv_4, grammarAccess.getSoftwareAccess().getProductKeyword_3_0());
+			}
 			(
-				lv_product_7_0=RULE_ID
-				{
-					newLeafNode(lv_product_7_0, grammarAccess.getSoftwareAccess().getProductIDTerminalRuleCall_7_0());
-				}
-				{
-					if ($current==null) {
-						$current = createModelElement(grammarAccess.getSoftwareRule());
+				(
+					lv_product_5_0=RULE_STRING
+					{
+						newLeafNode(lv_product_5_0, grammarAccess.getSoftwareAccess().getProductSTRINGTerminalRuleCall_3_1_0());
 					}
-					setWithLastConsumed(
-						$current,
-						"product",
-						lv_product_7_0,
-						"org.eclipse.xtext.common.Terminals.ID");
-				}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getSoftwareRule());
+						}
+						setWithLastConsumed(
+							$current,
+							"product",
+							lv_product_5_0,
+							"org.eclipse.xtext.common.Terminals.STRING");
+					}
+				)
 			)
-		)
-		otherlv_8=':'
-		{
-			newLeafNode(otherlv_8, grammarAccess.getSoftwareAccess().getColonKeyword_8());
-		}
+		)?
 		(
+			otherlv_6='version'
+			{
+				newLeafNode(otherlv_6, grammarAccess.getSoftwareAccess().getVersionKeyword_4_0());
+			}
 			(
-				lv_version_9_0=RULE_STRING
-				{
-					newLeafNode(lv_version_9_0, grammarAccess.getSoftwareAccess().getVersionSTRINGTerminalRuleCall_9_0());
-				}
-				{
-					if ($current==null) {
-						$current = createModelElement(grammarAccess.getSoftwareRule());
+				(
+					lv_version_7_0=RULE_STRING
+					{
+						newLeafNode(lv_version_7_0, grammarAccess.getSoftwareAccess().getVersionSTRINGTerminalRuleCall_4_1_0());
 					}
-					setWithLastConsumed(
-						$current,
-						"version",
-						lv_version_9_0,
-						"org.eclipse.xtext.common.Terminals.STRING");
-				}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getSoftwareRule());
+						}
+						setWithLastConsumed(
+							$current,
+							"version",
+							lv_version_7_0,
+							"org.eclipse.xtext.common.Terminals.STRING");
+					}
+				)
 			)
-		)
-		otherlv_10='package'
-		{
-			newLeafNode(otherlv_10, grammarAccess.getSoftwareAccess().getPackageKeyword_10());
-		}
+		)?
 		(
+			otherlv_8='package'
+			{
+				newLeafNode(otherlv_8, grammarAccess.getSoftwareAccess().getPackageKeyword_5_0());
+			}
 			(
-				lv_package_11_0=RULE_STRING
-				{
-					newLeafNode(lv_package_11_0, grammarAccess.getSoftwareAccess().getPackageSTRINGTerminalRuleCall_11_0());
-				}
-				{
-					if ($current==null) {
-						$current = createModelElement(grammarAccess.getSoftwareRule());
+				(
+					lv_package_9_0=RULE_STRING
+					{
+						newLeafNode(lv_package_9_0, grammarAccess.getSoftwareAccess().getPackageSTRINGTerminalRuleCall_5_1_0());
 					}
-					setWithLastConsumed(
-						$current,
-						"package",
-						lv_package_11_0,
-						"org.eclipse.xtext.common.Terminals.STRING");
-				}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getSoftwareRule());
+						}
+						setWithLastConsumed(
+							$current,
+							"package",
+							lv_package_9_0,
+							"org.eclipse.xtext.common.Terminals.STRING");
+					}
+				)
 			)
-		)
+		)?
 	)
 ;
 
@@ -498,7 +529,7 @@ ruleMode returns [EObject current=null]
 					}
 					otherlv_3=RULE_ID
 					{
-						newLeafNode(otherlv_3, grammarAccess.getModeAccess().getSuperTypeModeCrossReference_2_1_0());
+						newLeafNode(otherlv_3, grammarAccess.getModeAccess().getSuperModeModeCrossReference_2_1_0());
 					}
 				)
 			)
@@ -640,6 +671,29 @@ ruleMode returns [EObject current=null]
 						"org.xtext.mdsl.Mdsl.Enabled");
 					afterParserOrEnumRuleCall();
 				}
+			)
+		)?
+		(
+			otherlv_17='exchangeable'
+			{
+				newLeafNode(otherlv_17, grammarAccess.getModeAccess().getExchangeableKeyword_12_0());
+			}
+			otherlv_18='with'
+			{
+				newLeafNode(otherlv_18, grammarAccess.getModeAccess().getWithKeyword_12_1());
+			}
+			(
+				(
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getModeRule());
+						}
+					}
+					otherlv_19=RULE_ID
+					{
+						newLeafNode(otherlv_19, grammarAccess.getModeAccess().getAlternativeModeModeCrossReference_12_2_0());
+					}
+				)
 			)
 		)?
 	)
@@ -985,26 +1039,79 @@ ruleAction returns [EObject current=null]
 				)
 			)
 		)?
-		otherlv_6='shellCmd'
-		{
-			newLeafNode(otherlv_6, grammarAccess.getActionAccess().getShellCmdKeyword_4());
-		}
 		(
 			(
-				lv_shellCmd_7_0=RULE_STRING
+				otherlv_6='shellCmd'
 				{
-					newLeafNode(lv_shellCmd_7_0, grammarAccess.getActionAccess().getShellCmdSTRINGTerminalRuleCall_5_0());
+					newLeafNode(otherlv_6, grammarAccess.getActionAccess().getShellCmdKeyword_4_0_0());
 				}
+				(
+					(
+						lv_shellCmd_7_0=RULE_STRING
+						{
+							newLeafNode(lv_shellCmd_7_0, grammarAccess.getActionAccess().getShellCmdSTRINGTerminalRuleCall_4_0_1_0());
+						}
+						{
+							if ($current==null) {
+								$current = createModelElement(grammarAccess.getActionRule());
+							}
+							setWithLastConsumed(
+								$current,
+								"shellCmd",
+								lv_shellCmd_7_0,
+								"org.eclipse.xtext.common.Terminals.STRING");
+						}
+					)
+				)
+			)
+			    |
+			(
+				otherlv_8='params'
 				{
-					if ($current==null) {
-						$current = createModelElement(grammarAccess.getActionRule());
+					newLeafNode(otherlv_8, grammarAccess.getActionAccess().getParamsKeyword_4_1_0());
+				}
+				(
+					(
+						lv_params_9_0=RULE_STRING
+						{
+							newLeafNode(lv_params_9_0, grammarAccess.getActionAccess().getParamsSTRINGTerminalRuleCall_4_1_1_0());
+						}
+						{
+							if ($current==null) {
+								$current = createModelElement(grammarAccess.getActionRule());
+							}
+							addWithLastConsumed(
+								$current,
+								"params",
+								lv_params_9_0,
+								"org.eclipse.xtext.common.Terminals.STRING");
+						}
+					)
+				)
+				(
+					otherlv_10=','
+					{
+						newLeafNode(otherlv_10, grammarAccess.getActionAccess().getCommaKeyword_4_1_2_0());
 					}
-					setWithLastConsumed(
-						$current,
-						"shellCmd",
-						lv_shellCmd_7_0,
-						"org.eclipse.xtext.common.Terminals.STRING");
-				}
+					(
+						(
+							lv_params_11_0=RULE_STRING
+							{
+								newLeafNode(lv_params_11_0, grammarAccess.getActionAccess().getParamsSTRINGTerminalRuleCall_4_1_2_1_0());
+							}
+							{
+								if ($current==null) {
+									$current = createModelElement(grammarAccess.getActionRule());
+								}
+								addWithLastConsumed(
+									$current,
+									"params",
+									lv_params_11_0,
+									"org.eclipse.xtext.common.Terminals.STRING");
+							}
+						)
+					)
+				)*
 			)
 		)
 	)
@@ -1225,6 +1332,95 @@ ruleEvent returns [EObject current=null]
 	)
 ;
 
+// Rule SUPPORTED_OPERATING_SYSTEMS
+ruleSUPPORTED_OPERATING_SYSTEMS returns [Enumerator current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			enumLiteral_0='Windows'
+			{
+				$current = grammarAccess.getSUPPORTED_OPERATING_SYSTEMSAccess().getWindowsEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
+				newLeafNode(enumLiteral_0, grammarAccess.getSUPPORTED_OPERATING_SYSTEMSAccess().getWindowsEnumLiteralDeclaration_0());
+			}
+		)
+		    |
+		(
+			enumLiteral_1='Linux'
+			{
+				$current = grammarAccess.getSUPPORTED_OPERATING_SYSTEMSAccess().getLinuxEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
+				newLeafNode(enumLiteral_1, grammarAccess.getSUPPORTED_OPERATING_SYSTEMSAccess().getLinuxEnumLiteralDeclaration_1());
+			}
+		)
+	)
+;
+
+// Rule SUPPORTED_DISTRIBUTIONS
+ruleSUPPORTED_DISTRIBUTIONS returns [Enumerator current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			enumLiteral_0='Debian'
+			{
+				$current = grammarAccess.getSUPPORTED_DISTRIBUTIONSAccess().getDebianEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
+				newLeafNode(enumLiteral_0, grammarAccess.getSUPPORTED_DISTRIBUTIONSAccess().getDebianEnumLiteralDeclaration_0());
+			}
+		)
+		    |
+		(
+			enumLiteral_1='Ubuntu'
+			{
+				$current = grammarAccess.getSUPPORTED_DISTRIBUTIONSAccess().getUbuntuEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
+				newLeafNode(enumLiteral_1, grammarAccess.getSUPPORTED_DISTRIBUTIONSAccess().getUbuntuEnumLiteralDeclaration_1());
+			}
+		)
+		    |
+		(
+			enumLiteral_2='Other'
+			{
+				$current = grammarAccess.getSUPPORTED_DISTRIBUTIONSAccess().getOtherEnumLiteralDeclaration_2().getEnumLiteral().getInstance();
+				newLeafNode(enumLiteral_2, grammarAccess.getSUPPORTED_DISTRIBUTIONSAccess().getOtherEnumLiteralDeclaration_2());
+			}
+		)
+	)
+;
+
+// Rule SUPPORTED_RELEASES
+ruleSUPPORTED_RELEASES returns [Enumerator current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			enumLiteral_0='Buster'
+			{
+				$current = grammarAccess.getSUPPORTED_RELEASESAccess().getBusterEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
+				newLeafNode(enumLiteral_0, grammarAccess.getSUPPORTED_RELEASESAccess().getBusterEnumLiteralDeclaration_0());
+			}
+		)
+		    |
+		(
+			enumLiteral_1='Other'
+			{
+				$current = grammarAccess.getSUPPORTED_RELEASESAccess().getOtherEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
+				newLeafNode(enumLiteral_1, grammarAccess.getSUPPORTED_RELEASESAccess().getOtherEnumLiteralDeclaration_1());
+			}
+		)
+	)
+;
+
 // Rule Enabled
 ruleEnabled returns [Enumerator current=null]
 @init {
@@ -1251,8 +1447,6 @@ ruleEnabled returns [Enumerator current=null]
 		)
 	)
 ;
-
-RULE_DATE : '2000'..'2999' '-' '01'..'12' '-' '01'..'31';
 
 RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
