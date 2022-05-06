@@ -1,8 +1,8 @@
 # Mode Switching Framework
 
-In order to detect relevant security vulnerabilities, and in turn, to react to reported vulnerabilities appropriately, automation support is needed to reduce the manual effort required for these tasks. Our model-driven framework can be used for developing and managing multi-modal architectures, modes, and modes switches. If a vulnerability is detected modes are switched automatically to overcome and reduce the risk, until software vendors provide patches and system administrators install them.
+In order to detect relevant security vulnerabilities and, in turn, to react to reported vulnerabilities appropriately, automation support is needed to reduce the manual effort required for these tasks. Our model-driven framework can be used for developing and managing multi-modal architectures, modes, and modes switches. If a vulnerability is detected, modes are switched automatically to overcome and reduce the risk until software vendors provide patches, and system administrators install them.
 
-For demonstrating the feasibility and potential benefits of our approach described in Paper XXX, we performed a case study for web server security and analyzed the time span of two years, from Feb. 2019 to Feb. 2021. We created a system configuration with commonly used components: Linux distribution Debian 10 (Buster) and two different implementations of popular web servers in its most recent version: Apache2 (v2.4.38) and nginx (v1.14.2). Additionally running on the web server, PHP (version 7.3) and FastCGI Process Manager are used to serve dynamic web content. Both web servers were selected because they provide similar functionality and work together with PHP. The web content was saved to the common /var/www directory, such that both web servers have access to it. The combination of a web server and a PHP interpreter is used by many common content management systems (CMSs) such as [WordPress](https://wordpress.org/download/), [Joomla](https://downloads.joomla.org/technical-requirements) or [Typo 3](https://get.typo3.org/). Typically, an instance of a CMS uses only a single (type of) web server. We investigate how mode switching can improve security and protect the system from reported vulnerabilities by applying our Mode DSL and the accompanying mode switching framework.
+To demonstrate the feasibility and potential benefits of our approach described in Paper XXX, we performed a case study for web server security. We analyzed the time span of two years, from Feb. 2019 to Feb. 2021. We created a system configuration with commonly used components: Linux distribution Debian 10 (Buster) and two different implementations of popular web servers in its most recent version: Apache2 (v2.4.38) and nginx (v1.14.2). Additionally running on the web server, PHP (version 7.3) and FastCGI Process Manager are used to serve dynamic web content. Both web servers were selected because they provide similar functionality and work together with PHP. The web content was saved to the common /var/www directory, such that both web servers have access to it. The combination of a web server and a PHP interpreter is used by many common content management systems (CMSs) such as [WordPress](https://wordpress.org/download/), [Joomla](https://downloads.joomla.org/technical-requirements) or [Typo 3](https://get.typo3.org/). Typically, an instance of a CMS uses only a single (type of) web server. We investigate how mode switching can improve security and protect the system from reported vulnerabilities by applying our Mode DSL and the accompanying mode switching framework.
 
 # Table of Contents
 1. [Mode Domain Specific Language (MDSL)](#mdsl)
@@ -24,19 +24,19 @@ When executing the framework on the command line, as shown in [Re-run the Web Se
 
 ## Requirements for Simulating Mode Switching
 * Installed Windows or Linux: e.g, Windows 10 or [Debian Buster](https://www.debian.org/releases/buster/debian-installer)
-* Installed Java, to run the Framework: `sudo apt install default-jdk`
+* Installed [Java](https://java.com), to run the Framework: `sudo apt install default-jdk`
 
 ## Extended Requirements for Executing Mode Switching
 * Installed and configured Apache2: `sudo apt install apache2`
 * Installed and configured nginx: `sudo apt install nginx`
 * Installed and configured PHP with FastCGI: `sudo apt install php-fpm`
 
-## Execute the Framework
-To start the Mode Switching Framework please execute the following command:
+## Download and Execute the Mode Switching Framework
+Please download the executeable Mode Switching Framework [WebServerCaseStudy-0.0.1-SNAPSHOT-jar-with-dependencies.jar](https://github.com/rmtec/modeswitcher/blob/main/WebServerCaseStudy-0.0.1-SNAPSHOT-jar-with-dependencies.jar) and execute the following command to start it:
 
 `java -jar -Dexec.classpathScope=system WebServerCaseStudy-0.0.1-SNAPSHOT-jar-with-dependencies.jar`
 
-The operating system (OS) will be automatically detected. If the OS is supported you can simulate and execute the action commands for the mode switch. Otherwise you can only simulate the mode switching.
+The operating system (OS) will be automatically detected. If the OS is supported, you can simulate and execute the action commands for the mode switch. Otherwise, you can only simulate the mode switching.
 
 ```
 ############################################################################
