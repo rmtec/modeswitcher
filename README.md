@@ -24,7 +24,7 @@ When executing the framework on the command line, as shown in [Re-run the Web Se
 
 ## Requirements for Simulating Mode Switching
 * Installed Windows or Linux: e.g, Windows 10 or [Debian Buster](https://www.debian.org/releases/buster/debian-installer)
-* Installed [Java](https://java.com), to run the Framework: `sudo apt install default-jdk`
+* Installed [Java](https://java.com), at least 11.0.1 or newer, to run the Framework: `sudo apt install default-jdk`
 
 ## Extended Requirements for Executing Mode Switching
 * Installed and configured Apache2: `sudo apt install apache2`
