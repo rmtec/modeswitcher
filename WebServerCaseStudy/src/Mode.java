@@ -13,7 +13,7 @@ public class Mode  implements Serializable{
 	private int priority;
 	private int startCounter; //count the number of starts
 	private int counter; //counts the number of calculated next mode
-	private Mode alternativeMode; //used for shuffle modes (moving target defense)
+	private List<Mode> alternativeModes; //used for shuffle modes (moving target defense)
 	
 	public Mode(String name, String desc, int priority, Service startService, Service stopService) {
 		this(name, desc,priority,Arrays.asList(startService),Arrays.asList(stopService));
@@ -161,6 +161,14 @@ public class Mode  implements Serializable{
 		this.stopServices = stopServices;
 	}
 	
+	public List<Mode> getAlternativeModes() {
+		return alternativeModes;
+	}
+	
+	public void setAlternativeModes(List<Mode> alternativeModes) {
+		this.alternativeModes = alternativeModes;
+	}
+	
 	public String toString() {
 		return name;
 	}
@@ -175,14 +183,6 @@ public class Mode  implements Serializable{
 
 	public void increaseCounter() {
 		counter++;		
-	}
-
-	public Mode getAlternativeMode() {
-		return alternativeMode;
-	}
-
-	public void setAlternativeMode(Mode alternativeMode) {
-		this.alternativeMode = alternativeMode;
 	}
 	
 	@Override

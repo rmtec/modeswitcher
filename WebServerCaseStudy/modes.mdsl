@@ -33,7 +33,7 @@ description "Static HTML and dynamic PHP pages"
 priority 2
 startServices phpFpmService
 stopServices phpFpmService
-exchangeable with ApacheWithPhp
+exchangeable with ApacheWithPhp,NginxOnly
 
 /*Mode WordpressApache extends ApacheWithPhp
 description "WordpressApache Mode"

@@ -699,7 +699,13 @@ public class ModeSwitcher {
 			log("----------------------------------------------------------------------------");
 			// Moving target defense shuffling modes is activated
 			log("Shuffling is enabled => looking for alternative mode");
-			Mode alternativeMode = currentMode.getAlternativeMode();
+			List<Mode> alternativeModes = currentMode.getAlternativeModes();
+			
+			Mode alternativeMode = currentMode.getAlternativeModes().stream().filter(
+					e -> e.getActiveTotalScore() <= currentMode.getActiveTotalScore()
+				).filter(Mode::isEnabled).collect(Collectors.toList()).get(0);
+			//System.out.println(alternativeMode);
+			
 			if (alternativeMode != null && alternativeMode.isEnabled()) {
 				log("Alternative enabled mode found: " + alternativeMode.getName());
 				if (alternativeMode.getActiveTotalScore() <= currentMode.getActiveTotalScore()) {

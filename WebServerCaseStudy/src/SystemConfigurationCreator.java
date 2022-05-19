@@ -116,10 +116,10 @@ public class SystemConfigurationCreator{
 			);
 			modes.add(nginxWithPhp);
 			
-			apache.setAlternativeMode(nginxOnly);
-			apacheWithPhp.setAlternativeMode(nginxWithPhp);
-			nginxOnly.setAlternativeMode(apache);
-			nginxWithPhp.setAlternativeMode(apacheWithPhp);
+			apache.setAlternativeModes(Arrays.asList(nginxOnly));
+			apacheWithPhp.setAlternativeModes(Arrays.asList(nginxWithPhp));
+			nginxOnly.setAlternativeModes(Arrays.asList(apache));
+			nginxWithPhp.setAlternativeModes(Arrays.asList(apacheWithPhp, nginxOnly));
 			
 			return new SystemConfiguration(modes, software);
 		}

@@ -42,7 +42,7 @@ Mode :
 		(',' stopServices+=[Service])*
 	)?
 	(enabled=Enabled)?
-	('exchangeable' 'with' alternativeMode=[Mode])?
+	('exchangeable' 'with' alternativeModes+=[Mode] (',' alternativeModes+=[Mode])*)?
 ;
 
 enum Enabled:

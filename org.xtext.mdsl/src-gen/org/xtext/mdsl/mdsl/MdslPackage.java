@@ -307,13 +307,13 @@ public interface MdslPackage extends EPackage
   int MODE__ENABLED = DECLARATION_FEATURE_COUNT + 6;
 
   /**
-   * The feature id for the '<em><b>Alternative Mode</b></em>' reference.
+   * The feature id for the '<em><b>Alternative Modes</b></em>' reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MODE__ALTERNATIVE_MODE = DECLARATION_FEATURE_COUNT + 7;
+  int MODE__ALTERNATIVE_MODES = DECLARATION_FEATURE_COUNT + 7;
 
   /**
    * The number of structural features of the '<em>Mode</em>' class.
@@ -880,15 +880,15 @@ public interface MdslPackage extends EPackage
   EAttribute getMode_Enabled();
 
   /**
-   * Returns the meta object for the reference '{@link org.xtext.mdsl.mdsl.Mode#getAlternativeMode <em>Alternative Mode</em>}'.
+   * Returns the meta object for the reference list '{@link org.xtext.mdsl.mdsl.Mode#getAlternativeModes <em>Alternative Modes</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Alternative Mode</em>'.
-   * @see org.xtext.mdsl.mdsl.Mode#getAlternativeMode()
+   * @return the meta object for the reference list '<em>Alternative Modes</em>'.
+   * @see org.xtext.mdsl.mdsl.Mode#getAlternativeModes()
    * @see #getMode()
    * @generated
    */
-  EReference getMode_AlternativeMode();
+  EReference getMode_AlternativeModes();
 
   /**
    * Returns the meta object for class '{@link org.xtext.mdsl.mdsl.Service <em>Service</em>}'.
@@ -1407,12 +1407,12 @@ public interface MdslPackage extends EPackage
     EAttribute MODE__ENABLED = eINSTANCE.getMode_Enabled();
 
     /**
-     * The meta object literal for the '<em><b>Alternative Mode</b></em>' reference feature.
+     * The meta object literal for the '<em><b>Alternative Modes</b></em>' reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference MODE__ALTERNATIVE_MODE = eINSTANCE.getMode_AlternativeMode();
+    EReference MODE__ALTERNATIVE_MODES = eINSTANCE.getMode_AlternativeModes();
 
     /**
      * The meta object literal for the '{@link org.xtext.mdsl.mdsl.impl.ServiceImpl <em>Service</em>}' class.

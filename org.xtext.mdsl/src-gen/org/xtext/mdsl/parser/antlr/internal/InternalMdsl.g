@@ -691,10 +691,29 @@ ruleMode returns [EObject current=null]
 					}
 					otherlv_19=RULE_ID
 					{
-						newLeafNode(otherlv_19, grammarAccess.getModeAccess().getAlternativeModeModeCrossReference_12_2_0());
+						newLeafNode(otherlv_19, grammarAccess.getModeAccess().getAlternativeModesModeCrossReference_12_2_0());
 					}
 				)
 			)
+			(
+				otherlv_20=','
+				{
+					newLeafNode(otherlv_20, grammarAccess.getModeAccess().getCommaKeyword_12_3_0());
+				}
+				(
+					(
+						{
+							if ($current==null) {
+								$current = createModelElement(grammarAccess.getModeRule());
+							}
+						}
+						otherlv_21=RULE_ID
+						{
+							newLeafNode(otherlv_21, grammarAccess.getModeAccess().getAlternativeModesModeCrossReference_12_3_1_0());
+						}
+					)
+				)
+			)*
 		)?
 	)
 ;

@@ -96,10 +96,10 @@ public class SystemConfigurationCreator{
 			«ENDFOR»
 			
 			«FOR m : model.declarations.filter(Mode)»
-				«IF m.alternativeMode !==null»
-					«m.name.toFirstLower».setAlternativeMode(«m.alternativeMode.name.toFirstLower»);
-				«ENDIF»
-			«ENDFOR»			
+			«IF m.alternativeModes !==null»
+				«m.name.toFirstLower».setAlternativeModes(Arrays.asList(«m.alternativeModes.map[name.toFirstLower].join(', ')»));
+			«ENDIF»			
+			«ENDFOR»
 			
 			return new SystemConfiguration(modes, software);
 		}

@@ -3497,3 +3497,39 @@
 2022-05-03 18:36:57;refreshVulnerabilities;369906200
 2022-05-03 18:36:57;refreshPatches;446805000
 2022-05-03 18:36:57;nginxOnly;0.0;nginxOnly;0.0;0;0
+2022-05-18 15:38:29;time validation;150504900
+2022-05-18 15:38:29;time generation;38896000
+2022-05-18 15:38:30;time compilation;1085257600
+2022-05-18 15:38:30;time system configuration;2680104100
+2022-05-18 15:40:48;null;0.0;apacheWithPhp;0.0;5488100;0
+2022-05-18 15:40:51;apacheWithPhp;0.0;nginxWithPhp;0.0;1007900;0
+2022-05-18 15:42:09;nginxWithPhp;0.0;apacheWithPhp;0.0;1001500;0
+2022-05-18 15:42:21;apacheWithPhp;0.0;nginxWithPhp;0.0;0;0
+2022-05-18 15:42:32;nginxWithPhp;0.0;apacheWithPhp;0.0;0;0
+2022-05-18 15:42:52;apacheWithPhp;0.0;nginxOnly;0.0;0;0
+2022-05-18 15:43:54;nginxOnly;0.0;nginxWithPhp;0.0;0;0
+2022-05-18 15:44:00;nginxWithPhp;0.0;nginxWithPhp;0.0;0;0
+2022-05-18 15:44:10;nginxWithPhp;0.0;nginxWithPhp;0.0;0;0
+2022-05-18 15:44:13;nginxWithPhp;0.0;nginxWithPhp;0.0;0;0
+2022-05-18 15:47:04;null;0.0;apacheWithPhp;0.0;996900;0
+2022-05-18 15:47:07;apacheWithPhp;0.0;nginxWithPhp;0.0;997300;997300
+2022-05-18 15:47:10;nginxWithPhp;0.0;apacheWithPhp;0.0;0;0
+2022-05-18 15:47:12;apacheWithPhp;0.0;nginxWithPhp;0.0;0;0
+2022-05-18 15:47:56;nginxWithPhp;0.0;apacheWithPhp;0.0;996100;0
+2022-05-18 15:50:05;apacheWithPhp;0.0;nginxWithPhp;0.0;1004000;0
+2022-05-18 15:50:13;nginxWithPhp;0.0;nginxOnly;0.0;0;0
+2022-05-18 15:52:03;nginxOnly;0.0;apacheWithPhp;0.0;997600;997600
+2022-05-18 15:52:04;apacheWithPhp;0.0;nginxWithPhp;0.0;0;0
+2022-05-18 15:52:06;nginxWithPhp;0.0;apacheWithPhp;0.0;0;0
+2022-05-18 15:52:08;apacheWithPhp;0.0;nginxWithPhp;0.0;997000;997000
+2022-05-18 15:52:09;nginxWithPhp;0.0;apacheWithPhp;0.0;0;0
+2022-05-18 15:52:11;apacheWithPhp;0.0;nginxWithPhp;0.0;0;0
+2022-05-18 15:52:52;time validation;116026700
+2022-05-18 15:52:52;time generation;29919300
+2022-05-18 15:52:53;time compilation;821170800
+2022-05-18 15:52:53;time system configuration;2006108700
+2022-05-18 15:52:58;null;0.0;apacheWithPhp;0.0;997000;0
+2022-05-18 15:53:09;apacheWithPhp;0.0;nginxWithPhp;0.0;996400;0
+2022-05-18 15:53:11;nginxWithPhp;0.0;nginxOnly;0.0;0;0
+2022-05-18 15:53:29;nginxOnly;0.0;nginxWithPhp;0.0;998200;998200
+2022-05-18 15:53:34;nginxWithPhp;0.0;nginxOnly;0.0;0;0

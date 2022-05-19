@@ -21,7 +21,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.xtext.mdsl.mdsl.Mode#getStartServices <em>Start Services</em>}</li>
  *   <li>{@link org.xtext.mdsl.mdsl.Mode#getStopServices <em>Stop Services</em>}</li>
  *   <li>{@link org.xtext.mdsl.mdsl.Mode#getEnabled <em>Enabled</em>}</li>
- *   <li>{@link org.xtext.mdsl.mdsl.Mode#getAlternativeMode <em>Alternative Mode</em>}</li>
+ *   <li>{@link org.xtext.mdsl.mdsl.Mode#getAlternativeModes <em>Alternative Modes</em>}</li>
  * </ul>
  *
  * @see org.xtext.mdsl.mdsl.MdslPackage#getMode()
@@ -168,25 +168,15 @@ public interface Mode extends Declaration
   void setEnabled(Enabled value);
 
   /**
-   * Returns the value of the '<em><b>Alternative Mode</b></em>' reference.
+   * Returns the value of the '<em><b>Alternative Modes</b></em>' reference list.
+   * The list contents are of type {@link org.xtext.mdsl.mdsl.Mode}.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Alternative Mode</em>' reference.
-   * @see #setAlternativeMode(Mode)
-   * @see org.xtext.mdsl.mdsl.MdslPackage#getMode_AlternativeMode()
+   * @return the value of the '<em>Alternative Modes</em>' reference list.
+   * @see org.xtext.mdsl.mdsl.MdslPackage#getMode_AlternativeModes()
    * @model
    * @generated
    */
-  Mode getAlternativeMode();
-
-  /**
-   * Sets the value of the '{@link org.xtext.mdsl.mdsl.Mode#getAlternativeMode <em>Alternative Mode</em>}' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Alternative Mode</em>' reference.
-   * @see #getAlternativeMode()
-   * @generated
-   */
-  void setAlternativeMode(Mode value);
+  EList<Mode> getAlternativeModes();
 
 } // Mode

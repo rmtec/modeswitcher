@@ -344,9 +344,14 @@ public class MdslGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		private final Group cGroup_12 = (Group)cGroup.eContents().get(12);
 		private final Keyword cExchangeableKeyword_12_0 = (Keyword)cGroup_12.eContents().get(0);
 		private final Keyword cWithKeyword_12_1 = (Keyword)cGroup_12.eContents().get(1);
-		private final Assignment cAlternativeModeAssignment_12_2 = (Assignment)cGroup_12.eContents().get(2);
-		private final CrossReference cAlternativeModeModeCrossReference_12_2_0 = (CrossReference)cAlternativeModeAssignment_12_2.eContents().get(0);
-		private final RuleCall cAlternativeModeModeIDTerminalRuleCall_12_2_0_1 = (RuleCall)cAlternativeModeModeCrossReference_12_2_0.eContents().get(1);
+		private final Assignment cAlternativeModesAssignment_12_2 = (Assignment)cGroup_12.eContents().get(2);
+		private final CrossReference cAlternativeModesModeCrossReference_12_2_0 = (CrossReference)cAlternativeModesAssignment_12_2.eContents().get(0);
+		private final RuleCall cAlternativeModesModeIDTerminalRuleCall_12_2_0_1 = (RuleCall)cAlternativeModesModeCrossReference_12_2_0.eContents().get(1);
+		private final Group cGroup_12_3 = (Group)cGroup_12.eContents().get(3);
+		private final Keyword cCommaKeyword_12_3_0 = (Keyword)cGroup_12_3.eContents().get(0);
+		private final Assignment cAlternativeModesAssignment_12_3_1 = (Assignment)cGroup_12_3.eContents().get(1);
+		private final CrossReference cAlternativeModesModeCrossReference_12_3_1_0 = (CrossReference)cAlternativeModesAssignment_12_3_1.eContents().get(0);
+		private final RuleCall cAlternativeModesModeIDTerminalRuleCall_12_3_1_0_1 = (RuleCall)cAlternativeModesModeCrossReference_12_3_1_0.eContents().get(1);
 		
 		//Mode :
 		//    'Mode' name=ID ('extends' superMode=[Mode])?
@@ -359,7 +364,7 @@ public class MdslGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		//        (',' stopServices+=[Service])*
 		//    )?
 		//    (enabled=Enabled)?
-		//    ('exchangeable' 'with' alternativeMode=[Mode])?
+		//    ('exchangeable' 'with' alternativeModes+=[Mode] (',' alternativeModes+=[Mode])*)?
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
@@ -373,7 +378,7 @@ public class MdslGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		//    (',' stopServices+=[Service])*
 		//)?
 		//(enabled=Enabled)?
-		//('exchangeable' 'with' alternativeMode=[Mode])?
+		//('exchangeable' 'with' alternativeModes+=[Mode] (',' alternativeModes+=[Mode])*)?
 		public Group getGroup() { return cGroup; }
 		
 		//'Mode'
@@ -488,7 +493,7 @@ public class MdslGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		//Enabled
 		public RuleCall getEnabledEnabledEnumRuleCall_11_0() { return cEnabledEnabledEnumRuleCall_11_0; }
 		
-		//('exchangeable' 'with' alternativeMode=[Mode])?
+		//('exchangeable' 'with' alternativeModes+=[Mode] (',' alternativeModes+=[Mode])*)?
 		public Group getGroup_12() { return cGroup_12; }
 		
 		//'exchangeable'
@@ -497,14 +502,29 @@ public class MdslGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		//'with'
 		public Keyword getWithKeyword_12_1() { return cWithKeyword_12_1; }
 		
-		//alternativeMode=[Mode]
-		public Assignment getAlternativeModeAssignment_12_2() { return cAlternativeModeAssignment_12_2; }
+		//alternativeModes+=[Mode]
+		public Assignment getAlternativeModesAssignment_12_2() { return cAlternativeModesAssignment_12_2; }
 		
 		//[Mode]
-		public CrossReference getAlternativeModeModeCrossReference_12_2_0() { return cAlternativeModeModeCrossReference_12_2_0; }
+		public CrossReference getAlternativeModesModeCrossReference_12_2_0() { return cAlternativeModesModeCrossReference_12_2_0; }
 		
 		//ID
-		public RuleCall getAlternativeModeModeIDTerminalRuleCall_12_2_0_1() { return cAlternativeModeModeIDTerminalRuleCall_12_2_0_1; }
+		public RuleCall getAlternativeModesModeIDTerminalRuleCall_12_2_0_1() { return cAlternativeModesModeIDTerminalRuleCall_12_2_0_1; }
+		
+		//(',' alternativeModes+=[Mode])*
+		public Group getGroup_12_3() { return cGroup_12_3; }
+		
+		//','
+		public Keyword getCommaKeyword_12_3_0() { return cCommaKeyword_12_3_0; }
+		
+		//alternativeModes+=[Mode]
+		public Assignment getAlternativeModesAssignment_12_3_1() { return cAlternativeModesAssignment_12_3_1; }
+		
+		//[Mode]
+		public CrossReference getAlternativeModesModeCrossReference_12_3_1_0() { return cAlternativeModesModeCrossReference_12_3_1_0; }
+		
+		//ID
+		public RuleCall getAlternativeModesModeIDTerminalRuleCall_12_3_1_0_1() { return cAlternativeModesModeIDTerminalRuleCall_12_3_1_0_1; }
 	}
 	public class ServiceElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.mdsl.Mdsl.Service");
@@ -1272,7 +1292,7 @@ public class MdslGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 	//        (',' stopServices+=[Service])*
 	//    )?
 	//    (enabled=Enabled)?
-	//    ('exchangeable' 'with' alternativeMode=[Mode])?
+	//    ('exchangeable' 'with' alternativeModes+=[Mode] (',' alternativeModes+=[Mode])*)?
 	//;
 	public ModeElements getModeAccess() {
 		return pMode;

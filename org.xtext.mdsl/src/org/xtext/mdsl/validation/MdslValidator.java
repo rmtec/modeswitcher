@@ -42,17 +42,13 @@ public class MdslValidator extends AbstractMdslValidator {
 	public static final String DUPLICATE_START_SERVICES = "duplicateStartServices";
 	public static final String DUPLICATE_STOP_SERVICES = "duplicateStopServices";
 	public static final String DUPLICATE_MODE_NAMES = "duplicateModeNames";
+	public static final String DUPLICATE_ALTERNATIVE_MODE_NAMES = "duplicateAlternativeModeNames";
 	public static final String MODE_INHERIT_ITSELF = "modeInheritItself";
 
 	private HashMap<String, String> packageList;
-
-	private void initPackageList(String operatingSystem, String distribution) {
+	
+	private String getPackageListUrl(String operatingSystem, String distribution) {
 		String url = "";
-		String filename = "package-cpe-list.csv";
-		packageList = new HashMap<String, String>();
-		
-		System.out.println("initPackageList");
-		
 		switch(operatingSystem) {
 		case "Linux":
 			switch(distribution) {
@@ -65,6 +61,17 @@ public class MdslValidator extends AbstractMdslValidator {
 			url = "";
 			break;*/
 		}
+		return url;
+	}
+
+	private void initPackageList(String operatingSystem, String distribution) {
+		String url = "";
+		String filename = "package-cpe-list.csv";
+		packageList = new HashMap<String, String>();
+		
+		System.out.println("initPackageList");
+		
+		url = getPackageListUrl(operatingSystem, distribution);
 		if(url == "") {
 			System.out.println("Unkown operating system. No package list available.");
 			return;
@@ -78,7 +85,7 @@ public class MdslValidator extends AbstractMdslValidator {
 		//String currentPath = new File("").getAbsolutePath().toString();
 		//System.out.println("currentPath: " + currentPath);
 		if (f.exists()) {
-			System.out.println("package-cpe-list.csv found: " + f.getAbsolutePath().toString());
+			System.out.println(filename + " found: " + f.getAbsolutePath().toString());
 			
 			String line = "";
 			String splitBy = ";";
@@ -96,7 +103,7 @@ public class MdslValidator extends AbstractMdslValidator {
 				e.printStackTrace();
 			}
 		} else {
-			System.out.println("No package-cpe-list.csv available.");
+			System.out.println(filename + " not available.");
 		}
 	}
 
@@ -124,13 +131,38 @@ public class MdslValidator extends AbstractMdslValidator {
 		}
 		
 		/**
-		 * Check functionally alternative mode (moveable target defense)
+		 * Check alternative modes (moveable target defense)
 		 */
-		if (mode.getAlternativeMode() != null) {
-			System.out.println("	checkAlternativeMode: " + mode.getAlternativeMode().getName());
-			if (mode.getName() == mode.getAlternativeMode().getName()) {
+		if (mode.getAlternativeModes() != null) {
+			
+			System.out.println("	checkAlternativeModes");
+			
+			/**
+			 * Duplicate alternative mode names
+			 */
+			List<Mode> duplicateAltModeNames = mode.getAlternativeModes().stream().collect(Collectors.groupingBy(Mode::getName)).entrySet()
+					.stream().filter(e -> e.getValue().size() > 1).flatMap(e -> e.getValue().stream())
+					.collect(Collectors.toList());
+			
+			System.out.print("Alternative modes: ");
+			mode.getAlternativeModes().stream().forEach(m -> System.out.print(m.getName()+","));
+			System.out.println("");
+			
+			if (!duplicateAltModeNames.isEmpty()) {
+				System.out.println("Duplicate alternative mode names found!");
+				duplicateAltModeNames.forEach(i -> System.out.println (i.getName()));
+				warning("Modes with a duplicate name found", MdslPackage.Literals.SYSTEM__MODES, DUPLICATE_ALTERNATIVE_MODE_NAMES);
+				duplicateAltModeNames.forEach(i -> warning("Alternative modes with the same name found", i, MdslPackage.Literals.MODE__NAME, -1));
+			}
+			
+			/**
+			 * Mode == Alternative mode
+			 */
+			List<Mode> modeNameEqualAlternativeModeNames = mode.getAlternativeModes().stream().filter(str -> str.getName().equals(mode.getName()))
+					.collect(Collectors.toList());
+			if (!modeNameEqualAlternativeModeNames.isEmpty()) {
 				System.out.println("Mode " + mode.getName() +" cannot have itself as moveable target defense alternative");
-				error("Mode cannot have itself as moveable target defense alternative", mode, MdslPackage.Literals.MODE__ALTERNATIVE_MODE);
+				error("Mode cannot have itself as moveable target defense alternative", mode, MdslPackage.Literals.MODE__ALTERNATIVE_MODES);
 			}
 		}
 	}

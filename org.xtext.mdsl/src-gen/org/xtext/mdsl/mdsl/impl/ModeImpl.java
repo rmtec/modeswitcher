@@ -36,7 +36,7 @@ import org.xtext.mdsl.mdsl.Service;
  *   <li>{@link org.xtext.mdsl.mdsl.impl.ModeImpl#getStartServices <em>Start Services</em>}</li>
  *   <li>{@link org.xtext.mdsl.mdsl.impl.ModeImpl#getStopServices <em>Stop Services</em>}</li>
  *   <li>{@link org.xtext.mdsl.mdsl.impl.ModeImpl#getEnabled <em>Enabled</em>}</li>
- *   <li>{@link org.xtext.mdsl.mdsl.impl.ModeImpl#getAlternativeMode <em>Alternative Mode</em>}</li>
+ *   <li>{@link org.xtext.mdsl.mdsl.impl.ModeImpl#getAlternativeModes <em>Alternative Modes</em>}</li>
  * </ul>
  *
  * @generated
@@ -154,14 +154,14 @@ public class ModeImpl extends DeclarationImpl implements Mode
   protected Enabled enabled = ENABLED_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getAlternativeMode() <em>Alternative Mode</em>}' reference.
+   * The cached value of the '{@link #getAlternativeModes() <em>Alternative Modes</em>}' reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getAlternativeMode()
+   * @see #getAlternativeModes()
    * @generated
    * @ordered
    */
-  protected Mode alternativeMode;
+  protected EList<Mode> alternativeModes;
 
   /**
    * <!-- begin-user-doc -->
@@ -365,43 +365,13 @@ public class ModeImpl extends DeclarationImpl implements Mode
    * @generated
    */
   @Override
-  public Mode getAlternativeMode()
+  public EList<Mode> getAlternativeModes()
   {
-    if (alternativeMode != null && alternativeMode.eIsProxy())
+    if (alternativeModes == null)
     {
-      InternalEObject oldAlternativeMode = (InternalEObject)alternativeMode;
-      alternativeMode = (Mode)eResolveProxy(oldAlternativeMode);
-      if (alternativeMode != oldAlternativeMode)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, MdslPackage.MODE__ALTERNATIVE_MODE, oldAlternativeMode, alternativeMode));
-      }
+      alternativeModes = new EObjectResolvingEList<Mode>(Mode.class, this, MdslPackage.MODE__ALTERNATIVE_MODES);
     }
-    return alternativeMode;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public Mode basicGetAlternativeMode()
-  {
-    return alternativeMode;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setAlternativeMode(Mode newAlternativeMode)
-  {
-    Mode oldAlternativeMode = alternativeMode;
-    alternativeMode = newAlternativeMode;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, MdslPackage.MODE__ALTERNATIVE_MODE, oldAlternativeMode, alternativeMode));
+    return alternativeModes;
   }
 
   /**
@@ -429,9 +399,8 @@ public class ModeImpl extends DeclarationImpl implements Mode
         return getStopServices();
       case MdslPackage.MODE__ENABLED:
         return getEnabled();
-      case MdslPackage.MODE__ALTERNATIVE_MODE:
-        if (resolve) return getAlternativeMode();
-        return basicGetAlternativeMode();
+      case MdslPackage.MODE__ALTERNATIVE_MODES:
+        return getAlternativeModes();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -470,8 +439,9 @@ public class ModeImpl extends DeclarationImpl implements Mode
       case MdslPackage.MODE__ENABLED:
         setEnabled((Enabled)newValue);
         return;
-      case MdslPackage.MODE__ALTERNATIVE_MODE:
-        setAlternativeMode((Mode)newValue);
+      case MdslPackage.MODE__ALTERNATIVE_MODES:
+        getAlternativeModes().clear();
+        getAlternativeModes().addAll((Collection<? extends Mode>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -508,8 +478,8 @@ public class ModeImpl extends DeclarationImpl implements Mode
       case MdslPackage.MODE__ENABLED:
         setEnabled(ENABLED_EDEFAULT);
         return;
-      case MdslPackage.MODE__ALTERNATIVE_MODE:
-        setAlternativeMode((Mode)null);
+      case MdslPackage.MODE__ALTERNATIVE_MODES:
+        getAlternativeModes().clear();
         return;
     }
     super.eUnset(featureID);
@@ -539,8 +509,8 @@ public class ModeImpl extends DeclarationImpl implements Mode
         return stopServices != null && !stopServices.isEmpty();
       case MdslPackage.MODE__ENABLED:
         return enabled != ENABLED_EDEFAULT;
-      case MdslPackage.MODE__ALTERNATIVE_MODE:
-        return alternativeMode != null;
+      case MdslPackage.MODE__ALTERNATIVE_MODES:
+        return alternativeModes != null && !alternativeModes.isEmpty();
     }
     return super.eIsSet(featureID);
   }

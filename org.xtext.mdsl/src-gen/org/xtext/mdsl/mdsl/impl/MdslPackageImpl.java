@@ -452,7 +452,7 @@ public class MdslPackageImpl extends EPackageImpl implements MdslPackage
    * @generated
    */
   @Override
-  public EReference getMode_AlternativeMode()
+  public EReference getMode_AlternativeModes()
   {
     return (EReference)modeEClass.getEStructuralFeatures().get(7);
   }
@@ -823,7 +823,7 @@ public class MdslPackageImpl extends EPackageImpl implements MdslPackage
     createEReference(modeEClass, MODE__START_SERVICES);
     createEReference(modeEClass, MODE__STOP_SERVICES);
     createEAttribute(modeEClass, MODE__ENABLED);
-    createEReference(modeEClass, MODE__ALTERNATIVE_MODE);
+    createEReference(modeEClass, MODE__ALTERNATIVE_MODES);
 
     serviceEClass = createEClass(SERVICE);
     createEAttribute(serviceEClass, SERVICE__NAME);
@@ -926,7 +926,7 @@ public class MdslPackageImpl extends EPackageImpl implements MdslPackage
     initEReference(getMode_StartServices(), this.getService(), null, "startServices", null, 0, -1, Mode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getMode_StopServices(), this.getService(), null, "stopServices", null, 0, -1, Mode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getMode_Enabled(), this.getEnabled(), "enabled", null, 0, 1, Mode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getMode_AlternativeMode(), this.getMode(), null, "alternativeMode", null, 0, 1, Mode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getMode_AlternativeModes(), this.getMode(), null, "alternativeModes", null, 0, -1, Mode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(serviceEClass, Service.class, "Service", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getService_Name(), ecorePackage.getEString(), "name", null, 0, 1, Service.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

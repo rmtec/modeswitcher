@@ -131,7 +131,7 @@ public class MdslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *         (startServices+=[Service|ID] startServices+=[Service|ID]*)? 
 	 *         (stopServices+=[Service|ID] stopServices+=[Service|ID]*)? 
 	 *         enabled=Enabled? 
-	 *         alternativeMode=[Mode|ID]?
+	 *         (alternativeModes+=[Mode|ID] alternativeModes+=[Mode|ID]*)?
 	 *     )
 	 */
 	protected void sequence_Mode(ISerializationContext context, Mode semanticObject) {

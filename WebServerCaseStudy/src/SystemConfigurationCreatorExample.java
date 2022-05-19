@@ -50,10 +50,10 @@ public class SystemConfigurationCreatorExample {
 		// modes = Arrays.asList(nginx, nginxWithPhpFpm);
 		// setDefaultMode(apache2);
 		
-		apache2.setAlternativeMode(nginx);
-		apache2withPhpFpm.setAlternativeMode(nginxWithPhpFpm);
-		nginx.setAlternativeMode(apache2);
-		nginxWithPhpFpm.setAlternativeMode(apache2withPhpFpm);
+		apache2.setAlternativeModes(Arrays.asList(nginx));
+		apache2withPhpFpm.setAlternativeModes(Arrays.asList(nginxWithPhpFpm));
+		nginx.setAlternativeModes(Arrays.asList(apache2));
+		nginxWithPhpFpm.setAlternativeModes(Arrays.asList(apache2withPhpFpm));
 
 		return new SystemConfiguration(modes, software);
 	}

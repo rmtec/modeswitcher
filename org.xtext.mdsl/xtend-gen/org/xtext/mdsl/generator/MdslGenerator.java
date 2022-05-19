@@ -324,16 +324,19 @@ public class MdslGenerator extends AbstractGenerator {
       Iterable<Mode> _filter_5 = Iterables.<Mode>filter(model.getDeclarations(), Mode.class);
       for(final Mode m_1 : _filter_5) {
         {
-          Mode _alternativeMode = m_1.getAlternativeMode();
-          boolean _tripleNotEquals_6 = (_alternativeMode != null);
+          EList<Mode> _alternativeModes = m_1.getAlternativeModes();
+          boolean _tripleNotEquals_6 = (_alternativeModes != null);
           if (_tripleNotEquals_6) {
             _builder.append("\t\t\t");
             String _firstLower_9 = StringExtensions.toFirstLower(m_1.getName());
             _builder.append(_firstLower_9, "\t\t\t");
-            _builder.append(".setAlternativeMode(");
-            String _firstLower_10 = StringExtensions.toFirstLower(m_1.getAlternativeMode().getName());
-            _builder.append(_firstLower_10, "\t\t\t");
-            _builder.append(");");
+            _builder.append(".setAlternativeModes(Arrays.asList(");
+            final Function1<Mode, String> _function_8 = (Mode it) -> {
+              return StringExtensions.toFirstLower(it.getName());
+            };
+            String _join_7 = IterableExtensions.join(ListExtensions.<Mode, String>map(m_1.getAlternativeModes(), _function_8), ", ");
+            _builder.append(_join_7, "\t\t\t");
+            _builder.append("));");
             _builder.newLineIfNotEmpty();
           }
         }
