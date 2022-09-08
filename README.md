@@ -1,42 +1,41 @@
 # Mode Switching Framework
+## Introduction
+In order to detect relevant reported security vulnerabilities and, in turn, to react appropriately, automation support is needed to reduce the manual effort required for these tasks. Our model-driven framework can be used for developing and managing multi-modal architectures, modes, and modes switches. If a vulnerability is detected, modes are switched automatically to overcome and reduce the risk until software vendors provide patches, and system administrators install them.
 
-In order to detect relevant security vulnerabilities and, in turn, to react to reported vulnerabilities appropriately, automation support is needed to reduce the manual effort required for these tasks. Our model-driven framework can be used for developing and managing multi-modal architectures, modes, and modes switches. If a vulnerability is detected, modes are switched automatically to overcome and reduce the risk until software vendors provide patches, and system administrators install them.
+To demonstrate the feasibility and potential benefits of our approach described in Paper "A Model-based Mode-Switching-Framework based on Security Vulnerability Scores", we performed a case study for web server security. We analyzed the time span of two years, from Feb. 2019 to Feb. 2021. We created a system configuration with commonly used components: Linux distribution [Debian 10 (Buster)](https://www.debian.org/releases/buster/) and two different implementations of popular web servers in its most recent version: [Apache2 (v2.4.38)](https://httpd.apache.org/docs/2.4/) and [nginx (v1.14.2)](https://nginx.org/en/CHANGES-1.14). Additionally running on the web server, [PHP (version 7.3)](https://www.php.net/releases/7_3_0.php) and FastCGI Process Manager are used to serve dynamic web content. Both web servers were selected because they provide similar functionality and work together with PHP. The web content was saved to the common /var/www directory, such that both web servers have access to it. The combination of a web server and a PHP interpreter is used by many common content management systems (CMSs) such as [WordPress](https://wordpress.org/download/), [Joomla](https://downloads.joomla.org/technical-requirements) or [Typo 3](https://get.typo3.org/). Typically, an instance of a CMS uses only a single (type of) web server. We investigate how mode switching can improve security and protect the system from reported vulnerabilities by applying our Mode Domain Specific Language (MDSL) and the accompanying mode switching framework.
 
-To demonstrate the feasibility and potential benefits of our approach described in Paper "A Model-based Mode-Switching-Framework based on Security Vulnerability Scores", we performed a case study for web server security. We analyzed the time span of two years, from Feb. 2019 to Feb. 2021. We created a system configuration with commonly used components: Linux distribution Debian 10 (Buster) and two different implementations of popular web servers in its most recent version: Apache2 (v2.4.38) and nginx (v1.14.2). Additionally running on the web server, PHP (version 7.3) and FastCGI Process Manager are used to serve dynamic web content. Both web servers were selected because they provide similar functionality and work together with PHP. The web content was saved to the common /var/www directory, such that both web servers have access to it. The combination of a web server and a PHP interpreter is used by many common content management systems (CMSs) such as [WordPress](https://wordpress.org/download/), [Joomla](https://downloads.joomla.org/technical-requirements) or [Typo 3](https://get.typo3.org/). Typically, an instance of a CMS uses only a single (type of) web server. We investigate how mode switching can improve security and protect the system from reported vulnerabilities by applying our Mode DSL and the accompanying mode switching framework.
-
-# Table of Contents
-1. [Mode Domain Specific Language (MDSL)](#mdsl)
+## Contents of the repository
+1. [Getting Started](#start)
 2. [Re-run the Web Server Case Study](#rerun)
-3. [Data Sources](#datasources)
-    1. [Vulnerabilities](#vulnerabilities)
-    2. [Patches](#patches)
+3. [Mode Domain Specific Language (MDSL)](https://github.com/rmtec/modeswitcher/tree/main/org.xtext.mdsl)
+4. [Reproduction package (CVEs and patches)](https://github.com/rmtec/modeswitcher/tree/main/reproduction%20package)
 
-# Mode Domain Specific Language (MDSL) <a name="mdsl"></a>
-We defined our MDSL with [XText](https://www.eclipse.org/Xtext/) in the project [org.xtext.mdsl](https://github.com/rmtec/modeswitcher/tree/main/org.xtext.mdsl) and the grammar in the file [org.xtext.mdsl/src/org/xtext/mdsl/Mdsl.xtext](https://github.com/rmtec/modeswitcher/blob/main/org.xtext.mdsl/src/org/xtext/mdsl/Mdsl.xtext).
+## Getting Started <a name="start"></a>
 
-Using the MDSL within the Eclipse Editor, files with the extension .MDSL will support syntax highlighting, code-completion and validation.
-The validation is defined in [org.xtext.mdsl/src/org/xtext/mdsl/validation/MdslValidator.java](https://github.com/rmtec/modeswitcher/blob/main/org.xtext.mdsl/src/org/xtext/mdsl/validation/MdslValidator.java).
-The Xtext parser automatically validates if the syntax conforms to the defined MDSL. For example, only defined modes are allowed in a system. In addition, we statically analyze the system description and show error messages if there are duplicates of mode names, priorities, or action names. If the Debian OS and the distribution are specified, we check if the software and the packages are within the official package list. If not, we display a warning. If there are no errors the [XTend](https://www.eclipse.org/xtend/) code generator [org.xtext.mdsl/src/org/xtext/mdsl/generator/MdslGenerator.xtend](https://github.com/rmtec/modeswitcher/blob/main/org.xtext.mdsl/src/org/xtext/mdsl/generator/MdslGenerator.xtend) is executed and creates the system configuration as Java Code from the .MDSL-File. Then we create the Java bytecode from it.
-
-When executing the framework on the command line, as shown in [Re-run the Web Server Case Study](#rerun), the file mode.mdsl in the same folder is validated and used to generate the system configuration, see [WebServerCaseStudy/src/ModeSwitcher.java](https://github.com/rmtec/modeswitcher/blob/main/WebServerCaseStudy/src/ModeSwitcher.java) function generateSystemConfigurationCreatorFileFromMdsl.
-
-# Re-run the Web Server Case Study <a name="rerun"></a>
-
-## Requirements for Simulating Mode Switching
+### Requirements
 * Installed Windows or Linux: e.g, Windows 10 or [Debian Buster](https://www.debian.org/releases/buster/debian-installer)
 * Installed [Java](https://java.com), at least 11.0.1 or newer, to run the Framework: `sudo apt install default-jdk`
 
-## Extended Requirements for Executing Mode Switching
-* Installed and configured Apache2: `sudo apt install apache2`
-* Installed and configured nginx: `sudo apt install nginx`
-* Installed and configured PHP with FastCGI: `sudo apt install php-fpm`
-
-## Download and Execute the Mode Switching Framework
-Please download the executeable Mode Switching Framework [WebServerCaseStudy-0.0.1-SNAPSHOT-jar-with-dependencies.jar](https://github.com/rmtec/modeswitcher/blob/main/WebServerCaseStudy-0.0.1-SNAPSHOT-jar-with-dependencies.jar) and execute the following command to start it:
+### Download and Execute the Mode Switching Framework
+To use the Mode Switching Framework please download the executeable Java jar-file [WebServerCaseStudy-0.0.1-SNAPSHOT-jar-with-dependencies.jar](https://github.com/rmtec/modeswitcher/blob/main/WebServerCaseStudy-0.0.1-SNAPSHOT-jar-with-dependencies.jar) and execute the following command to start it:
 
 `java -jar -Dexec.classpathScope=system WebServerCaseStudy-0.0.1-SNAPSHOT-jar-with-dependencies.jar`
 
-The operating system (OS) will be automatically detected. If the OS is supported, you can simulate and execute the action commands for the mode switch. Otherwise, you can only simulate the mode switching.
+### Typical workflow of the Mode Switching Framework
+* Automatic Operating System (OS) detection
+* Generation of the System Configuration from the MDSL-Defintion
+* Initialization with the System Configuration (Modes)
+* Fetch and update Common Vulnerabilitiy Enumerations (CVEs) and Patches
+* Calculate the current severity for each mode
+* Switch Modes based on a changed severity
+* Show several statistics like the used software, open vulnerabilities, and historic CVEs
+* Simulate/execute scenarios
+
+## Re-run the Web Server Case Study <a name="rerun"></a>
+For simulating the case study follow the steps in [Getting Started](#start), activate debugging with option `d` and start the scenario `s1` as shown in the following output examples. To execute mode switching (optional) following extend requirements are necessary:
+* Installed and configured Apache2: `sudo apt install apache2`
+* Installed and configured nginx: `sudo apt install nginx`
+* Installed and configured PHP with FastCGI: `sudo apt install php-fpm`
 
 ```
 ############################################################################
@@ -93,8 +92,6 @@ Start scenario:
 ############################################################################
 [? for menu]>
 ```
-
-Then activate debugging with Option `d` and start the scenario `s1`.
 
 ```
 [? for menu]> s1
@@ -160,24 +157,3 @@ Some services are equal and remain
 File modes.log saved
 Data serialized and saved to disk
 ```
-
-# Data Sources <a name="datasources"></a>
-The following links provide access to the vulnerabilities and patches of the used software packages Apache2, Nginx, and PHP.
-In addition, we uploaded the JSON data in the folder reproduction package in case the links are not working anymore.
-
-## Vulnerabilities <a name="vulnerabilities"></a>
-* **Apache2 2.4.38 (17 Jan 2019)** `cpe:2.3:a:apache:http_server:2.4.38` [HTML](https://nvd.nist.gov/vuln/search/results?adv_search=true&query=cpe:2.3:a:apache:http_server:2.4.38), [JSON](https://services.nvd.nist.gov/rest/json/cpes/1.0?cpeMatchString=cpe:2.3:a:apache:http_server:2.4.38:*:*:*:*:*:*:*&addOns=cves), [HTML Vendor](https://httpd.apache.org/security/vulnerabilities_24.html)
-
-* **Nginx (4 Dec 2018)** `cpe:2.3\:a:nginx:nginx:1.14.2`
-[HTML](https://nvd.nist.gov/vuln/search/results?adv_search=true&query=cpe:2.3:a:nginx:nginx:1.14.2), [JSON](https://services.nvd.nist.gov/rest/json/cpes/1.0?cpeMatchString=cpe:2.3:a:nginx:nginx:1.14.2:*:*:*:*:*:*:*&addOns=cves), [HTML Vendor Changelog](https://nginx.org/en/CHANGES-1.16)
-
-* **PHP 7.3.5 (2 May 2019)** `cpe:2.3\:a:php:php:7.3.5`
-[HTML](https://nvd.nist.gov/vuln/search/results?adv_search=true&query=cpe:2.3:a:php:php:7.3.5), [JSON](https://services.nvd.nist.gov/rest/json/cpes/1.0?cpeMatchString=cpe:2.3:a:php:php:7.3.5:*:*:*:*:*:*:*&addOns=cves), [HTML Vendor Changelog](https://www.php.net/ChangeLog-7.php#PHP_7_3), [HTML Vendor Bugs](https://bugs.php.net)
-
-## Patches <a name="patches"></a>
-Debian 10 (Buster): Linux Kernel 4.19, Release July 2019, Security support 2022, LTS 2024
-
-* **Debian Patches:** [HTML](https://security-tracker.debian.org/tracker/), [JSON](https://security-tracker.debian.org/tracker/data/json)
-* **Apache2:** [HTML](https://security-tracker.debian.org/tracker/source-package/apache2)
-* **Nginx:** [HTML](https://security-tracker.debian.org/tracker/source-package/nginx)
-* **PHP:** [HTML](https://security-tracker.debian.org/tracker/source-package/php7.3)
