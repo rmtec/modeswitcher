@@ -157,18 +157,19 @@ Some services are equal and remain
 File modes.log saved
 Data serialized and saved to disk
 ```
-## Contributing
-We appreciate all contributions to improve the Mode Switching Framework. Please contact us.
-
 ## Citation
 Please cite the following paper if you use this repository in your reseach.
 ```
 @misc{modeswitchingframework2022,
   author =       {Michael Riegler, Johannes Sametinger, Michael Vierhauser, Manuel Wimmer},
   title =        {Mode Switching Framework},
-  howpublished = {\url{[https://github.com/open-mmlab/mmskeleton](https://github.com/rmtec/modeswitcher)}},
+  howpublished = {\url{[https://github.com/rmtec/modeswitcher](https://github.com/rmtec/modeswitcher)}},
   year =         {2022}
 }
 ```
+
+## Contributing
+We appreciate all contributions to improve the Mode Switching Framework. Please contact us.
+
 ## Contact
 For any question, feel free to contact Michael Riegler: michael DOT riegler [@] jku.at
