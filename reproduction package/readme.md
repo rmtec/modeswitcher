@@ -1,6 +1,7 @@
 # Reproduction package
-The following links provide access to the vulnerabilities, patches and vendor information of the used software packages Apache2, Nginx, and PHP.
-In addition, we uploaded the JSON data from NVD and Debian in this folder in case the links are not working anymore: [nvd_nginx_nginx-1.14.2_cves.json](https://github.com/rmtec/modeswitcher/blob/main/reproduction%20package/nvd_nginx_nginx-1.14.2_cves.json), 
+The following links provide access to the vulnerabilities, patches, and vendor information of the used software packages Apache2, Nginx, and PHP.
+We retrieved the vulnerabilities from the [Natural Vulnerability Database](https://nvd.nist.gov) (NVD) with the Common Platform Enumeration (CPE) Parameter, and the patches from [Debian Security Tracker](https://security-tracker.debian.org). 
+We provide the raw results of our data sources in case the links are not working anymore: [nvd_nginx_nginx-1.14.2_cves.json](https://github.com/rmtec/modeswitcher/blob/main/reproduction%20package/nvd_nginx_nginx-1.14.2_cves.json), 
 [nvd_apache-http_server-2.4.38_cves.json](https://github.com/rmtec/modeswitcher/blob/main/reproduction%20package/nvd_apache-http_server-2.4.38_cves.json), [nvd_php_php-7.3.5_cves.json](https://github.com/rmtec/modeswitcher/blob/main/reproduction%20package/nvd_php_php-7.3.5_cves.json), 
 [debian-security-tracker-data.zip](https://github.com/rmtec/modeswitcher/blob/main/reproduction%20package/debian-security-tracker-data.zip).
 
