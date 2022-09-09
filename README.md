@@ -4,6 +4,18 @@ In order to detect relevant reported security vulnerabilities and, in turn, to r
 
 To demonstrate the feasibility and potential benefits of our approach described in Paper "A Model-based Mode-Switching-Framework based on Security Vulnerability Scores", we performed a case study for web server security. We analyzed the time span of two years, from Feb. 2019 to Feb. 2021. We created a system configuration with commonly used components: Linux distribution [Debian 10 (Buster)](https://www.debian.org/releases/buster/) and two different implementations of popular web servers in its most recent version: [Apache2 (v2.4.38)](https://httpd.apache.org/docs/2.4/) and [nginx (v1.14.2)](https://nginx.org/en/CHANGES-1.14). Additionally running on the web server, [PHP (version 7.3)](https://www.php.net/releases/7_3_0.php) and FastCGI Process Manager are used to serve dynamic web content. Both web servers were selected because they provide similar functionality and work together with PHP. The web content was saved to the common /var/www directory, such that both web servers have access to it. The combination of a web server and a PHP interpreter is used by many common content management systems (CMSs) such as [WordPress](https://wordpress.org/download/), [Joomla](https://downloads.joomla.org/technical-requirements) or [Typo 3](https://get.typo3.org/). Typically, an instance of a CMS uses only a single (type of) web server. We investigate how mode switching can improve security and protect the system from reported vulnerabilities by applying our Mode Domain Specific Language (MDSL) and the accompanying mode switching framework.
 
+## Features
+* Define modes with our Mode Domain Specific Language (MDSL)
+* Automatic Operating System (OS) detection
+* Generation of the System Configuration from the MDSL-Defintion
+* Initialization with the System Configuration (modes)
+* Fetch and update Common Vulnerabilitiy Enumerations (CVEs) and Patches
+* Calculate the current severity for each mode
+* Automatic mode switch based on a changed severity
+* Optional manual mode switch
+* Show several statistics like the used software, open vulnerabilities, and historic CVEs
+* Simulate/execute scenarios
+
 ## Contents of the repository
 1. [Getting Started](#start)
 2. [Re-run the Web Server Case Study](#rerun)
@@ -21,21 +33,7 @@ To use the Mode Switching Framework please download the executeable Java jar-fil
 
 `java -jar -Dexec.classpathScope=system WebServerCaseStudy-0.0.1-SNAPSHOT-jar-with-dependencies.jar`
 
-### Typical workflow of the Mode Switching Framework
-* Automatic Operating System (OS) detection
-* Generation of the System Configuration from the MDSL-Defintion
-* Initialization with the System Configuration (Modes)
-* Fetch and update Common Vulnerabilitiy Enumerations (CVEs) and Patches
-* Calculate the current severity for each mode
-* Switch Modes based on a changed severity
-* Show several statistics like the used software, open vulnerabilities, and historic CVEs
-* Simulate/execute scenarios
-
-## Re-run the Web Server Case Study <a name="rerun"></a>
-For simulating the case study follow the steps in [Getting Started](#start), activate debugging with option `d` and start the scenario `s1` as shown in the following output examples. To execute mode switching (optional) following extend requirements are necessary:
-* Installed and configured Apache2: `sudo apt install apache2`
-* Installed and configured nginx: `sudo apt install nginx`
-* Installed and configured PHP with FastCGI: `sudo apt install php-fpm`
+Based on your automatically detected operating system you can simulate and execute mode switches. After the System Configuration is generated from the MDSL-Defintion (see [Details](https://github.com/rmtec/modeswitcher/tree/main/org.xtext.mdsl)) the system is initialized and you can choose between several options and start scenarios.
 
 ```
 ############################################################################
@@ -92,6 +90,12 @@ Start scenario:
 ############################################################################
 [? for menu]>
 ```
+
+## Re-run the Web Server Case Study <a name="rerun"></a>
+For simulating the case study follow the steps in [Getting Started](#start), activate debugging with option `d` and start the scenario `s1` as shown in the following output examples. To execute mode switching (optional) following extend requirements are necessary:
+* Installed and configured Apache2: `sudo apt install apache2`
+* Installed and configured nginx: `sudo apt install nginx`
+* Installed and configured PHP with FastCGI: `sudo apt install php-fpm`
 
 ```
 [? for menu]> s1
