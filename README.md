@@ -256,8 +256,23 @@ In the following, we describe the menu options of our framework in more detail a
   Score      493,2   6,6   2,1 CVE-2020-13938   9,8 CVE-2019-11043 
   Days4Patch 520     9,0  -4   CVE-2021-23017  29   CVE-2021-21705 
   ```
-* [vsps] Show statistics about vulnerabilities  (CVEs) per software
-* [h] Show the mode switching history of the system
+* [vsps] Similar to [vs], this table show the vulnerability statistics per software
+  ```
+  Vulnerabilities statistics per software
+  ----------------------------------------------------------------------------
+  cpe:/:nginx:nginx:1.14.2 Vulnerabilty Statistic
+  ----------------------------------------------------------------------------
+  5 Vulnerabilities: 0 active, 5 patched
+  Type       Total   Avg   Min                 Max
+  Score       36,3   7,3   5,3 CVE-2019-20372   9,5 CVE-2021-23017 
+  Days4Patch  -2     0,0  -4   CVE-2021-23017   2   CVE-2019-20372 
+  ```
+* [h] Show the historic log of the system. For example, when vulnerabilities were refreshed and how long it took.
+  ```
+  2023-02-02 15:53:46;refreshVulnerabilities;796007400
+  2023-02-02 15:55:30;refreshPatches;780302700
+  2023-02-02 15:57:46;apacheWithPhp;0.0;nginxWithPhp;0.0;0;0
+  ```
 * [e] Enable or disable modes. Disabled modes are not considered during automatic mode switching [ams].
 * [si] Enable or disable the simulation of another operating system (e.g., Linux).
 * [ex] Enable the real execution of the system commands to switch modes or show the commands only (disabled).
@@ -266,12 +281,20 @@ In the following, we describe the menu options of our framework in more detail a
 
 Scenarios:
 * [s1] Start scenario vulnerability time series, see [Re-run the Web Server Case Study](#rerun).
-* [s2] Start scenario all modes are disabled
-* [s3] Start scenario all software is disabled
-* [s4] Start scenario random mode order
-* [s5] Start scenario mode switch duration
+* [s2] Start scenario all modes are disabled, to manually enable needed modes.
+* [s3] Start scenario all software is disabled, to manually 
+* [s4] Start scenario random mode order, to perform evaluations
+* [s5] Start scenario mode switch duration, to perform evaluations
 
 ## Command line options <a name="cmdoptions"></a>
+The framework supports the following options per command line. Details about the funtionality, see [Menu Options](#menuoptions).
+```
+modeswitcher init					         initalize the system (default mode)
+modeswitcher update				         updates vulns and patches (auto mode switch)
+modeswitcher update [cves|patches] updates vulns or patches (auto mode switch)
+modeswitcher to MODE		           manual mode switch to MODE
+modeswitcher scenario [s1-s5]		   start screnario S1-S5
+```
 
 ## Citation
 Please cite the following paper if you use this repository in your reseach.
