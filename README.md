@@ -166,55 +166,96 @@ Data serialized and saved to disk
 ## Menu options <a name="menuoptions"></a>
 In the following, we describe the menu options of our framework in more detail and show some example outputs:
 * [i] Initialize - Reloads the data files from the hard drive and executes an automatic mode switch.
-* [m] Show modes - Show the current status of the system. In the example the current mode is nginxWithPhp.
-```
-Current mode >> nginxWithPhp
-----------------------------------------------------------------------------
-Score        Avg      Prio  #CVE Enabled Name                    #Cnt/Starts
-  0,0/  0,0  0,0/ 0,0    1  0/ 0    true apacheWithPhp              3/27
-  0,0/  0,0  0,0/ 0,0    2  0/ 0    true nginxWithPhp               0/27
-  0,0/  0,0  0,0/ 0,0    3  0/ 0   false apache                     0/ 0
-  0,0/  0,0  0,0/ 0,0    4  0/ 0    true nginxOnly                  0/ 0
-----------------------------------------------------------------------------
-Suggested next mode >> apacheWithPhp
-```
+* [m] Show the current status of the system and information about the modes in a table. 
+  In the example the current mode is nginxWithPhp. For calculating the next suggested next mode, we order the modes ascending by the total severity score of open vulnerabilties, ascending by the average severity score of open vulnerabilities and ascending by the mode priority. Thereby, apacheWithPhp was suggested, because it had the lowest values.
+  ```
+  Current mode >> nginxWithPhp
+  ----------------------------------------------------------------------------
+  Score        Avg      Prio  #CVE Enabled Name                    #Cnt/Starts
+    0,0/318,1  0,0/ 7,1    1  0/45    true apacheWithPhp              0/ 2
+    0,0/207,2  0,0/ 7,1    2  0/29    true nginxWithPhp              14/ 6
+    0,0/147,2  0,0/ 7,0    3  0/21    true apache                     0/ 4
+    0,0/ 36,3  0,0/ 7,3    4  0/ 5    true nginxOnly                 18/ 4
+  ----------------------------------------------------------------------------
+  Suggested next mode >> apacheWithPhp
+  ```
+  The table columns are defined as follows:
+  -   Score: Total severity score of open vulnerabilties / Total severity score of all vulnerabilities
+  -   Avg: Average severity score of open vulnerabilities / Average severity score of all vulnerabilities
+  -   Prio: Priority of the mode (definied in the MDSL definition)
+  -   #CVE: Number of the open vulnerabilities / Number of all vulnerabilities
+  -   Enabled: State of the mode (enabled/disabled)
+  -   Name: Name of the mode (definied in the MDSL definition)
+  -   #Cnt: Number of suggested switches to that mode ()
+  -   Starts: Number of real switches to that mode
 * [u] Update CVEs, Patches and automatically switch the mode. For details see [uv], [up] and [ams].
 * [uv] Update CVEs for the used software versions from the [National Vulnerability Database](https://nvd.nist.gov/) (NVD).
-```
-refreshVulnerabilities
-----------------------------------------------------------------------------
-refreshVulnerabilitiesPerProduct nginx nginx 1.14.2
-refreshVulnerabilitiesPerProduct apache http_server 2.4.38
-Vulnerabilities for cpe:2.3:a:apache:http_server:2.4.38:*:*:*:*:*:*:*
-WARNING: CVE-2007-4723 was ignored, because it was published 2007 before the release year of the distribution
-[CVE-2020-11993] already known, nothing changed!
-2021-06-10 cpe:/:apache:http_server:2.4.38 [CVE-2020-13938] new vulnerability with score:2.1
-```
+  ```
+  refreshVulnerabilities
+  ----------------------------------------------------------------------------
+  refreshVulnerabilitiesPerProduct apache http_server 2.4.38
+  Vulnerabilities for cpe:2.3:a:apache:http_server:2.4.38:*:*:*:*:*:*:*
+  WARNING: CVE-2007-4723 was ignored, because it was published 2007 before the release year of the distribution
+  [CVE-2020-11993] already known, nothing changed!
+  2021-06-10 cpe:/:apache:http_server:2.4.38 [CVE-2020-13938] new vulnerability with score:2.1
+  ```
 * [up] Update Patches for the used software versions (specific for each operating system distribution).
-```
-refreshPatches
-----------------------------------------------------------------------------
-Loading Data from Debian Security Tracker
-Package nginx found
-WARNING: CVE-2009-4487 is open, but considered as unimportant
-WARNING: Could not add patch! CVE-2018-16845 not found
-[CVE-2019-9516] already resolved!
-CVE-2021-3618 is open
-```
-* [ams] Automatic mode switch based on the total vulnerability score and the priority.
+  ```
+  refreshPatches
+  ----------------------------------------------------------------------------
+  Loading Data from Debian Security Tracker
+  Package nginx found
+  WARNING: CVE-2009-4487 is open, but considered as unimportant
+  WARNING: Could not add patch! CVE-2018-16845 not found
+  [CVE-2019-9516] already resolved!
+  CVE-2021-3618 is open
+  ```
+* [ams] Automatic mode switch based on the total severity score of open vulnerabilties, the average severity score of open vulnerabilities and by the mode priority
 * [mms] Manual mode switch based on the decision of the operator
 * [s] Show used software of the modes
-```
-Used Software
-----------------------------------------------------------------------------
-key: cpe:/:nginx:nginx:1.14.2 value: cpe:/:nginx:nginx:1.14.2
-key: cpe:/:apache:http_server:2.4.38 value: cpe:/:apache:http_server:2.4.38
-key: cpe:/:php:php:7.3.5 value: cpe:/:php:php:7.3.5
-```
-* [v] Show all vulnerabilities (CVEs) of the used software
-* [vo] Show open vulnerabilities (CVEs) with no patches from the operating system distribution
-* [vps] Show vulnerabilities (CVEs) per software
-* [vs] Show statistics about vulnerabilities (CVEs) 
+  ```
+  Used Software
+  ----------------------------------------------------------------------------
+  key: cpe:/:nginx:nginx:1.14.2 value: cpe:/:nginx:nginx:1.14.2
+  key: cpe:/:apache:http_server:2.4.38 value: cpe:/:apache:http_server:2.4.38
+  key: cpe:/:php:php:7.3.5 value: cpe:/:php:php:7.3.5
+  ```
+* [v] Show all vulnerabilities (CVEs) with the published date, the CVE number, the severity score, the resolved date, and the duration in days between the two dates
+  Vulnerabilities
+  ----------------------------------------------------------------------------
+  Date       CVE            Score Resolved   Duration
+  2019-04-01 CVE-2019-0196    5,3 2019-04-07        6
+  2019-04-01 CVE-2019-0197    4,2 2019-04-07        6
+  2019-04-01 CVE-2019-0211    7,8 2019-04-07        6
+* [vo] In this table we show only open vulnerabilities (CVEs) with no patches from the operating system distribution. Table structure, see [v].
+  ```
+  Vulnerabilities
+  ----------------------------------------------------------------------------
+  Date       CVE            Score Resolved   Duration
+  2019-04-01 CVE-2019-0196    5,3 2019-04-07        6
+  2019-04-01 CVE-2019-0197    4,2 2019-04-07        6
+  2019-04-01 CVE-2019-0211    7,8 2019-04-07        6
+  ```
+* [vps] In this table we show all vulnerabilities (CVEs) per software. Table structure, see [v].
+  ```
+  Vulnerabilities per software
+  ############################################################################
+  cpe:/:nginx:nginx:1.14.2 Vulnerabilities
+  ----------------------------------------------------------------------------
+  Date       CVE            Score Resolved   Duration
+  2019-08-13 CVE-2019-9511    7,5 2019-08-13        0
+  2019-08-13 CVE-2019-9513    7,5 2019-08-13        0
+  2019-08-13 CVE-2019-9516    6,5 2019-08-13        0
+  ```
+* [vs] Show the overall vulnerability statistics. In the following example, we had 75 vulnerabilities in total, 19 are open/active and 56 have been patched. In the table we show statistics about the severity score and the days until a vulnerability was pached. The first row shows the total severity score sum of all vulnerabilties of 493.2, the average severity score of all vulnerabilities of 6.6, the minimum severity score of 2.1 from CVE-2020-13938, and the maximum severity score of 9.8 from CVE-2019-11043. The second row shows the total duration in days of all vulnerabilities to fix them. On average the fix took 9 days, the fastest fix of CVE-2021-23017 took -4 days, and the slowest fix of CVE-2021-21705 took 29 days.
+  ```
+  Overall Vulnerabilty Statistic
+  ----------------------------------------------------------------------------
+  75 Vulnerabilities: 19 active, 56 patched
+  Type       Total   Avg   Min                 Max
+  Score      493,2   6,6   2,1 CVE-2020-13938   9,8 CVE-2019-11043 
+  Days4Patch 520     9,0  -4   CVE-2021-23017  29   CVE-2021-21705 
+  ```
 * [vsps] Show statistics about vulnerabilities  (CVEs) per software
 * [h] Show the mode switching history of the system
 * [e] Enable or disable modes. Disabled modes are not considered during automatic mode switching [ams].
