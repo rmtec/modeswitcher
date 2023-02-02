@@ -19,8 +19,10 @@ To demonstrate the feasibility and potential benefits of our approach described 
 ## Contents of the repository
 1. [Getting Started](#start)
 2. [Re-run the Web Server Case Study](#rerun)
-3. [Mode Domain Specific Language (MDSL)](https://github.com/rmtec/modeswitcher/tree/main/org.xtext.mdsl)
-4. [Reproduction package (CVEs and patches)](https://github.com/rmtec/modeswitcher/tree/main/reproduction%20package)
+3. [Menu Options](#menuoptions)
+4. [Command Line Options](#cmdoptions)
+5. [Mode Domain Specific Language (MDSL)](https://github.com/rmtec/modeswitcher/tree/main/org.xtext.mdsl)
+6. [Reproduction package (CVEs and patches)](https://github.com/rmtec/modeswitcher/tree/main/reproduction%20package)
 
 ## Getting Started <a name="start"></a>
 
@@ -210,9 +212,9 @@ In the following, we describe the menu options of our framework in more detail a
   [CVE-2019-9516] already resolved!
   CVE-2021-3618 is open
   ```
-* [ams] Automatic mode switch based on the total severity score of open vulnerabilties, the average severity score of open vulnerabilities and by the mode priority
-* [mms] Manual mode switch based on the decision of the operator
-* [s] Show used software of the modes
+* [ams] Automatic mode switch based on the total severity score of open vulnerabilties, the average severity score of open vulnerabilities and by the mode priority.
+* [mms] Manual mode switch based on the decision of the operator.
+* [s] Show used software of the modes.
   ```
   Used Software
   ----------------------------------------------------------------------------
@@ -220,13 +222,15 @@ In the following, we describe the menu options of our framework in more detail a
   key: cpe:/:apache:http_server:2.4.38 value: cpe:/:apache:http_server:2.4.38
   key: cpe:/:php:php:7.3.5 value: cpe:/:php:php:7.3.5
   ```
-* [v] Show all vulnerabilities (CVEs) with the published date, the CVE number, the severity score, the resolved date, and the duration in days between the two dates
+* [v] Show all vulnerabilities (CVEs) with the published date, the CVE number, the severity score, the resolved date, and the duration in days between the two dates.
+  ```
   Vulnerabilities
   ----------------------------------------------------------------------------
   Date       CVE            Score Resolved   Duration
   2019-04-01 CVE-2019-0196    5,3 2019-04-07        6
   2019-04-01 CVE-2019-0197    4,2 2019-04-07        6
   2019-04-01 CVE-2019-0211    7,8 2019-04-07        6
+  ```
 * [vo] In this table we show only open vulnerabilities (CVEs) with no patches from the operating system distribution. Table structure, see [v].
   ```
   Vulnerabilities
@@ -279,7 +283,7 @@ In the following, we describe the menu options of our framework in more detail a
 * [d] Enable debugging for a pause between mode switches (useful for the scenarios).
 * [q] Quit the software.
 
-Scenarios:
+Additionally we support the following scenarios with the framwork:
 * [s1] Start scenario vulnerability time series, see [Re-run the Web Server Case Study](#rerun).
 * [s2] Start scenario all modes are disabled, to manually enable needed modes.
 * [s3] Start scenario all software is disabled, to manually 
@@ -289,11 +293,11 @@ Scenarios:
 ## Command line options <a name="cmdoptions"></a>
 The framework supports the following options per command line. Details about the funtionality, see [Menu Options](#menuoptions).
 ```
-modeswitcher init					         initalize the system (default mode)
-modeswitcher update				         updates vulns and patches (auto mode switch)
+modeswitcher init					initalize the system (default mode)
+modeswitcher update				updates vulns and patches (auto mode switch)
 modeswitcher update [cves|patches] updates vulns or patches (auto mode switch)
-modeswitcher to MODE		           manual mode switch to MODE
-modeswitcher scenario [s1-s5]		   start screnario S1-S5
+modeswitcher to MODE				manual mode switch to MODE
+modeswitcher scenario [s1-s5]		start screnario S1-S5
 ```
 
 ## Citation
