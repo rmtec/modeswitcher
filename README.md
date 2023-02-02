@@ -1,19 +1,19 @@
 # Mode Switching Framework
 ## Introduction
-In order to detect relevant reported security vulnerabilities and, in turn, to react appropriately, automation support is needed to reduce the manual effort required for these tasks. Our model-driven framework can be used for developing and managing multi-modal architectures, modes, and modes switches. If a vulnerability is detected, modes are switched automatically to overcome and reduce the risk until software vendors provide patches, and system administrators install them.
+In order to detect relevant reported security vulnerabilities and, in turn, to react appropriately, automation support is needed to reduce the manual effort required for these tasks. Our model-driven framework can be used for developing and managing multi-modal architectures. We support switching between modes with specific system configurations, which refer to specific software components, features, and settings. Each mode faces different security risks over time. If a vulnerability is detected, we automatically switch modes to overcome and reduce the risk until software vendors provide patches and system administrators install them.
 
-To demonstrate the feasibility and potential benefits of our approach described in Paper "A Model-based Mode-Switching-Framework based on Security Vulnerability Scores", we performed a case study for web server security. We analyzed the time span of two years, from Feb. 2019 to Feb. 2021. We created a system configuration with commonly used components: Linux distribution [Debian 10 (Buster)](https://www.debian.org/releases/buster/) and two different implementations of popular web servers in its most recent version: [Apache2 (v2.4.38)](https://httpd.apache.org/docs/2.4/) and [nginx (v1.14.2)](https://nginx.org/en/CHANGES-1.14). Additionally running on the web server, [PHP (version 7.3)](https://www.php.net/releases/7_3_0.php) and FastCGI Process Manager are used to serve dynamic web content. Both web servers were selected because they provide similar functionality and work together with PHP. The web content was saved to the common /var/www directory, such that both web servers have access to it. The combination of a web server and a PHP interpreter is used by many common content management systems (CMSs) such as [WordPress](https://wordpress.org/download/), [Joomla](https://downloads.joomla.org/technical-requirements) or [Typo 3](https://get.typo3.org/). Typically, an instance of a CMS uses only a single (type of) web server. We investigate how mode switching can improve security and protect the system from reported vulnerabilities by applying our Mode Domain Specific Language (MDSL) and the accompanying mode switching framework.
+To demonstrate the feasibility and potential benefits of our approach described in Paper "A Model-based Mode-Switching-Framework based on Security Vulnerability Scores", we performed a case study for web server security. We analyzed the time span of two years, from Feb. 2019 to Feb. 2021. We created a system configuration with commonly used components: Linux distribution [Debian 10 (Buster)](https://www.debian.org/releases/buster/) and two different implementations of popular web servers in its most recent version: [Apache2 (v2.4.38)](https://httpd.apache.org/docs/2.4/) and [nginx (v1.14.2)](https://nginx.org/en/CHANGES-1.14). Additionally running on the web server, [PHP (version 7.3)](https://www.php.net/releases/7_3_0.php) and FastCGI Process Manager are used to serve dynamic web content. Both web servers were selected because they provide similar functionality and work together with PHP. The web content was saved to the common /var/www directory so both web servers could access it. The combination of a web server and a PHP interpreter is used by many common content management systems (CMSs) such as [WordPress](https://wordpress.org/download/), [Joomla](https://downloads.joomla.org/technical-requirements) or [Typo 3](https://get.typo3.org/). Typically, an instance of a CMS uses only a single (type of) web server. We investigate how mode switching can improve security and protect the system from reported vulnerabilities by applying our Mode Domain Specific Language (MDSL) and the accompanying mode switching framework.
 
 ## Features
 * Define modes with our Mode Domain Specific Language (MDSL)
 * Automatic Operating System (OS) detection
 * Generation of the System Configuration from the MDSL-Defintion
 * Initialization with the System Configuration (modes)
-* Fetch and update Common Vulnerabilitiy Enumerations (CVEs) and Patches
+* Fetch and update [Common Vulnerabilitiy Enumerations](cve.mitre.org) (CVEs) and Patches
 * Calculate the current severity for each mode
 * Automatic mode switch based on a changed severity
 * Optional manual mode switch
-* Show several statistics like the used software, open vulnerabilities, and historic CVEs
+* Show several statistics like the used software, open vulnerabilities, and historic [CVEs](cve.mitre.org)
 * Simulate/execute scenarios
 
 ## Contents of the repository
@@ -25,7 +25,7 @@ To demonstrate the feasibility and potential benefits of our approach described 
 ## Getting Started <a name="start"></a>
 
 ### Requirements
-* Installed Windows or Linux: e.g, Windows 10 or [Debian Buster](https://www.debian.org/releases/buster/debian-installer)
+* Installed Windows or Linux: e.g, Windows 10 or [Debian Buster](https://www.debian.org/releases/buster/debian-installer) (Mac OS may work, but was not tested)
 * Installed [Java](https://java.com), at least 11.0.1 or newer, to run the Framework: `sudo apt install default-jdk`
 
 ### Download and Execute the Mode Switching Framework
@@ -33,7 +33,7 @@ To use the Mode Switching Framework please download the executeable Java jar-fil
 
 `java -jar -Dexec.classpathScope=system WebServerCaseStudy-0.0.1-SNAPSHOT-jar-with-dependencies.jar`
 
-Based on your automatically detected operating system you can simulate and execute mode switches. After the System Configuration is generated from the MDSL-Defintion (see [Details](https://github.com/rmtec/modeswitcher/tree/main/org.xtext.mdsl)) the system is initialized and you can choose between several options and start scenarios.
+Based on your automatically detected operating system you can simulate and execute mode switches. After the System Configuration is generated from the MDSL-Defintion (see [Details](https://github.com/rmtec/modeswitcher/tree/main/org.xtext.mdsl)) the system is initialized.
 
 ```
 ############################################################################
@@ -56,6 +56,7 @@ Regenerate system configuration from MDSL-Defintion not neccessary
 Possible modes:[[apache, apacheWithPhp, nginxOnly, nginxWithPhp]]
 ```
 
+You can choose between several options and start pre-defined scenarios in the menu.
 ```
 ############################################################################
 What do you want to do? Choose an option:
@@ -161,6 +162,76 @@ Some services are equal and remain
 File modes.log saved
 Data serialized and saved to disk
 ```
+
+## Menu options <a name="menuoptions"></a>
+In the following, we describe the menu options of our framework in more detail and show some example outputs:
+* [i] Initialize - Reloads the data files from the hard drive and executes an automatic mode switch.
+* [m] Show modes - Show the current status of the system. In the example the current mode is nginxWithPhp.
+```
+Current mode >> nginxWithPhp
+----------------------------------------------------------------------------
+Score        Avg      Prio  #CVE Enabled Name                    #Cnt/Starts
+  0,0/  0,0  0,0/ 0,0    1  0/ 0    true apacheWithPhp              3/27
+  0,0/  0,0  0,0/ 0,0    2  0/ 0    true nginxWithPhp               0/27
+  0,0/  0,0  0,0/ 0,0    3  0/ 0   false apache                     0/ 0
+  0,0/  0,0  0,0/ 0,0    4  0/ 0    true nginxOnly                  0/ 0
+----------------------------------------------------------------------------
+Suggested next mode >> apacheWithPhp
+```
+* [u] Update CVEs, Patches and automatically switch the mode. For details see [uv], [up] and [ams].
+* [uv] Update CVEs for the used software versions from the [National Vulnerability Database](https://nvd.nist.gov/) (NVD).
+```
+refreshVulnerabilities
+----------------------------------------------------------------------------
+refreshVulnerabilitiesPerProduct nginx nginx 1.14.2
+refreshVulnerabilitiesPerProduct apache http_server 2.4.38
+Vulnerabilities for cpe:2.3:a:apache:http_server:2.4.38:*:*:*:*:*:*:*
+WARNING: CVE-2007-4723 was ignored, because it was published 2007 before the release year of the distribution
+[CVE-2020-11993] already known, nothing changed!
+2021-06-10 cpe:/:apache:http_server:2.4.38 [CVE-2020-13938] new vulnerability with score:2.1
+```
+* [up] Update Patches for the used software versions (specific for each operating system distribution).
+```
+refreshPatches
+----------------------------------------------------------------------------
+Loading Data from Debian Security Tracker
+Package nginx found
+WARNING: CVE-2009-4487 is open, but considered as unimportant
+WARNING: Could not add patch! CVE-2018-16845 not found
+[CVE-2019-9516] already resolved!
+CVE-2021-3618 is open
+```
+* [ams] Automatic mode switch based on the total vulnerability score and the priority.
+* [mms] Manual mode switch based on the decision of the operator
+* [s] Show used software of the modes
+```
+Used Software
+----------------------------------------------------------------------------
+key: cpe:/:nginx:nginx:1.14.2 value: cpe:/:nginx:nginx:1.14.2
+key: cpe:/:apache:http_server:2.4.38 value: cpe:/:apache:http_server:2.4.38
+key: cpe:/:php:php:7.3.5 value: cpe:/:php:php:7.3.5
+```
+* [v] Show all vulnerabilities (CVEs) of the used software
+* [vo] Show open vulnerabilities (CVEs) with no patches from the operating system distribution
+* [vps] Show vulnerabilities (CVEs) per software
+* [vs] Show statistics about vulnerabilities (CVEs) 
+* [vsps] Show statistics about vulnerabilities  (CVEs) per software
+* [h] Show the mode switching history of the system
+* [e] Enable or disable modes. Disabled modes are not considered during automatic mode switching [ams].
+* [si] Enable or disable the simulation of another operating system (e.g., Linux).
+* [ex] Enable the real execution of the system commands to switch modes or show the commands only (disabled).
+* [d] Enable debugging for a pause between mode switches (useful for the scenarios).
+* [q] Quit the software.
+
+Scenarios:
+* [s1] Start scenario vulnerability time series, see [Re-run the Web Server Case Study](#rerun).
+* [s2] Start scenario all modes are disabled
+* [s3] Start scenario all software is disabled
+* [s4] Start scenario random mode order
+* [s5] Start scenario mode switch duration
+
+## Command line options <a name="cmdoptions"></a>
+
 ## Citation
 Please cite the following paper if you use this repository in your reseach.
 ```
