@@ -11,9 +11,9 @@ To demonstrate the feasibility and potential benefits of our approach described 
 ## Features
 * Define modes with our Mode Domain Specific Language (MDSL)
 * Automatic Operating System (OS) detection
-* Generation of the System Configuration from the MDSL-Defintion
+* Generation of the System Configuration from the MDSL-Definition
 * Initialization with the System Configuration (modes)
-* Fetch and update [Common Vulnerabilitiy Enumerations](cve.mitre.org) (CVEs) and Patches
+* Fetch and update [Common Vulnerability Enumerations](cve.mitre.org) (CVEs) and Patches
 * Calculate the current severity for each mode
 * Automatic mode switch based on a changed severity
 * Optional manual mode switch
@@ -31,15 +31,15 @@ To demonstrate the feasibility and potential benefits of our approach described 
 ## Getting Started <a name="start"></a>
 
 ### Requirements
-* Installed Windows or Linux: e.g, Windows 10 or [Debian Buster](https://www.debian.org/releases/buster/debian-installer) (Mac OS may work, but was not tested)
-* Installed [Java](https://java.com), at least 11.0.1 or newer, to run the Framework: `sudo apt install default-jdk`
+* Installed Windows or Linux: e.g., Windows 10 or [Debian Buster](https://www.debian.org/releases/buster/debian-installer) (Mac OS may work, but was not tested)
+* Installed [Java](https://java.com), at least 11.0.1 or newer, to run the framework: `sudo apt install default-jdk`
 
 ### Download and Execute the Mode Switching Framework
-To use the Mode Switching Framework please download the executeable Java jar-file [WebServerCaseStudy-0.0.1-SNAPSHOT-jar-with-dependencies.jar](https://github.com/rmtec/modeswitcher/blob/main/WebServerCaseStudy-0.0.1-SNAPSHOT-jar-with-dependencies.jar) and execute the following command to start it:
+To use the Mode Switching Framework please download the executable Java jar-file [WebServerCaseStudy-0.0.1-SNAPSHOT-jar-with-dependencies.jar](https://github.com/rmtec/modeswitcher/blob/main/WebServerCaseStudy-0.0.1-SNAPSHOT-jar-with-dependencies.jar) and execute the following command to start it:
 
 `java -jar -Dexec.classpathScope=system WebServerCaseStudy-0.0.1-SNAPSHOT-jar-with-dependencies.jar`
 
-Based on your automatically detected operating system you can simulate and execute mode switches. After the System Configuration is generated from the MDSL-Defintion (see [Details](https://github.com/rmtec/modeswitcher/tree/main/org.xtext.mdsl)) the system is initialized.
+You can simulate and execute mode switches based on your automatically detected operating system. After the System Configuration is generated from the MDSL-Defintion (see [Details](https://github.com/rmtec/modeswitcher/tree/main/org.xtext.mdsl)), the system is initialized.
 
 ```
 ############################################################################
@@ -99,7 +99,7 @@ Start scenario:
 ```
 
 ## Re-run the Web Server Case Study <a name="rerun"></a>
-For simulating the case study follow the steps in [Getting Started](#start), activate debugging with option `d` and start the scenario `s1` as shown in the following output examples. To execute mode switching (optional) following extend requirements are necessary:
+For simulating the case study, follow the steps in [Getting Started](#start), activate debugging with option `d`, and start scenario `s1`, as shown in the following output examples. To execute mode switching (optional) following extended requirements are necessary:
 * Installed and configured Apache2: `sudo apt install apache2`
 * Installed and configured nginx: `sudo apt install nginx`
 * Installed and configured PHP with FastCGI: `sudo apt install php-fpm`
@@ -172,8 +172,8 @@ Data serialized and saved to disk
 ## Menu options <a name="menuoptions"></a>
 In the following, we describe the menu options of our framework in more detail and show some example outputs:
 * [i] Initialize - Reloads the data files from the hard drive and executes an automatic mode switch.
-* [m] Show the current status of the system and information about the modes in a table. 
-  In the example the current mode is nginxWithPhp. For calculating the next suggested next mode, we order the modes ascending by the total severity score of open vulnerabilties, ascending by the average severity score of open vulnerabilities and ascending by the mode priority. Thereby, apacheWithPhp was suggested, because it had the lowest values.
+* [m] Show the system's current status and information about the modes in a table.
+  In the example, the current mode is nginxWithPhp. To calculate the next suggested mode, we order the modes ascending by the total severity score of open vulnerabilities, the average severity score of open vulnerabilities, and the mode priority. Thereby, apacheWithPhp was suggested because it had the lowest values.
   ```
   Current mode >> nginxWithPhp
   ----------------------------------------------------------------------------
@@ -186,15 +186,15 @@ In the following, we describe the menu options of our framework in more detail a
   Suggested next mode >> apacheWithPhp
   ```
   The table columns are defined as follows:
-  -   Score: Total severity score of open vulnerabilties / Total severity score of all vulnerabilities
+  -   Score: Total severity score of open vulnerabilities / Total severity score of all vulnerabilities
   -   Avg: Average severity score of open vulnerabilities / Average severity score of all vulnerabilities
-  -   Prio: Priority of the mode (definied in the MDSL definition)
-  -   #CVE: Number of the open vulnerabilities / Number of all vulnerabilities
+  -   Prio: Priority of the mode (specified in the MDSL definition)
+  -   #CVE: Number of open vulnerabilities / Number of all vulnerabilities
   -   Enabled: State of the mode (enabled/disabled)
-  -   Name: Name of the mode (definied in the MDSL definition)
+  -   Name: Name of the mode (specified in the MDSL definition)
   -   #Cnt: Number of suggested switches to that mode ()
   -   Starts: Number of real switches to that mode
-* [u] Update CVEs, Patches and automatically switch the mode. For details see [uv], [up] and [ams].
+* [u] Update CVEs, Patches and automatically switch the mode. For details, see [uv], [up], and [ams].
 * [uv] Update CVEs for the used software versions from the [National Vulnerability Database](https://nvd.nist.gov/) (NVD).
   ```
   refreshVulnerabilities
@@ -216,9 +216,9 @@ In the following, we describe the menu options of our framework in more detail a
   [CVE-2019-9516] already resolved!
   CVE-2021-3618 is open
   ```
-* [ams] Automatic mode switch based on the total severity score of open vulnerabilties, the average severity score of open vulnerabilities and by the mode priority.
-* [mms] Manual mode switch based on the decision of the operator.
-* [s] Show used software of the modes.
+* [ams] Execute an automatic mode switch based on the next suggested mode. Therefore we order the modes ascending by the total severity score of open vulnerabilities, the average severity score of open vulnerabilities, and the mode priority.
+* [mms] Open dialog for manual mode switch based on the decision of the operator.
+* [s] Show the used software of the modes.
   ```
   Used Software
   ----------------------------------------------------------------------------
@@ -235,7 +235,7 @@ In the following, we describe the menu options of our framework in more detail a
   2019-04-01 CVE-2019-0197    4,2 2019-04-07        6
   2019-04-01 CVE-2019-0211    7,8 2019-04-07        6
   ```
-* [vo] In this table we show only open vulnerabilities (CVEs) with no patches from the operating system distribution. Table structure, see [v].
+* [vo] In the following table, we show only open vulnerabilities (CVEs) with no patches from the operating system distribution. Table structure, see [v].
   ```
   Vulnerabilities
   ----------------------------------------------------------------------------
@@ -244,7 +244,7 @@ In the following, we describe the menu options of our framework in more detail a
   2019-04-01 CVE-2019-0197    4,2 2019-04-07        6
   2019-04-01 CVE-2019-0211    7,8 2019-04-07        6
   ```
-* [vps] In this table we show all vulnerabilities (CVEs) per software. Table structure, see [v].
+* [vps] In the following table, we show all vulnerabilities (CVEs) per software. Table structure, see [v].
   ```
   Vulnerabilities per software
   ############################################################################
@@ -255,16 +255,16 @@ In the following, we describe the menu options of our framework in more detail a
   2019-08-13 CVE-2019-9513    7,5 2019-08-13        0
   2019-08-13 CVE-2019-9516    6,5 2019-08-13        0
   ```
-* [vs] Show the overall vulnerability statistics. In the following example, we had 75 vulnerabilities in total, 19 are open/active and 56 have been patched. In the table we show statistics about the severity score and the days until a vulnerability was pached. The first row shows the total severity score sum of all vulnerabilties of 493.2, the average severity score of all vulnerabilities of 6.6, the minimum severity score of 2.1 from CVE-2020-13938, and the maximum severity score of 9.8 from CVE-2019-11043. The second row shows the total duration in days of all vulnerabilities to fix them. On average the fix took 9 days, the fastest fix of CVE-2021-23017 took -4 days, and the slowest fix of CVE-2021-21705 took 29 days.
+* [vs] Show the overall vulnerability statistics. In the following example, we had in total 75 vulnerabilities in total: 19 are open/active, and 56 have been patched. The table shows statistics about the severity score and the days until a vulnerability was pached. The first row shows the total severity score sum of all vulnerabilities of 493.2, the average severity score of all vulnerabilities of 6.6, the minimum severity score of 2.1 from CVE-2020-13938, and the maximum severity score of 9.8 from CVE-2019-11043. The second row shows the total duration in days of all vulnerabilities to patch them. On average, providing the patch took nine days, the fastest patch of CVE-2021-23017 took -4 days, and the slowest patch of CVE-2021-21705 took 29 days.
   ```
-  Overall Vulnerabilty Statistic
+  Overall Vulnerability Statistic
   ----------------------------------------------------------------------------
   75 Vulnerabilities: 19 active, 56 patched
   Type       Total   Avg   Min                 Max
   Score      493,2   6,6   2,1 CVE-2020-13938   9,8 CVE-2019-11043 
   Days4Patch 520     9,0  -4   CVE-2021-23017  29   CVE-2021-21705 
   ```
-* [vsps] Similar to [vs], this table show the vulnerability statistics per software
+* [vsps] Similar to [vs], this table shows the vulnerability statistics per software
   ```
   Vulnerabilities statistics per software
   ----------------------------------------------------------------------------
@@ -275,7 +275,7 @@ In the following, we describe the menu options of our framework in more detail a
   Score       36,3   7,3   5,3 CVE-2019-20372   9,5 CVE-2021-23017 
   Days4Patch  -2     0,0  -4   CVE-2021-23017   2   CVE-2019-20372 
   ```
-* [h] Show the historic log of the system. For example, when vulnerabilities were refreshed and how long it took.
+* [h] Show the historical log of the system. For example, when vulnerabilities were refreshed and how long it took.
   ```
   2023-02-02 15:53:46;refreshVulnerabilities;796007400
   2023-02-02 15:55:30;refreshPatches;780302700
@@ -284,18 +284,18 @@ In the following, we describe the menu options of our framework in more detail a
 * [e] Enable or disable modes. Disabled modes are not considered during automatic mode switching [ams].
 * [si] Enable or disable the simulation of another operating system (e.g., Linux).
 * [ex] Enable the real execution of the system commands to switch modes or show the commands only (disabled).
-* [d] Enable debugging for a pause between mode switches (useful for the scenarios).
+* [d] Enable debugging for pauses between mode switches (useful for the scenarios).
 * [q] Quit the software.
 
-Additionally we support the following scenarios with the framwork:
-* [s1] Start scenario vulnerability time series, see [Re-run the Web Server Case Study](#rerun).
-* [s2] Start scenario all modes are disabled, to manually enable needed modes.
-* [s3] Start scenario all software is disabled, to manually 
-* [s4] Start scenario random mode order, to perform evaluations
-* [s5] Start scenario mode switch duration, to perform evaluations
+Additionally, we support the following scenarios with the framwork:
+* [s1] Start scenario vulnerability time series. See [Re-run the Web Server Case Study](#rerun).
+* [s2] Start scenario all modes are disabled to enable needed modes manually.
+* [s3] Start scenario all software is disabled to manually 
+* [s4] Start scenario random mode order to perform evaluations
+* [s5] Start scenario mode switch duration to perform evaluations
 
 ## Command line options <a name="cmdoptions"></a>
-The framework supports the following options per command line. Details about the funtionality, see [Menu Options](#menuoptions).
+The framework supports the following options per command line. For details about the functionality, see [Menu Options](#menuoptions).
 ```
 modeswitcher init					initalize the system (default mode)
 modeswitcher update				updates vulns and patches (auto mode switch)
@@ -305,7 +305,7 @@ modeswitcher scenario [s1-s5]		start screnario S1-S5
 ```
 
 ## Citation
-Please cite the following paper if you use this repository in your reseach.
+Please cite the following paper if you use this repository in your research.
 ```
 @misc{modeswitchingframework2022,
   author =       {Michael Riegler, Johannes Sametinger, Michael Vierhauser, Manuel Wimmer},
@@ -319,4 +319,4 @@ Please cite the following paper if you use this repository in your reseach.
 We appreciate all contributions to improve the Mode Switching Framework. Please contact us.
 
 ## Contact
-For any question, feel free to contact Michael Riegler: michael DOT riegler [@] jku.at
+For any questions, feel free to contact Michael Riegler: michael DOT riegler [@] jku.at
